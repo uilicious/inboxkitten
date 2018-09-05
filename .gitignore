@@ -1,0 +1,5 @@
+# Hidden files
+**/.*
+
+# Whitelist .gitignore
+!.gitignore
