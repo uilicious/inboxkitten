@@ -38,7 +38,7 @@ var axiosPost = function(url, body, options){
 * 
 * Example usage
 * ```
-* let reader = new mailgunReader( { apiKey:"api-*****", domainList:["inboxkitten.com"] })
+* let reader = new mailgunReader( { apiKey:"api-*****", emailDomain:"inboxkitten.com" })
 * 
 * // Returns a list of email recieve events
 * reader.recipientEventList("some-domain.inboxkitten.com");
@@ -56,8 +56,8 @@ let mailgunReader = function mailgunReader(config) {
 	if( this._config.apiKey == null || this._config.apiKey.length <= 0 ) {
 		throw new Error("Missing config.apiKey");
 	}
-	if( this._config.domainList == null || this._config.domainList.length <= 0 ) {
-		throw new Error("Missing config.domainList");
+	if( this._config.emailDomain == null || this._config.emailDomain.length <= 0 ) {
+		throw new Error("Missing config.emailDomain");
 	}
 	
 	// Default mailgun domain if not used
@@ -86,6 +86,8 @@ mailgunReader.prototype.recipientEmailValidation = function recipientEmailValida
  * See : https://documentation.mailgun.com/en/latest/api-events.html#event-structure
  * 
  * @param {String} email 
+ * 
+ * @return  Promise object, returning list of email events
  */
 mailgunReader.prototype.recipientEventList = function recipientEventList(email) {
 	// Validate email format
@@ -94,8 +96,17 @@ mailgunReader.prototype.recipientEventList = function recipientEventList(email) 
 	}
 
 	// Compute the listing url
+	let urlWithParams = this._config.mailgunApi+"/"+this._config.emailDomain+"/events?recipent="+email;
 
+	// Lets get and return it with a promise
+	return axiosGet(urlWithParams, this._authOption);
 }
+
+/**
+ * Return the email object itself
+ * 
+ * See: https://www.mailgun.com/blog/how-to-view-your-messages
+ */
 
 // Export the mailgunReader class
 module.exports = mailgunReader;
