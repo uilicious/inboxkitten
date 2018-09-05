@@ -17,23 +17,6 @@ var axiosGet = function(urlWithParams, options){
 }
 
 /**
-* Simple axois post, with response data
-* @param {String} urlWithParams 
-* @param {Object} body 
-* @param {Object} options 
-*/
-var axiosPost = function(url, body, options){
-	return new Promise(function(resolve, reject){
-		axios.post(url, body, options).then(response =>{
-			resolve(response.data)
-		}).catch(e => {
-			reject(e)
-		})
-	})
-}
-
-
-/**
 * Simple MailgunApi accessor class for reading event stream, and saved emails
 * 
 * Example usage
