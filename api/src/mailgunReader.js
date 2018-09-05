@@ -103,10 +103,33 @@ mailgunReader.prototype.recipientEventList = function recipientEventList(email) 
 }
 
 /**
- * Return the email object itself
+ * Validate the url parameter for a valid mailgun api URL.
+ * This is to safeguard the getURL from api key leakage
  * 
- * See: https://www.mailgun.com/blog/how-to-view-your-messages
+ * @param {String} url
  */
+mailgunReader.prototype.getUrlValidation = function getUrlValidation(email) {
+	// @TODO - the validation
+	return true;
+}
+
+
+
+/**
+ * Get the content of URL and return it, using the mailgun key.
+ * This is useful for stored emails returned by the event stream.
+ * 
+ * @param {String} url
+ */
+mailgunReader.prototype.getUrl = function getUrl(url) {
+	// Validate the URL
+	if( !this.getUrlValidation(url) ) {
+		return Promise.reject("Invalid getUrl request : "+url);
+	}
+
+	// Lets get and return it with a promise
+	return axiosGet(url, this._authOption);
+}
 
 // Export the mailgunReader class
 module.exports = mailgunReader;
