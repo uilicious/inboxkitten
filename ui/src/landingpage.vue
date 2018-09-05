@@ -17,7 +17,7 @@
       </div>
       <form class="pure-form bottom-element">
         <input type="text" :value="randomName" id="email-input"/> @inboxkitten.com <br>
-        <button type="submit" class="pure-button pure-button-primary">Check inbox</button>
+        <button type="submit" class="pure-button pure-button-primary" @click="goToInbox">Check inbox</button>
       </form>
       <div class="intermission-header">
         <p>Host your own InboxKitten!</p>
@@ -58,6 +58,9 @@ export default {
         separator: '',
         formatter: (word) => word.slice(0, 1).toUpperCase().concat(word.slice(1))
       })
+    },
+    goToInbox () {
+      this.$router.push({name: 'Inbox'})
     },
     scrollDown () {
       $('html, body').animate({
@@ -101,6 +104,7 @@ export default {
 
   #express-js {
     height: 50vh;
+    background-color: lightgray;
   }
 
   #google-js {
