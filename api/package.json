@@ -9,8 +9,14 @@
 		"express": "^4.16.3",
 		"validator": "^10.7.0"
 	},
+	"devDependencies": {
+		"mailgun-js": "^0.20.0",
+		"mocha": "^5.2.0",
+		"shortid": "^2.2.13",
+		"uuid": "^3.3.2"
+	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "mocha",
 		"start": "node app.js"
 	},
 	"author": "",

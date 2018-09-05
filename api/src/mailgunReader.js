@@ -8,9 +8,11 @@ const axios = require("axios");
 */
 var axiosGet = function(urlWithParams, options){
 	return new Promise(function(resolve, reject){
+		// console.log(urlWithParams);
 		axios.get(urlWithParams, options).then(response => {
 			resolve(response.data)
 		}).catch(e => {
+			// console.log(e);
 			reject(e)
 		})
 	})
@@ -48,9 +50,11 @@ let mailgunReader = function mailgunReader(config) {
 
 	// Setup the authentication option object
 	this._authOption = {
-		username : "api",
-		password : this._config.apiKey
-	}
+		auth: {
+			username : "api",
+			password : this._config.apiKey
+		}
+	};
 }
 
 /**
@@ -79,7 +83,7 @@ mailgunReader.prototype.recipientEventList = function recipientEventList(email) 
 	}
 
 	// Compute the listing url
-	let urlWithParams = this._config.mailgunApi+"/"+this._config.emailDomain+"/events?recipent="+email;
+	let urlWithParams = this._config.mailgunApi+"/"+this._config.emailDomain+"/events?recipient="+email;
 
 	// Lets get and return it with a promise
 	return axiosGet(urlWithParams, this._authOption);
