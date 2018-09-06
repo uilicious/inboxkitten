@@ -172,6 +172,7 @@ export default {
     .message-row:hover {
       box-shadow: 2px 1px 2px 2px lightgrey;
       overflow: auto;
+      cursor: pointer;
     }
   }
 
