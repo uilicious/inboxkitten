@@ -18,7 +18,7 @@ describe('mailgunReader', function() {
 	//
 	// Testing for valid "404" errors
 	//
-	describe('blank-requests', function() {
+	describe('empty-guid-inbox-requests', function() {
 		// when using a uuid (unless collision occured D=)
 		it('should return empty event list', async () => {
 			
@@ -40,7 +40,7 @@ describe('mailgunReader', function() {
 		// Get the emails to send and recieve from
 		let sender = md5(uuidv4())+"@"+mailgunConfig.emailDomain;
 		let reciever = md5(uuidv4())+"@"+mailgunConfig.emailDomain;
-		let emailContent = "this-is-a-test";
+		let emailContent = md5(uuidv4());
 
 		// Test timeout to use
 		let thirtySeconds = 30 * 1000;
@@ -101,6 +101,23 @@ describe('mailgunReader', function() {
 
 		}).timeout(thirtySeconds * 5);
 
+		// Listing of email
+		it('reading-of-email', async () => {
+			assert.notEqual(emailEvent, null);
+
+			// Get the email URL
+			let emailUrl = emailEvent.storage.url;
+			assert.notEqual(emailUrl, null);
+			
+			// Lets get the email content
+			let content = await reader.getUrl(emailUrl);
+			assert.notEqual(content, null);
+			
+			// Assert content exists with GUID, 
+			// which is definitive proof that the test work,
+			// unless multiple suns started exploding
+			assert.equal( content["stripped-html"].indexOf(emailContent) >= 0, true );
+		});
 	});
 
 
