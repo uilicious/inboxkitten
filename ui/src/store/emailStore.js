@@ -1,12 +1,12 @@
 
 // State
 const state = {
-  email: 'tetest'
+  currentEmail: ''
 }
 
 const mutations = {
   changeEmail: function (state, value) {
-    state.email = value
+    state.currentEmail = value
   }
 }
 

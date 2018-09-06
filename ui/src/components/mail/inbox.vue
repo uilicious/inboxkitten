@@ -43,7 +43,7 @@ export default {
   data: () => {
     return {
       viewMessageDetail: false,
-      emailValue: '',
+      email: '',
       listOfMessages: [],
       vueScrollBarOps: {
         bar: {
@@ -53,16 +53,21 @@ export default {
     }
   },
   computed: {
-    email: {
-      get: function () {
-        return this.$route.params.email
-      },
-      set: function (value) {
-        this.emailValue = value
-      }
 
+    currentEmail: {
+      get: function () {
+        return this.$store.state.email.currentEmail
+      }
     }
 
+  },
+
+  mounted () {
+    if (this.currentEmail === '') {
+      this.$router.push({ name: 'Kitten Land' })
+    }
+
+    this.email = this.currentEmail
   },
 
   methods: {
@@ -70,10 +75,7 @@ export default {
       this.viewMessageDetail = true
     },
     changeInbox () {
-      this.$router.push({
-        name: 'Inbox',
-        params: {email: this.emailValue}
-      })
+      this.$store.commit('changeEmail', this.email)
     }
   },
 

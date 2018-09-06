@@ -16,8 +16,8 @@
         </div>
       </div>
       <form class="pure-form bottom-element">
-        <input type="text" v-model="email" id="email-input"/> @inboxkitten.com <br>
-        <button type="submit" class="pure-button pure-button-primary" @click="goToInbox">Check inbox</button>
+        <input type="text" v-model="randomName" id="email-input"/> @inboxkitten.com <br>
+        <router-link class="pure-button pure-button-primary" :to="goToInbox">Check inbox</router-link>
       </form>
       <div class="intermission-header">
         <p>Host your own InboxKitten!</p>
@@ -46,14 +46,15 @@ export default {
       randomName: ''
     }
   },
-  computed: {
-    email: function () {
-      return this.$store.state.email.email
-    }
-
-  },
   mounted () {
-    this.$store.commit('changeEmail', this.generateRandomName().toString())
+    this.randomName = this.generateRandomName().toString()
+    this.$store.commit('changeEmail', this.randomName)
+  },
+  computed: {
+    goToInbox: function () {
+      this.$store.commit('changeEmail', this.randomName)
+      return '/inbox'
+    }
   },
   methods: {
     generateRandomName () {
@@ -64,10 +65,6 @@ export default {
         separator: '',
         formatter: (word) => word.slice(0, 1).toUpperCase().concat(word.slice(1))
       })
-    },
-    goToInbox () {
-      this.$router.push({ name: 'Inbox', params: { email: this.email } })
-      this.$store.commit('changeEmail', this.generateRandomName().toString())
     },
     scrollDown () {
       $('html, body').animate({

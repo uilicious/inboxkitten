@@ -18,7 +18,7 @@ export default new Router({
       component: LandingPage
     },
     {
-      path: '/inbox/:email',
+      path: '/inbox',
       name: 'Inbox',
       component: Inbox
     }
