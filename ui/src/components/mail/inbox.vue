@@ -6,7 +6,7 @@
     </div>
     <div class="content">
       <div class="left">
-        <vue-scroll :ops="vueScrollBarOps" >
+        <vue-scroll :ops="vueScrollBarOps">
           <table class="pure-table message-list">
             <tr class="message-list-headers">
               <th>Subject</th>
@@ -20,7 +20,11 @@
             </tr>
           </table>
           <div class="no-mails" v-if="listOfMessages.length == 0">
-            There for no messages for this kitten :(
+            <p>
+              There for no messages for this kitten :(<br/><br/>
+              Press on the 'Refresh' button if you want to overwork the kittens...
+            </p>
+            <button class="pure-button pure-button-primary" @click="getMessageList">Refresh</button>
           </div>
         </vue-scroll>
       </div>
@@ -66,6 +70,12 @@ export default {
 
     this.email = this.currentEmail
     this.getMessageList()
+
+    this.retrieveMessage = window.setInterval(this.getMessageList, 10000)
+  },
+
+  beforeDestroy () {
+    window.clearInterval(this.retrieveMessage)
   },
 
   methods: {
@@ -136,18 +146,18 @@ export default {
     justify-content: baseline;
   }
 
-  #email{
+  #email {
     text-align: right;
     margin-right: 0.25rem;
-    margin-left:2rem;
+    margin-left: 2rem;
     border-radius: 10px;
     padding-right: 0.5rem;
   }
 
   .fetch-button {
-    align-self:auto;
+    align-self: auto;
     margin-left: 1rem;
-    order:2;
+    order: 2;
   }
 
   .left {
@@ -157,13 +167,13 @@ export default {
 
   .message-list {
     width: 100%;
-    th,td{
+    th, td {
       text-align: left;
       font-size: 12px;
       border: 0;
     }
 
-    tr{
+    tr {
       padding-left: 1rem;
       border: 1px solid lightgrey;
     }
@@ -180,7 +190,7 @@ export default {
   }
 
   .right {
-    flex:1;
+    flex: 1;
   }
 
   .content {
@@ -188,7 +198,7 @@ export default {
     flex-direction: row;
     align-content: center;
     height: 100%;
-    width:100%;
+    width: 100%;
   }
 
   .no-mails {
