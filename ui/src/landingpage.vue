@@ -16,7 +16,7 @@
         </div>
       </div>
       <form class="pure-form bottom-element">
-        <input type="text" :value="randomName" id="email-input"/> @inboxkitten.com <br>
+        <input type="text" v-model="randomName" id="email-input"/> @inboxkitten.com <br>
         <button type="submit" class="pure-button pure-button-primary" @click="goToInbox">Check inbox</button>
       </form>
       <div class="intermission-header">
@@ -60,7 +60,7 @@ export default {
       })
     },
     goToInbox () {
-      this.$router.push({name: 'Inbox'})
+      this.$router.push({ name: 'Inbox', params: { email: this.randomName.toString() } })
     },
     scrollDown () {
       $('html, body').animate({
