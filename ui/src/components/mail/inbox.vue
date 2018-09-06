@@ -1,40 +1,34 @@
 <template>
   <div class="app">
     <div class="nav">
-      <div class="left">Hello {{email}}</div>
-      <div class="right nav-right">
-        <div>
-          <button v-if="viewMessageDetail" @click="viewMessageDetail = !viewMessageDetail">Back</button>
-        </div>
-
-        <div class="email-input">
-          <input v-model="email" v-on:keyup.enter="changeInbox"/> @inboxkitten.com
-        </div>
-      </div>
+        <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @inboxkitten.com
     </div>
     <div class="content">
-      <div class="sidebar left">
-        sidebar
-      </div>
-      <vue-scroll classes="right" :ops="vueScrollBarOps" v-if="!viewMessageDetail">
-        <div>
+      <div class="left">
+        <vue-scroll :ops="vueScrollBarOps" >
+          <table class="pure-table message-list">
+            <tr>
+              <th>Subject</th>
+              <th>From</th>
+              <th>Time</th>
+            </tr>
+            <tr class="message-row" v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
+              <td>{{msg.message.headers.subject}}</td>
+              <td>{{msg.message.headers.from}}</td>
+              <td>{{calculateTime(msg)}}</td>
+            </tr>
+          </table>
           <div class="no-mails" v-if="listOfMessages.length == 0">
             There for no messages for this kitten :(
           </div>
-          <div v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
-            <message-box :message="msg" :timeCalculated="calculateTime(msg)"></message-box>
-          </div>
-        </div>
-      </vue-scroll>
-      <!--<vue-scroll classes="right" v-if="viewMessageDetail">-->
-        <message-display v-if="viewMessageDetail" :emailContent="emailContent" class="right"></message-display>
-      <!--</vue-scroll>-->
+        </vue-scroll>
+      </div>
+      <message-display :emailContent="emailContent" class="right"></message-display>
     </div>
   </div>
 </template>
 
 <script>
-import MessageBox from './MessageBox.vue'
 import MessageDisplay from './MessageDisplay.vue'
 import config from '@/../config/apiconfig.js'
 import axios from 'axios'
@@ -113,7 +107,6 @@ export default {
   },
 
   components: {
-    MessageBox,
     MessageDisplay
   }
 }
@@ -125,9 +118,8 @@ export default {
     position: absolute;
     display: flex;
     flex-direction: column;
-    height: 85vh;
-    width: 90vw;
-    left: 5%;
+    height: 100vh;
+    width: 100vw;
     box-shadow: 2px 2px 3px 3px darkgray;
   }
 
@@ -150,22 +142,43 @@ export default {
   }
 
   .left {
-    width: 30vw;
+    width: 40vw;
+    border-right: 1px solid lightgray;
+  }
+
+  .message-list {
+    width: 100%;
+    th,td{
+      text-align: left;
+      font-size: 12px;
+      border: 0;
+    }
+
+    tr{
+      padding-left: 1rem;
+      border: 1px solid lightgrey;
+    }
+
+    .message-row:hover {
+      box-shadow: 2px 1px 2px 2px lightgrey;
+      overflow: auto;
+    }
   }
 
   .right {
-    flex-grow: 1;
+    flex:1;
   }
 
-  input {
+  #email{
     text-align: right;
+    margin-right: 0.25rem;
   }
 
   .email-input {
     display: flex;
     flex-direction: row;
-    align-self: flex-end;
-    justify-content: flex-end;
+    /*align-self: flex-end;*/
+    /*justify-content: flex-end;*/
     flex-grow: 1;
   }
 
@@ -174,11 +187,7 @@ export default {
     flex-direction: row;
     align-content: center;
     height: 100%;
-  }
-
-  .sidebar {
-    background-color: #F3F3F3;
-    height: 100%;
+    width:100%;
   }
 
   .no-mails {
