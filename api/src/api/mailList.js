@@ -6,15 +6,15 @@ const reader = new mailgunReader(mailgunConfig);
 
 /**
  * Mail listing api, returns the item list
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 module.exports = function(req, res){
-	let params = req.body
+	let params = req.query
 	let recipient = params.recipient
 	if (recipient == null){
-		res.status(400).send('{ "error" : "No `recepient` param found" }');
+		res.status(400).send({ error : "No `recepient` param found" });
 	}
 
 	reader.recipientEventList(recipient).then(response => {

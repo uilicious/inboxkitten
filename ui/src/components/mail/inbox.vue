@@ -37,6 +37,8 @@
 
 <script>
 import MessageBox from './MessageBox.vue'
+import config from '@/../config/apiconfig.js'
+import axios from 'axios'
 
 export default {
   name: 'Inbox',
@@ -64,18 +66,26 @@ export default {
 
   mounted () {
     if (this.currentEmail === '') {
-      this.$router.push({ name: 'Kitten Land' })
+      this.$router.push({name: 'Kitten Land'})
     }
 
     this.email = this.currentEmail
+    this.getMessageList()
   },
 
   methods: {
     getMessage (url) {
       this.viewMessageDetail = true
     },
+    getMessageList () {
+      axios.get(config.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
+        .then(res => {
+          console.log(res)
+        })
+    },
     changeInbox () {
       this.$store.commit('changeEmail', this.email)
+      this.getMessageList()
     }
   },
 
@@ -130,7 +140,7 @@ export default {
   .email-input {
     display: flex;
     flex-direction: row;
-    align-self:flex-end;
+    align-self: flex-end;
     justify-content: flex-end;
     flex-grow: 1;
   }
