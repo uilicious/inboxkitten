@@ -1,6 +1,7 @@
 // Dependencies loading
-const express = require("express");
-const bodyParser = require("body-parser");
+const express       = require("express");
+const bodyParser    = require("body-parser");
+const mailgunConfig = require("./config/mailgunConfig");
 
 // Initializing the express app
 const app = express();
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Allow cross site requests (for now)
 app.use(function (req, res, next){
-	res.setHeader("Access-Control-Allow-Origin", config.allowedHost);
+	res.setHeader("Access-Control-Allow-Origin", mailgunConfig.emailDomain);
 	// Request methods you wish to allow
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
@@ -27,10 +28,8 @@ app.use(function (req, res, next){
 });
 
 // Setup the routes
-routes(function(app) {
-	app.get("/api/v1/mail/list", require("src/api/mailList"));
-	app.get("/api/v1/mail/getUrl", require("src/api/mailGetUrl"));
-});
+app.get("/api/v1/mail/list",   require("./src/api/mailList"));
+app.get("/api/v1/mail/getUrl", require("./src/api/mailGetUrl"));
 
 // Setup the server 
 var server = app.listen(8800, function () {

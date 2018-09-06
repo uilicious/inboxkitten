@@ -1,6 +1,6 @@
 // Loading mailgun reader and config
 const mailgunReader = require("../mailgunReader");
-const mailgunConfig = require("../config/mailgunConfig")
+const mailgunConfig = require("../../config/mailgunConfig");
 
 const reader = new mailgunReader(mailgunConfig);
 
@@ -14,7 +14,7 @@ module.exports = function(req, res){
 	let params = req.body
 	let url = params.url
 	if (url == null || url === ""){
-		 res.status(400).send("No `url` param found.")
+		 res.status(400).send('{ "error" : "No `url` param found" }');
 	}
 
 	reader.getUrl(recipient).then(response => {
