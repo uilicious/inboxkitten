@@ -1,7 +1,8 @@
 <template>
   <div class="app">
     <div class="nav">
-        <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @inboxkitten.com
+      <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @inboxkitten.com
+      <button @click="changeInbox" class="pure-button fetch-button">Fetch!</button>
     </div>
     <div class="content">
       <div class="left">
@@ -84,6 +85,8 @@ export default {
     },
     changeInbox () {
       this.$store.commit('changeEmail', this.email)
+      this.emailContent = {}
+      this.$eventHub.$emit('iframe_content', '')
       this.getMessageList()
     },
 
@@ -130,15 +133,22 @@ export default {
     height: 10vh;
     background: #F3F3F3;
     align-items: center;
-    justify-content: center;
+    justify-content: baseline;
   }
 
-  .nav-right {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: baseline;
-    margin-right: 1rem;
+  #email{
+    text-align: right;
+    margin-right: 0.25rem;
+    margin-left:2rem;
+    border-radius: 10px;
+    padding-right: 0.5rem;
+  }
+
+  .fetch-button {
+    align-self:auto;
+    margin-left: 1rem;
+    margin-bottom:1rem;
+    order:2;
   }
 
   .left {
@@ -167,19 +177,6 @@ export default {
 
   .right {
     flex:1;
-  }
-
-  #email{
-    text-align: right;
-    margin-right: 0.25rem;
-  }
-
-  .email-input {
-    display: flex;
-    flex-direction: row;
-    /*align-self: flex-end;*/
-    /*justify-content: flex-end;*/
-    flex-grow: 1;
   }
 
   .content {
