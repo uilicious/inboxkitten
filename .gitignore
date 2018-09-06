@@ -1,0 +1,8 @@
+# Hidden files
+**/.*
+
+# node_modules folder
+**/node_modules
+
+# Whitelist .gitignore
+!.gitignore

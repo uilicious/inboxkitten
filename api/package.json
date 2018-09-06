@@ -1,0 +1,26 @@
+{
+	"name": "inboxkitten-api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"axios": "^0.18.0",
+		"body-parser": "^1.18.3",
+		"express": "^4.16.3",
+		"validator": "^10.7.0"
+	},
+	"devDependencies": {
+		"delay": "^4.0.0",
+		"mailgun-js": "^0.20.0",
+		"mocha": "^5.2.0",
+		"shortid": "^2.2.13",
+		"md5": "^2.2.1",
+		"uuid": "^3.3.2"
+	},
+	"scripts": {
+		"test": "mocha",
+		"start": "node app.js"
+	},
+	"author": "",
+	"license": "MIT"
+}
