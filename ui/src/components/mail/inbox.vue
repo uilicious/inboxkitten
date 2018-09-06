@@ -191,5 +191,6 @@ export default {
     text-align: center;
     vertical-align: center;
     overflow: hidden;
+    margin-top: 2rem;
   }
 </style>
