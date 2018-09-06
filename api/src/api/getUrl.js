@@ -5,19 +5,19 @@ const mailgunConfig = require("../config/mailgunConfig")
 const reader = new mailgunReader(mailgunConfig);
 
 /**
- * Mail listing api, returns the item list
+ * Get and return the URL content from the mailgun API
  * 
  * @param {*} req 
  * @param {*} res 
  */
 module.exports = function(req, res){
 	let params = req.body
-	let recipient = params.recipient
-	if (recipient == null){
-		 res.status(400).send("No `recipient` param found.")
+	let url = params.url
+	if (url == null || url === ""){
+		 res.status(400).send("No `url` param found.")
 	}
 
-	reader.recipientEventList(recipient).then(response => {
+	reader.getUrl(recipient).then(response => {
 		 res.status(200).send(response.items)
 	})
 	.catch(e => {
