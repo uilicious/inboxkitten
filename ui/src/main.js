@@ -19,6 +19,13 @@ new Vue({
   el: '#app',
   store,
   router,
-  components: { App },
-  template: '<App/>'
+  components: {App},
+  template: '<App/>',
+  created () {
+    this.$eventHub = new Vue({
+      name: 'EventHub',
+      parent: this,
+      functional: true
+    })
+  }
 })

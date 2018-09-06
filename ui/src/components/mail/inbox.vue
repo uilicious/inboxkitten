@@ -21,22 +21,21 @@
           <div class="no-mails" v-if="listOfMessages.length == 0">
             There for no messages for this kitten :(
           </div>
-          <div v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.url)">
+          <div v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
             <message-box :message="msg" :timeCalculated="calculateTime(msg)"></message-box>
           </div>
         </div>
       </vue-scroll>
-      <vue-scroll classes="right" v-if="viewMessageDetail">
-        <div>
-
-        </div>
-      </vue-scroll>
+      <!--<vue-scroll classes="right" v-if="viewMessageDetail">-->
+        <message-display v-if="viewMessageDetail" :emailContent="emailContent" class="right"></message-display>
+      <!--</vue-scroll>-->
     </div>
   </div>
 </template>
 
 <script>
 import MessageBox from './MessageBox.vue'
+import MessageDisplay from './MessageDisplay.vue'
 import config from '@/../config/apiconfig.js'
 import axios from 'axios'
 
@@ -46,6 +45,7 @@ export default {
     return {
       viewMessageDetail: false,
       email: '',
+      emailContent: {},
       listOfMessages: [],
       vueScrollBarOps: {
         bar: {
@@ -76,6 +76,11 @@ export default {
   methods: {
     getMessage (url) {
       this.viewMessageDetail = true
+      axios.get(config.apiUrl + '/getUrl?url=' + url)
+        .then(res => {
+          this.emailContent = res.data
+          this.$eventHub.$emit('iframe_content', res.data['body-html'])
+        })
     },
     getMessageList () {
       axios.get(config.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
@@ -108,7 +113,8 @@ export default {
   },
 
   components: {
-    MessageBox
+    MessageBox,
+    MessageDisplay
   }
 }
 </script>
