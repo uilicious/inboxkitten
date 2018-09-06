@@ -17,7 +17,7 @@
       </div>
       <form class="pure-form bottom-element">
         <input type="text" v-model="randomName" id="email-input"/> @inboxkitten.com <br>
-        <router-link class="pure-button pure-button-primary" :to="goToInbox">Check inbox</router-link>
+        <router-link class="pure-button pure-button-primary inbox-button" :to="goToInbox">Check inbox</router-link>
       </form>
       <div class="intermission-header">
         <p>Host your own InboxKitten!</p>
@@ -92,8 +92,8 @@ export default {
     top: 40%;
   }
 
-  button {
-    margin-top: 1rem;
+  .inbox-button {
+    margin-top: 2rem;
   }
 
   .main-section {

@@ -2,7 +2,7 @@
   <div class="app">
     <div class="nav">
       <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @inboxkitten.com
-      <button @click="changeInbox" class="pure-button fetch-button">Fetch!</button>
+      <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Fetch!</button>
     </div>
     <div class="content">
       <div class="left">
@@ -147,7 +147,6 @@ export default {
   .fetch-button {
     align-self:auto;
     margin-left: 1rem;
-    margin-bottom:1rem;
     order:2;
   }
 
@@ -172,6 +171,7 @@ export default {
     .message-row:hover {
       box-shadow: 2px 1px 2px 2px lightgrey;
       overflow: auto;
+      cursor: pointer;
     }
   }
 
@@ -191,5 +191,6 @@ export default {
     text-align: center;
     vertical-align: center;
     overflow: hidden;
+    margin-top: 2rem;
   }
 </style>
