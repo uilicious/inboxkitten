@@ -1,6 +1,6 @@
 # Change this to your respective main file
-mainfile="hello-cli.go"
-outfile="hello-cli"
+mainfile="inboxkitten.go"
+outfile="inboxkitten"
 
 # The go build command
 dependencies:
