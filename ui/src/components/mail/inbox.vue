@@ -8,7 +8,7 @@
         </div>
 
         <div class="email-input">
-          <input v-model="email"/> @inboxkitten.com
+          <input v-model="email" v-on:keyup.enter="changeInbox"/> @inboxkitten.com
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <div class="sidebar left">
         sidebar
       </div>
-      <scroll-bar classes="my-scrollbar right" ref="ScrollBar" v-if="!viewMessageDetail">
+      <vue-scroll classes="right" :ops="vueScrollBarOps" v-if="!viewMessageDetail">
         <div>
           <div class="no-mails" v-if="listOfMessages.length == 0">
             There for no messages for this kitten :(
@@ -25,70 +25,42 @@
             <message-box :message="msg"></message-box>
           </div>
         </div>
-      </scroll-bar>
-      <div class="right" v-if="viewMessageDetail">
+      </vue-scroll>
+      <vue-scroll classes="right" v-if="viewMessageDetail">
+        <div>
 
-      </div>
+        </div>
+      </vue-scroll>
     </div>
   </div>
 </template>
 
 <script>
 import MessageBox from './MessageBox.vue'
-import ScrollBar from 'vue2-scrollbar'
 
 export default {
   name: 'Inbox',
   data: () => {
     return {
       viewMessageDetail: false,
-      listOfMessages: [
-        {
-          url: 'https://taaa',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'abc',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'https://taaa',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'abc',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'https://taaa',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'abc',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'https://taaa',
-          subject: 'Testin',
-          sender: 'email@email.com'
-        },
-        {
-          url: 'abc',
-          subject: 'Testin',
-          sender: 'email@email.com'
+      emailValue: '',
+      listOfMessages: [],
+      vueScrollBarOps: {
+        bar: {
+          background: 'darkgrey'
         }
-      ]
+      }
     }
   },
   computed: {
-    email: function () {
-      return this.$route.params.email
+    email: {
+      get: function () {
+        return this.$route.params.email
+      },
+      set: function (value) {
+        this.emailValue = value
+      }
+
     }
 
   },
@@ -96,18 +68,22 @@ export default {
   methods: {
     getMessage (url) {
       this.viewMessageDetail = true
+    },
+    changeInbox () {
+      this.$router.push({
+        name: 'Inbox',
+        params: {email: this.emailValue}
+      })
     }
   },
 
   components: {
-    MessageBox,
-    ScrollBar
+    MessageBox
   }
 }
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  @import url("vue2-scrollbar/dist/style/vue2-scrollbar.css");
 
   .app {
     position: absolute;
