@@ -16,7 +16,7 @@
         </div>
       </div>
       <form class="pure-form bottom-element">
-        <input type="text" v-model="randomName" id="email-input"/> @inboxkitten.com <br>
+        <input type="text" v-model="email" id="email-input"/> @inboxkitten.com <br>
         <button type="submit" class="pure-button pure-button-primary" @click="goToInbox">Check inbox</button>
       </form>
       <div class="intermission-header">
@@ -46,8 +46,14 @@ export default {
       randomName: ''
     }
   },
+  computed: {
+    email: function () {
+      return this.$store.state.email.email
+    }
+
+  },
   mounted () {
-    this.randomName = this.generateRandomName()
+    this.$store.commit('changeEmail', this.generateRandomName().toString())
   },
   methods: {
     generateRandomName () {
@@ -60,7 +66,8 @@ export default {
       })
     },
     goToInbox () {
-      this.$router.push({ name: 'Inbox', params: { email: this.randomName.toString() } })
+      this.$router.push({ name: 'Inbox', params: { email: this.email } })
+      this.$store.commit('changeEmail', this.generateRandomName().toString())
     },
     scrollDown () {
       $('html, body').animate({
