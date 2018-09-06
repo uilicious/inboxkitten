@@ -1,5 +1,5 @@
 /**
  * Lambda entrypoint
  */
-module.mailList   = require("./src/api/mailList");
-module.mailGetUrl = require("./src/api/mailGetUrl");
+exports.mailList   = require("./src/api/mailList");
+exports.mailGetUrl = require("./src/api/mailGetUrl");
