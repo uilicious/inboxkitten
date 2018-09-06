@@ -57,9 +57,9 @@ export default {
   }
   .message-header {
     height:160px;
-    margin-top: 0.5rem;
-    margin-left:0.5rem;
-    margin-right:0.5rem;
+    margin-top: 1rem;
+    margin-left:2rem;
+    margin-right:2rem;
     border-bottom: 1px solid lightgrey;
   }
   .message-display {

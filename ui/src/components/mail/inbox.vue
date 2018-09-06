@@ -8,7 +8,7 @@
       <div class="left">
         <vue-scroll :ops="vueScrollBarOps" >
           <table class="pure-table message-list">
-            <tr>
+            <tr class="message-list-headers">
               <th>Subject</th>
               <th>From</th>
               <th>Time</th>
@@ -173,6 +173,10 @@ export default {
       overflow: auto;
       cursor: pointer;
     }
+  }
+
+  .message-list-headers {
+    background-color: #fffd8c;
   }
 
   .right {
