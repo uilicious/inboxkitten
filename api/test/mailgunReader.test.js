@@ -1,5 +1,8 @@
 // Dependencies loading
-const assert = require('assert');
+const assert  = require('assert');
+const delay   = require('delay');
+const md5     = require('md5');
+const uuidv4  = require('uuid/v4');
 const shortid = require('shortid');
 
 // MailgunReader class
@@ -20,13 +23,13 @@ describe('mailgunReader', function() {
 		it('should return empty event list', async () => {
 			
 			// Get the id to validate
-			let id = shortid.generate();
-			assert.notEqual(null, id);
+			let id = md5(uuidv4());
+			assert.notEqual(id, null);
 
 			// Get the list of emails (as item)
 			let eventListObj = await reader.recipientEventList(id+"@"+mailgunConfig.emailDomain);
-			assert.notEqual(null, eventListObj);
-			assert.equal(0, eventListObj.items );
+			assert.notEqual(eventListObj, null);
+			assert.equal( eventListObj.items.length , 0);
 		});
 	});
 
@@ -35,9 +38,12 @@ describe('mailgunReader', function() {
 	//
 	describe('send-list-recieve', function() {
 		// Get the emails to send and recieve from
-		let sender = shortid.generate()+"@"+mailgunConfig.emailDomain;
-		let reciever = shortid.generate()+"@"+mailgunConfig.emailDomain;
-		let emailContent = shortid.generate();
+		let sender = md5(uuidv4())+"@"+mailgunConfig.emailDomain;
+		let reciever = md5(uuidv4())+"@"+mailgunConfig.emailDomain;
+		let emailContent = "this-is-a-test";
+
+		// Test timeout to use
+		let thirtySeconds = 30 * 1000;
 
 		// Sending of email
 		it('sending-of-email', async () => {
@@ -65,8 +71,36 @@ describe('mailgunReader', function() {
 
 			// Wait for sending to complete
 			let sendPromiseResult = await sendPromise;
+		}).timeout(thirtySeconds);
 
-		});
+		// The email event to use
+		let emailEvent = null;
+
+		// Listing of email
+		it('listing-of-email', async () => {
+
+			// Loop and get email event (there might be significant time delay)
+			while(emailEvent == null) {
+				// Lets not spam
+				await delay(2500);
+
+				// Get the list of emails (as item)
+				let eventListObj = await reader.recipientEventList(reciever);
+				assert.notEqual(eventListObj, null);
+
+				// Continue loop if length is 0
+				if( eventListObj.items.length == 0 ) {
+					continue;
+				}
+
+				// Get the email event
+				//assert.equal(eventListObj.items.length, 1);
+				emailEvent = eventListObj.items[0];
+				assert.notEqual(emailEvent, null);
+			}
+
+		}).timeout(thirtySeconds * 5);
+
 	});
 
 
