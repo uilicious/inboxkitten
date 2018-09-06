@@ -1,7 +1,8 @@
 <template functional>
   <div class="message-box">
-    <p>{{props.message.sender}}</p>
-    <p>{{props.message.subject}}</p>
+    <p>{{props.message.message.headers.from}}</p>
+    <p>{{props.message.message.headers.subject}}</p>
+    <p>{{props.timeCalculated}}</p>
   </div>
 </template>
 
@@ -9,6 +10,9 @@
 export default {
   props: {
     message: {
+      required: true
+    },
+    timeCalculated: {
       required: true
     }
   }
@@ -19,6 +23,7 @@ export default {
   .message-box {
     border: 1px solid lightgrey;
   }
+
   .message-box:hover {
     box-shadow: 0px 10px 18px lightgrey;
     overflow: hidden;

@@ -22,7 +22,7 @@
             There for no messages for this kitten :(
           </div>
           <div v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.url)">
-            <message-box :message="msg"></message-box>
+            <message-box :message="msg" :timeCalculated="calculateTime(msg)"></message-box>
           </div>
         </div>
       </vue-scroll>
@@ -80,12 +80,30 @@ export default {
     getMessageList () {
       axios.get(config.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
         .then(res => {
-          console.log(res)
+          this.listOfMessages = res.data
         })
     },
     changeInbox () {
       this.$store.commit('changeEmail', this.email)
       this.getMessageList()
+    },
+
+    calculateTime (msg) {
+      var date = new Date(Math.round(msg.timestamp * 1000))
+      var currentTime = new Date().getTime()
+      var difference = currentTime / 1000 - Math.floor(msg.timestamp)
+      var timeDisplay = date.toLocaleString()
+
+      if (difference < 60) {
+        timeDisplay = difference + ' seconds ago'
+      } else if (difference < 3600) {
+        timeDisplay = 'about ' + Math.floor(difference / 60) + ' minutes ago'
+      } else if (difference < 86400) {
+        timeDisplay = 'about ' + Math.floor(difference / 3600) + ' hours ago'
+      } else if (difference >= 86400) {
+        timeDisplay = 'about ' + Math.floor(difference / 86400) + ' days ago'
+      }
+      return timeDisplay
     }
   },
 
