@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Allow cross site requests (for now)
 app.use(function (req, res, next){
-	res.setHeader("Access-Control-Allow-Origin", mailgunConfig.emailDomain);
+	res.setHeader("Access-Control-Allow-Origin", mailgunConfig.corsOrigin);
 	// Request methods you wish to allow
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
@@ -30,8 +30,9 @@ app.use(function (req, res, next){
 // Setup the routes
 app.get("/api/v1/mail/list",   require("./src/api/mailList"));
 app.get("/api/v1/mail/getUrl", require("./src/api/mailGetUrl"));
+app.get("/api/v1/mail/getKey", require("./src/api/mailGetKey"));
 
-// Setup the server 
+// Setup the server
 var server = app.listen(8800, function () {
 	console.log("app running on port.", server.address().port);
 });

@@ -42,7 +42,6 @@ export default {
   name: 'Inbox',
   data: () => {
     return {
-      viewMessageDetail: false,
       email: '',
       emailContent: {},
       listOfMessages: [],
@@ -84,8 +83,10 @@ export default {
 
   methods: {
     getMessage (url) {
-      this.viewMessageDetail = true
-      axios.get(this.apiUrl + '/getUrl?url=' + url)
+      let [protocol, empty, host, ...uri] = url.split('/')
+      let [region, ...remainingHost] = host.split('.')
+
+      axios.get(this.apiUrl + '/getKey?mailKey=' + region+'-'+uri[uri.length - 1])
         .then(res => {
           this.emailContent = res.data
           this.$eventHub.$emit('iframe_content', res.data['body-html'])
