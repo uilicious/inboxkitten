@@ -6,5 +6,9 @@
 **/bin
 **/gopath
 
+# deploy build files
+deploy/firebase/functions
+deploy/firebase/public
+
 # Whitelist .gitignore
 !.gitignore
