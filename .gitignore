@@ -6,9 +6,16 @@
 **/bin
 **/gopath
 
+# UI build folder ignore
+ui/build/*
+
 # deploy build files
 deploy/firebase/functions
 deploy/firebase/public
 
+# Whitelist anchor files
+
+
 # Whitelist .gitignore
 !.gitignore
+!**/.anchor
