@@ -4,9 +4,9 @@
 
       <div class="head">
         <div class="ear ear-left"></div>
-        <div class="ear ear-inner-left"></div>
+        <div class="ear ear-edge-left"></div>
         <div class="ear ear-right"></div>
-        <div class="ear ear-inner-right"></div>
+        <div class="ear ear-edge-right"></div>
         <div class="face">
           <div class="mouth"></div>
           <div class="eye-group">
