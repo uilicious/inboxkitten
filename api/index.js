@@ -37,8 +37,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setup the routes - for mail list / get
-app.get("/mail/list",   require("./src/api/mailList"));
-app.get("/mail/getUrl", require("./src/api/mailGetUrl"));
+app.get("/api/v1/mail/list",   require("./src/api/mailList"));
+app.get("/api/v1/mail/getUrl", require("./src/api/mailGetUrl"));
 
 // Expose the HTTP on request
-exports.express = functions.https.onRequest(app);
+exports.cloudfunction = functions.https.onRequest(app);
