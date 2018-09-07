@@ -1,8 +1,8 @@
 /**
  * This is configured for use within cloud function (or firebase cloud functions)
- * 
+ *
  * See : https://firebase.google.com/docs/functions/http-events
- * 
+ *
  * @TODO : AWS functions?
  */
 
@@ -39,6 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Setup the routes - for mail list / get
 app.get("/mail/list",   require("./src/api/mailList"));
 app.get("/mail/getUrl", require("./src/api/mailGetUrl"));
+app.get("/mail/getKey", require("./src/api/mailGetKey"));
 
 // Expose the HTTP on request
 exports.express = functions.https.onRequest(app);

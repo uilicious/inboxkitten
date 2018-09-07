@@ -3,8 +3,8 @@ const axios = require("axios");
 
 /**
 * Simple axois get, with response data
-* @param {String} urlWithParams 
-* @param {Object} options 
+* @param {String} urlWithParams
+* @param {Object} options
 */
 var axiosGet = function(urlWithParams, options){
 	return new Promise(function(resolve, reject){
@@ -20,23 +20,23 @@ var axiosGet = function(urlWithParams, options){
 
 /**
 * Simple MailgunApi accessor class for reading event stream, and saved emails
-* 
+*
 * Example usage
 * ```
 * let reader = new mailgunReader( { apiKey:"api-*****", emailDomain:"inboxkitten.com" })
-* 
+*
 * // Returns a list of email recieve events
 * reader.recipientEventList("some-domain.inboxkitten.com");
-* 
+*
 * // Get and return the email json
 * reader.getRecipentEmail("some-email-id");
 * ```
 */
 let mailgunReader = function mailgunReader(config) {
-	
+
 	// The config object being used
 	this._config = config;
-	
+
 	// Validate the config for required parameters
 	if( this._config.apiKey == null || this._config.apiKey.length <= 0 ) {
 		throw new Error("Missing config.apiKey");
@@ -44,7 +44,7 @@ let mailgunReader = function mailgunReader(config) {
 	if( this._config.emailDomain == null || this._config.emailDomain.length <= 0 ) {
 		throw new Error("Missing config.emailDomain");
 	}
-	
+
 	// Default mailgun domain if not used
 	this._config.mailgunApi = this._config.mailgunApi || "https://api.mailgun.net/v3";
 
@@ -59,8 +59,8 @@ let mailgunReader = function mailgunReader(config) {
 
 /**
  * Validate the request email against list of domains
- * 
- * @param {String} email 
+ *
+ * @param {String} email
  */
 mailgunReader.prototype.recipientEmailValidation = function recipientEmailValidation(email) {
 	// @TODO - the validation
@@ -69,11 +69,11 @@ mailgunReader.prototype.recipientEmailValidation = function recipientEmailValida
 
 /**
  * Get and return a list of email events
- * 
+ *
  * See : https://documentation.mailgun.com/en/latest/api-events.html#event-structure
- * 
- * @param {String} email 
- * 
+ *
+ * @param {String} email
+ *
  * @return  Promise object, returning list of email events
  */
 mailgunReader.prototype.recipientEventList = function recipientEventList(email) {
@@ -92,7 +92,7 @@ mailgunReader.prototype.recipientEventList = function recipientEventList(email) 
 /**
  * Validate the url parameter for a valid mailgun api URL.
  * This is to safeguard the getURL from api key leakage
- * 
+ *
  * @param {String} url
  */
 mailgunReader.prototype.getUrlValidation = function getUrlValidation(email) {
@@ -105,7 +105,7 @@ mailgunReader.prototype.getUrlValidation = function getUrlValidation(email) {
 /**
  * Get the content of URL and return it, using the mailgun key.
  * This is useful for stored emails returned by the event stream.
- * 
+ *
  * @param {String} url
  */
 mailgunReader.prototype.getUrl = function getUrl(url) {
@@ -116,6 +116,23 @@ mailgunReader.prototype.getUrl = function getUrl(url) {
 
 	// Lets get and return it with a promise
 	return axiosGet(url, this._authOption);
+}
+
+/**
+ * Get the content of URL and return it, using the mailgun key.
+ * This is useful for stored emails returned by the event stream.
+ *
+ * @param {String} url
+ */
+mailgunReader.prototype.getKey = function getKey(key) {
+
+	[prefix, key, ...rest] = key.split("-")
+	// slice the mailgunApi to include the region
+	let apiUrl = this._config.mailgunApi
+	apiUrl = apiUrl.replace("://", "://"+prefix+".")
+	let urlWithParams = apiUrl+"/domains/"+this._config.emailDomain+"/messages/"+key;
+	// Lets get and return it with a promise
+	return axiosGet(urlWithParams, this._authOption);
 }
 
 // Export the mailgunReader class
