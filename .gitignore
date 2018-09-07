@@ -4,6 +4,7 @@
 # lib / build folders folder
 **/node_modules
 **/bin
+**/dist
 **/gopath
 
 # UI build folder ignore
@@ -12,6 +13,7 @@ ui/build/*
 # deploy build files
 deploy/firebase/functions
 deploy/firebase/public
+deploy/firebase/*.log
 
 # Whitelist anchor files
 

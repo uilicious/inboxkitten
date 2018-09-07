@@ -8,18 +8,13 @@
 		],
 		"rewrites": [
 			{
-				"source": "/api/**",
-				"function": "api-v1"
+				"source": "/api/v1/mail/**",
+				"function": "firebase_api_v1"
 			},
 			{
 				"source": "**",
 				"destination": "/index.html"
 			}
-		]
-	},
-	"functions": {
-		"predeploy": [
-			"npm --prefix \"$RESOURCE_DIR\" run lint"
 		]
 	}
 }
