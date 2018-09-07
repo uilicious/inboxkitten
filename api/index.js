@@ -7,6 +7,7 @@
  */
 
 // Dependencies loading
+const functions     = require('firebase-functions');
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const mailgunConfig = require("./config/mailgunConfig");
