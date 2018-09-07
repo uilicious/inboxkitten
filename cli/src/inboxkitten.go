@@ -33,6 +33,35 @@ func jsonPrettifier( raw string ) string {
 
 //---------------------------------------------------------------------------------------
 //
+// Http Request functions
+//
+//---------------------------------------------------------------------------------------
+
+func doGetRequest( url string ) []byte {
+	client := http.Client{
+		Timeout: time.Second * 2,
+	};
+
+	req, err := http.NewRequest(http.MethodGet, url, nil);
+	if err != nil {
+		log.Fatal(err);
+	}
+
+	res, getErr := client.Do(req);
+	if getErr != nil {
+		log.Fatal(getErr);
+	}
+	
+	body, readErr := ioutil.ReadAll(res.Body);
+	if readErr != nil {
+		log.Fatal(readErr);
+	}
+
+	return body;
+}
+
+//---------------------------------------------------------------------------------------
+//
 // Main CLI functions
 //
 // Note most of the CLI coding was done with referencing to :
@@ -104,57 +133,24 @@ func main() {
 		}
 
 		var email = listArgs[0];
-		//fmt.Fprintf(os.Stdout, "listing email : %s\n", email);
-
-		client := http.Client{
-			Timeout: time.Second * 2,
-		};
-
-		req, err := http.NewRequest(http.MethodGet, api+"/mail/list?recipient="+email, nil);
-		if err != nil {
-			log.Fatal(err);
-		}
-
-		res, getErr := client.Do(req);
-		if getErr != nil {
-			log.Fatal(getErr);
-		}
-
-		body, readErr := ioutil.ReadAll(res.Body);
-		if readErr != nil {
-			log.Fatal(readErr);
-		}
-
+		
+		var urlWithParams = api+"/mail/list?recipient="+email
+		var body = doGetRequest(urlWithParams);
 		fmt.Println( jsonPrettifier( string(body) ) );
 	}
 
 	if getCommand.Parsed() {
 		var getArgs = getCommand.Args();
-		if len(getArgs) <= 0 {
-			fmt.Fprintf(os.Stderr, "`get [url]` missing email url parameter\n");
+		if len(getArgs) <= 1 {
+			fmt.Fprintf(os.Stderr, "`get [region] [key]` missing region and key parameter\n");
 			os.Exit(1);
 		}
 
-		var url = getArgs[0];
+		var region = getArgs[0];
+		var key = getArgs[1];
 
-		client := http.Client{
-			Timeout: time.Second * 2,
-		};
-
-		req, err := http.NewRequest(http.MethodGet, api+"/mail/getUrl?url="+url, nil);
-		if err != nil {
-			log.Fatal(err);
-		}
-
-		res, getErr := client.Do(req);
-		if getErr != nil {
-			log.Fatal(getErr);
-		}
-
-		body, readErr := ioutil.ReadAll(res.Body);
-		if readErr != nil {
-			log.Fatal(readErr);
-		}
+		var urlWithParams = api+"/mail/getKey?mailKey="+region+"-"+key;
+		var body = doGetRequest(urlWithParams);
 
 		fmt.Println( jsonPrettifier( string(body) ) );
 	}
