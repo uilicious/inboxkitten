@@ -1,14 +1,14 @@
 <template>
   <div class="app">
     <div class="nav">
-      <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @inboxkitten.com
+      <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @{{domain}}
       <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Fetch!</button>
     </div>
     <div class="content">
       <div class="left">
-        <vue-scroll :ops="vueScrollBarOps" >
+        <vue-scroll :ops="vueScrollBarOps">
           <table class="pure-table message-list">
-            <tr>
+            <tr class="message-list-headers">
               <th>Subject</th>
               <th>From</th>
               <th>Time</th>
@@ -20,7 +20,11 @@
             </tr>
           </table>
           <div class="no-mails" v-if="listOfMessages.length == 0">
-            There for no messages for this kitten :(
+            <p>
+              There for no messages for this kitten :(<br/><br/>
+              Press on the 'Refresh' button if you want to overwork the kittens...
+            </p>
+            <button class="pure-button pure-button-primary" @click="getMessageList">Refresh</button>
           </div>
         </vue-scroll>
       </div>
@@ -31,7 +35,7 @@
 
 <script>
 import MessageDisplay from './MessageDisplay.vue'
-import config from '@/../config/apiconfig.js'
+import {mapState} from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -55,7 +59,11 @@ export default {
       get: function () {
         return this.$store.state.email.currentEmail
       }
-    }
+    },
+    ...mapState({
+      domain: state => state.email.domain,
+      apiUrl: state => state.email.apiUrl
+    })
 
   },
 
@@ -66,19 +74,25 @@ export default {
 
     this.email = this.currentEmail
     this.getMessageList()
+
+    this.retrieveMessage = window.setInterval(this.getMessageList, 10000)
+  },
+
+  beforeDestroy () {
+    window.clearInterval(this.retrieveMessage)
   },
 
   methods: {
     getMessage (url) {
       this.viewMessageDetail = true
-      axios.get(config.apiUrl + '/getUrl?url=' + url)
+      axios.get(this.apiUrl + '/getUrl?url=' + url)
         .then(res => {
           this.emailContent = res.data
           this.$eventHub.$emit('iframe_content', res.data['body-html'])
         })
     },
     getMessageList () {
-      axios.get(config.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
+      axios.get(this.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
         .then(res => {
           this.listOfMessages = res.data
         })
@@ -134,20 +148,22 @@ export default {
     background: #F3F3F3;
     align-items: center;
     justify-content: baseline;
+    padding-top:1rem;
+    padding-bottom:1rem;
   }
 
-  #email{
+  #email {
     text-align: right;
     margin-right: 0.25rem;
-    margin-left:2rem;
+    margin-left: 2rem;
     border-radius: 10px;
     padding-right: 0.5rem;
   }
 
   .fetch-button {
-    align-self:auto;
+    align-self: auto;
     margin-left: 1rem;
-    order:2;
+    order: 2;
   }
 
   .left {
@@ -157,13 +173,13 @@ export default {
 
   .message-list {
     width: 100%;
-    th,td{
+    th, td {
       text-align: left;
       font-size: 12px;
       border: 0;
     }
 
-    tr{
+    tr {
       padding-left: 1rem;
       border: 1px solid lightgrey;
     }
@@ -175,8 +191,12 @@ export default {
     }
   }
 
+  .message-list-headers {
+    background-color: #fffd8c;
+  }
+
   .right {
-    flex:1;
+    flex: 1;
   }
 
   .content {
@@ -184,7 +204,7 @@ export default {
     flex-direction: row;
     align-content: center;
     height: 100%;
-    width:100%;
+    width: 100%;
   }
 
   .no-mails {
