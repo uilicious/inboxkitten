@@ -16,7 +16,7 @@
         </div>
       </div>
       <form class="pure-form bottom-element">
-        <input type="text" v-model="randomName" id="email-input"/> @inboxkitten.com <br>
+        <input type="text" v-model="randomName" id="email-input"/> @{{domain}} <br>
         <router-link class="pure-button pure-button-primary inbox-button" :to="goToInbox">Check inbox</router-link>
       </form>
       <div class="intermission-header">
@@ -37,6 +37,7 @@
 </template>
 <script>
 import $ from 'jquery'
+import {mapState} from 'vuex'
 
 export default {
   name: 'LandingPage',
@@ -54,7 +55,10 @@ export default {
     goToInbox: function () {
       this.$store.commit('changeEmail', this.randomName)
       return '/inbox'
-    }
+    },
+    ...mapState({
+      domain: state => state.email.domain
+    })
   },
   methods: {
     generateRandomName () {
@@ -109,9 +113,15 @@ export default {
   #express-js {
     height: 50vh;
     background-color: lightgray;
+    padding-top:5rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5rem;
   }
 
   #google-js {
     height: 50vh;
+    padding-top:5rem;
   }
 </style>

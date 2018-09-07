@@ -1,7 +1,10 @@
+import config from '@/../config/apiconfig.js'
 
 // State
 const state = {
-  currentEmail: ''
+  currentEmail: '',
+  domain: config.domain,
+  apiUrl: config.apiUrl
 }
 
 const mutations = {

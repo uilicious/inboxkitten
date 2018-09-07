@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="nav">
-      <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @inboxkitten.com
+      <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @{{domain}}
       <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Fetch!</button>
     </div>
     <div class="content">
@@ -35,7 +35,7 @@
 
 <script>
 import MessageDisplay from './MessageDisplay.vue'
-import config from '@/../config/apiconfig.js'
+import {mapState} from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -59,7 +59,11 @@ export default {
       get: function () {
         return this.$store.state.email.currentEmail
       }
-    }
+    },
+    ...mapState({
+      domain: state => state.email.domain,
+      apiUrl: state => state.email.apiUrl
+    })
 
   },
 
@@ -81,14 +85,14 @@ export default {
   methods: {
     getMessage (url) {
       this.viewMessageDetail = true
-      axios.get(config.apiUrl + '/getUrl?url=' + url)
+      axios.get(this.apiUrl + '/getUrl?url=' + url)
         .then(res => {
           this.emailContent = res.data
           this.$eventHub.$emit('iframe_content', res.data['body-html'])
         })
     },
     getMessageList () {
-      axios.get(config.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
+      axios.get(this.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
         .then(res => {
           this.listOfMessages = res.data
         })
@@ -144,6 +148,8 @@ export default {
     background: #F3F3F3;
     align-items: center;
     justify-content: baseline;
+    padding-top:1rem;
+    padding-bottom:1rem;
   }
 
   #email {
