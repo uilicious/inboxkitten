@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Allow cross site requests (for now)
 app.use(function (req, res, next){
-	res.setHeader("Access-Control-Allow-Origin", mailgunConfig.emailDomain);
+	res.setHeader("Access-Control-Allow-Origin", mailgunConfig.corsOrigin);
 	// Request methods you wish to allow
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 

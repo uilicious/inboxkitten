@@ -5,5 +5,6 @@
 //
 module.exports = {
 	"apiKey" : "c890691fc566dc8c1c2dd0b2cd190095-f45b080f-2b297bf8",
-	"emailDomain" : "test.popskitten.com"
+	"emailDomain" : "test.popskitten.com",
+	"corsOrigin" : "http://test.popskitten.com:8080"
 }
