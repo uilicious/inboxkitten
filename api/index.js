@@ -15,10 +15,6 @@ const mailgunConfig = require("./config/mailgunConfig");
 // Initializing the express app
 const app = express();
 
-// Setup JSON encoding
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // Allow cross site requests (for now)
 app.use(function (req, res, next){
 	res.setHeader("Access-Control-Allow-Origin", mailgunConfig.emailDomain);
@@ -35,6 +31,10 @@ app.use(function (req, res, next){
 	// Pass to next layer of middleware
 	next();
 });
+
+// Setup JSON encoding
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setup the routes - for mail list / get
 app.get("/mail/list",   require("./src/api/mailList"));
