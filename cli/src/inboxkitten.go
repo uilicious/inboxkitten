@@ -1,26 +1,50 @@
 package main
 
+//---------------------------------------------------------------------------------------
+//
+// Dependencies import
+//
+//---------------------------------------------------------------------------------------
+
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
-	"encoding/json"
 	"os"
+	"io/ioutil"
 	"net/http"
 	"time"
 	"log"
+	"bytes"
+	"encoding/json"
+	// "github.com/hokaccha/go-prettyjson"
 )
 
-type emailList struct {
-	array []interface{}
+//---------------------------------------------------------------------------------------
+//
+// Utility functions
+//
+//---------------------------------------------------------------------------------------
+
+func jsonPrettifier( raw string ) string {
+	buf := new(bytes.Buffer)
+	json.Indent(buf, []byte(raw), "", "  ")
+	return buf.String()
 }
 
+//---------------------------------------------------------------------------------------
 //
-// Most the CLI example is taken from
+// Main CLI functions
+//
+// Note most of the CLI coding was done with referencing to :
 //
 // https://gobyexample.com/command-line-arguments
 // https://gobyexample.com/command-line-flags
 // https://blog.rapid7.com/2016/08/04/build-a-simple-cli-tool-with-golang/
+//
+//---------------------------------------------------------------------------------------
+
+//
+// Main CLI
 //
 func main() {
 
@@ -44,7 +68,7 @@ func main() {
 	// flagArgs[0] is the main command
 	// flagArgs[1] will be the subcommand
 	var missingCommandError = "`list [email]` or `get [emailid]` subcommand is required\n";
-	if len(flagArgs) <= 1 {
+	if len(flagArgs) <= 0 {
 		fmt.Fprintf(os.Stderr, missingCommandError);
 		flag.PrintDefaults();
 		os.Exit(1);
@@ -53,9 +77,6 @@ func main() {
 	// The list and get command
 	getCommand := flag.NewFlagSet("get", flag.ExitOnError)
 	listCommand := flag.NewFlagSet("list", flag.ExitOnError)
-
-	// 
-	listEmailPtr := listCommand.String("email", "", "Email to retrieve (Required)")
 
 	// Switch on the subcommand
 	// Parse the flags for appropriate FlagSet
@@ -72,18 +93,25 @@ func main() {
 			os.Exit(1);
 	}
 
+	//
+	// Processing of list command
+	//
 	if listCommand.Parsed() {
-		if *listEmailPtr == "" {
-			listCommand.PrintDefaults();
+
+		var listArgs = listCommand.Args();
+		if len(listArgs) <= 0 {
+			fmt.Fprintf(os.Stderr, "`list [email]` missing email parameter\n");
 			os.Exit(1);
 		}
-		fmt.Printf("Email: %s", *listEmailPtr);
+
+		var email = listArgs[0];
+		//fmt.Fprintf(os.Stdout, "listing email : %s\n", email);
 
 		client := http.Client{
 			Timeout: time.Second * 2,
 		};
 
-		req, err := http.NewRequest(http.MethodGet, api+"/mail/list?recipient="+*listEmailPtr, nil);
+		req, err := http.NewRequest(http.MethodGet, api+"/mail/list?recipient="+email, nil);
 		if err != nil {
 			log.Fatal(err);
 		}
@@ -97,11 +125,8 @@ func main() {
 		if readErr != nil {
 			log.Fatal(readErr);
 		}
-		emailListVar := emailList{}
-		jsonErr := json.Unmarshal(body, &emailListVar)
-		if jsonErr != nil {
-			log.Fatal(jsonErr)
-		}
-		fmt.Println(emailListVar);
+
+		fmt.Println( jsonPrettifier( string(body) ) );
 	}
 }
+
