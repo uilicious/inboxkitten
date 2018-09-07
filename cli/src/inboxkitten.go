@@ -97,7 +97,6 @@ func main() {
 	// Processing of list command
 	//
 	if listCommand.Parsed() {
-
 		var listArgs = listCommand.Args();
 		if len(listArgs) <= 0 {
 			fmt.Fprintf(os.Stderr, "`list [email]` missing email parameter\n");
@@ -112,6 +111,37 @@ func main() {
 		};
 
 		req, err := http.NewRequest(http.MethodGet, api+"/mail/list?recipient="+email, nil);
+		if err != nil {
+			log.Fatal(err);
+		}
+
+		res, getErr := client.Do(req);
+		if getErr != nil {
+			log.Fatal(getErr);
+		}
+
+		body, readErr := ioutil.ReadAll(res.Body);
+		if readErr != nil {
+			log.Fatal(readErr);
+		}
+
+		fmt.Println( jsonPrettifier( string(body) ) );
+	}
+
+	if getCommand.Parsed() {
+		var getArgs = getCommand.Args();
+		if len(getArgs) <= 0 {
+			fmt.Fprintf(os.Stderr, "`get [url]` missing email url parameter\n");
+			os.Exit(1);
+		}
+
+		var url = getArgs[0];
+
+		client := http.Client{
+			Timeout: time.Second * 2,
+		};
+
+		req, err := http.NewRequest(http.MethodGet, api+"/mail/getUrl?url="+url, nil);
 		if err != nil {
 			log.Fatal(err);
 		}
