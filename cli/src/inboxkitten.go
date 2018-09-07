@@ -3,8 +3,17 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"encoding/json"
 	"os"
+	"net/http"
+	"time"
+	"log"
 )
+
+type emailList struct {
+	array []interface{}
+}
 
 //
 // Most the CLI example is taken from
@@ -16,7 +25,7 @@ import (
 func main() {
 
 	// The api url with default value
-	var apiDefault = "https://api.inboxkitten.com/api/v1/"
+	var apiDefault = "https://us-central1-ulicious-inbox-kitten.cloudfunctions.net/api-v1"
 	var api string
 	flag.StringVar(&api, "api", apiDefault, "URL to inbox kitten API")
 
@@ -45,6 +54,9 @@ func main() {
 	getCommand := flag.NewFlagSet("get", flag.ExitOnError)
 	listCommand := flag.NewFlagSet("list", flag.ExitOnError)
 
+	// 
+	listEmailPtr := listCommand.String("email", "", "Email to retrieve (Required)")
+
 	// Switch on the subcommand
 	// Parse the flags for appropriate FlagSet
 	// FlagSet.Parse() requires a set of arguments to parse as input
@@ -60,10 +72,36 @@ func main() {
 			os.Exit(1);
 	}
 
+	if listCommand.Parsed() {
+		if *listEmailPtr == "" {
+			listCommand.PrintDefaults();
+			os.Exit(1);
+		}
+		fmt.Printf("Email: %s", *listEmailPtr);
 
-	// if len(image) == 0 {
-	// 	fmt.Fprintf(os.Stderr, "You must specify a Docker image name")
-	// }
-	// fmt.Printf("Your Docker image was: %s", image)
-	// fmt.Printf("\n")
+		client := http.Client{
+			Timeout: time.Second * 2,
+		};
+
+		req, err := http.NewRequest(http.MethodGet, api+"/mail/list?recipient="+*listEmailPtr, nil);
+		if err != nil {
+			log.Fatal(err);
+		}
+
+		res, getErr := client.Do(req);
+		if getErr != nil {
+			log.Fatal(getErr);
+		}
+
+		body, readErr := ioutil.ReadAll(res.Body);
+		if readErr != nil {
+			log.Fatal(readErr);
+		}
+		emailListVar := emailList{}
+		jsonErr := json.Unmarshal(body, &emailListVar)
+		if jsonErr != nil {
+			log.Fatal(jsonErr)
+		}
+		fmt.Println(emailListVar);
+	}
 }
