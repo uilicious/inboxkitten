@@ -9,6 +9,11 @@ before_install:
   - npm install -g firebase-tools
   # # Installing of uilicious toolchain
   # - npm install -g uilicious-cli
+# Addons (for build debugging)
+addons:
+  apt:
+    packages:
+      - tree
 # Building and testing on travis
 script:
   - ./config.sh
