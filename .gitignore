@@ -15,9 +15,12 @@ deploy/firebase/functions
 deploy/firebase/public
 deploy/firebase/*.log
 
-# Whitelist anchor files
+# Remove out config files
+api/config/*.js
 
+# Include sample config files
+!api/config/*.sample.js
 
-# Whitelist .gitignore
+# Whitelist anchor files & .gitignore
 !.gitignore
 !**/.anchor
