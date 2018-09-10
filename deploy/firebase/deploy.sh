@@ -20,12 +20,12 @@ mkdir -p "$firebaseDir/functions/";
 
 # Transfering files into fire base deploy folder
 echo ">> Preparing build files for firebase upload"
-cp -R "$projectDir/ui/dist/" "$firebaseDir/public/"
-cp -R "$projectDir/cli/bin/" "$firebaseDir/public/cli/"
-cp -R "$projectDir/api/" "$firebaseDir/functions/"
+cp -a "$projectDir/ui/dist/." "$firebaseDir/public/"
+cp -a "$projectDir/cli/bin/." "$firebaseDir/public/cli/"
+cp -a "$projectDir/api/." "$firebaseDir/functions/"
 
 # Reconfigure the API function for firebase
-# cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
+cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
 # Debug for file tree
 cd "$firebaseDir"
