@@ -25,7 +25,7 @@ cp -R "$projectDir/cli/bin/" "$firebaseDir/public/cli/"
 cp -R "$projectDir/api/" "$firebaseDir/functions/"
 
 # Reconfigure the API function for firebase
-cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
+# cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
 # Debug for file tree
 cd "$firebaseDir"
