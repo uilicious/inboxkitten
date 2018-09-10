@@ -16,10 +16,10 @@ npm install;
 npm run build;
 
 # Build the API
-echo ">> Building the UI (NPM install + run build)"
+echo ">> Building the UI (NPM install)"
 cd "$projectDir/api"
 npm install;
-npm run build;
+# npm run build;
 
 # Build the CLI
 echo ">> Building the CLI"
