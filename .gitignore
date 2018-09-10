@@ -17,6 +17,7 @@ deploy/firebase/*.log
 
 # Remove out config files
 api/config/*.js
+ui/config/apiconfig.js
 
 # Include sample config files
 !api/config/*.sample.js

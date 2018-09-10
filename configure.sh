@@ -63,3 +63,4 @@ export MAILGUN_API_KEY="$MAILGUN_API_KEY"
 #
 echo ">> Applying config settings"
 cat "$projectDir/api/config/mailgunConfig.sample.js" | envsubst > "$projectDir/api/config/mailgunConfig.js"
+cat "$projectDir/ui/config/apiconfig.sample.js" | envsubst > "$projectDir/ui/config/apiconfig.js"
