@@ -39,5 +39,6 @@ cp -r "$projectDir/api/" "$firebaseDir/functions/"
 cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
 # Calling firebase deploy
+cd "$firebaseDir"
 echo ">> Deploying to firebase"
 firebase deploy
