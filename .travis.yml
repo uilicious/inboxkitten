@@ -18,7 +18,7 @@ addons:
 script:
   - ./config.sh
   - ./build.sh
-  - echo "Displaying project file tree (for easy debugging)" && tree -L 3
+  - echo "Displaying project file tree (for easy debugging)" && tree -L 2
 # The actual deploy scripts
 deploy:
   - provider: script
