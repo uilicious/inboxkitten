@@ -33,11 +33,6 @@ if [ ! -z "DISPLAY_DEPLOY_FILE_TREE" ]; then
 	tree -L 3;
 fi
 
-# Calling firebase deploy
-if [ -z "$FIREBASE_TOKEN" ]; then
-	echo ">> Deploying to firebase"
-	firebase deploy
-else
-	echo ">> Deploying to firebase - using FIREBASE_TOKEN"
-	firebase deploy --token "$FIREBASE_TOKEN"
-fi
+# Calling firebase deploy, with parameters passing forward
+echo ">> Deploying to firebase"
+firebase deploy $@

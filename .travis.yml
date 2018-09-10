@@ -23,7 +23,7 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: cd ./deploy/firebase && ./deploy.sh
+    script: cd ./deploy/firebase && ./deploy.sh --token "$FIREBASE_TOKEN" --project "$FIREBASE_PROJECT"
     on:
       branch: master
 # Dependencies caching (for NPM, and GO)
