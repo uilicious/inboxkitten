@@ -5,9 +5,18 @@ language: go
 node_js: "8.10"
 # Installation of subdependencies
 before_install:
+  # Install firebase tools
+  - npm install -g firebase-tools
   # # Installing of uilicious toolchain
   # - npm install -g uilicious-cli
 # Building and testing on travis
 script:
   - ./config.sh
   - ./build.sh
+# The actual deploy scripts
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: cd ./deploy/firebase && ./deploy.sh
+    on:
+      branch: master
