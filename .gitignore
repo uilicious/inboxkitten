@@ -24,4 +24,5 @@ ui/config/apiconfig.js
 
 # Whitelist anchor files & .gitignore
 !.gitignore
+!.travis.yml
 !**/.anchor

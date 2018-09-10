@@ -1,0 +1,12 @@
+sudo: false
+language: go
+
+# Our CLI toolchain is based on node_js
+node_js: "8.10"
+# Installation of subdependencies
+before_install:
+  # # Installing of uilicious toolchain
+  # - npm install -g uilicious-cli
+# Building and testing on travis
+script:
+  - echo "hello world"
