@@ -10,4 +10,4 @@ before_install:
 # Building and testing on travis
 script:
   - ./config.sh
-  - cd ./deploy/firebase && ./deploy.sh
+  - ./build.sh
