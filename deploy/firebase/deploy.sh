@@ -27,6 +27,9 @@ cp -a "$projectDir/api/." "$firebaseDir/functions/"
 # Reconfigure the API function for firebase
 cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
+# Add in commit hash, to help debug deployment build
+git rev-parse HEAD > "$firebaseDir/public/GITHASH"
+
 # Debug for file tree
 cd "$firebaseDir"
 if [ ! -z "DISPLAY_DEPLOY_FILE_TREE" ]; then
