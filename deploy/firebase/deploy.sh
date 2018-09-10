@@ -12,18 +12,7 @@ firebaseDir="`pwd`"
 projectDir="$(cd "$firebaseDir/../.."; pwd)"
 echo ">> Assuming project directory of : $projectDir"
 
-# Build the UI + CLI
-echo ">> Building the UI (NPM install + run build)"
-cd "$projectDir/ui"
-npm install;
-npm run build;
-
-# Build the CLI
-echo ">> Building the CLI"
-cd "$projectDir/cli"
-make build;
-
-# Clearing out firebase public folder
+# Clearing out firebase public / functions folder
 rm -rf "$firebaseDir/functions/"; 
 rm -rf "$firebaseDir/public/"; 
 mkdir -p "$firebaseDir/public/cli/";
