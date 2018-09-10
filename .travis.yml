@@ -9,4 +9,4 @@ before_install:
   # - npm install -g uilicious-cli
 # Building and testing on travis
 script:
-  - echo "hello world"
+  - ./config.sh
