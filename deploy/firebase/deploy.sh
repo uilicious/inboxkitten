@@ -27,9 +27,13 @@ cp -R "$projectDir/api/" "$firebaseDir/functions/"
 # Reconfigure the API function for firebase
 cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
-# Calling firebase deploy
+# Debug for file tree
 cd "$firebaseDir"
+if [ ! -z "DISPLAY_DEPLOY_FILE_TREE" ]; then
+	tree -L 3;
+fi
 
+# Calling firebase deploy
 if [ -z "$FIREBASE_TOKEN" ]; then
 	echo ">> Deploying to firebase"
 	firebase deploy

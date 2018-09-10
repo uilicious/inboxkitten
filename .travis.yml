@@ -13,6 +13,7 @@ before_install:
 script:
   - ./config.sh
   - ./build.sh
+  - echo "Displaying project file tree (for easy debugging)" && tree -L 3
 # The actual deploy scripts
 deploy:
   - provider: script
