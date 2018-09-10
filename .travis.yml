@@ -26,3 +26,9 @@ deploy:
     script: cd ./deploy/firebase && ./deploy.sh
     on:
       branch: master
+# Dependencies caching (for NPM, and GO)
+cache:
+  directories:
+    - api/node_modules
+    - ui/node_modules
+    - cli/gopath
