@@ -40,5 +40,11 @@ cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
 # Calling firebase deploy
 cd "$firebaseDir"
-echo ">> Deploying to firebase"
-firebase deploy
+
+if [ -z "$FIREBASE_TOKEN" ]; then
+	echo ">> Deploying to firebase"
+	firebase deploy
+else
+	echo ">> Deploying to firebase - using FIREBASE_TOKEN"
+	firebase deploy --token "$FIREBASE_TOKEN"
+fi
