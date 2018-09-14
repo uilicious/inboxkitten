@@ -13,14 +13,20 @@ const reader = new mailgunReader(mailgunConfig);
 module.exports = function(req, res){
 	let params = req.query
 	let recipient = params.recipient
+
 	if (recipient == null){
 		res.status(400).send({ error : "No `recepient` param found" });
 	}
 
-	reader.recipientEventList(recipient).then(response => {
+	// strip off all @domain if there is any
+	if(recipient.indexOf("@") >= 0){
+		recipient = recipient.substring(0, recipient.indexOf("@"))
+	}
+
+	reader.recipientEventList(recipient+"@"+mailgunConfig.emailDomain).then(response => {
 		 res.status(200).send(response.items)
 	})
 	.catch(e => {
-		 res.status(500).send(e)
+		res.status(500).send("{error: '"+e+"'}")
 	});
 }
