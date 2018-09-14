@@ -21,6 +21,6 @@ module.exports = function(req, res){
 		 res.status(200).send(response)
 	})
 	.catch(e => {
-		 res.status(500).send(e)
+		res.status(500).send("{error: '"+e+"'}")
 	});
 }
