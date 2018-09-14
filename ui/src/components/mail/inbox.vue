@@ -24,7 +24,8 @@
               There for no messages for this kitten :(<br/><br/>
               Press on the 'Refresh' button if you want to overwork the kittens...
             </p>
-            <button class="pure-button pure-button-primary" @click="getMessageList">Refresh</button>
+            <button class="pure-button pure-button-primary" @click="refreshList" v-if="!refreshing">Refresh</button>
+            <pulse-loader v-if="refreshing"></pulse-loader>
           </div>
         </vue-scroll>
       </div>
@@ -37,12 +38,14 @@
 import MessageDisplay from './MessageDisplay.vue'
 import {mapState} from 'vuex'
 import axios from 'axios'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
   name: 'Inbox',
   data: () => {
     return {
       email: '',
+      refreshing: false,
       emailContent: {},
       listOfMessages: [],
       vueScrollBarOps: {
@@ -85,17 +88,26 @@ export default {
     getMessage (url) {
       let [protocol, empty, host, ...uri] = url.split('/')
       let [region, ...remainingHost] = host.split('.')
+      console.log('Protocol: ' + protocol + empty)
+      console.log('Domain: ', remainingHost)
 
-      axios.get(this.apiUrl + '/getKey?mailKey=' + region+'-'+uri[uri.length - 1])
+      axios.get(this.apiUrl + '/getKey?mailKey=' + region + '-' + uri[uri.length - 1])
         .then(res => {
           this.emailContent = res.data
           this.$eventHub.$emit('iframe_content', res.data['body-html'])
         })
     },
+    refreshList () {
+      this.refreshing = true
+      this.getMessageList()
+    },
     getMessageList () {
       axios.get(this.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
         .then(res => {
           this.listOfMessages = res.data
+          this.refreshing = false
+        }).catch((e) => {
+          this.refreshing = false
         })
     },
     changeInbox () {
@@ -125,7 +137,8 @@ export default {
   },
 
   components: {
-    MessageDisplay
+    MessageDisplay,
+    PulseLoader
   }
 }
 </script>
@@ -149,8 +162,8 @@ export default {
     background: #F3F3F3;
     align-items: center;
     justify-content: baseline;
-    padding-top:1rem;
-    padding-bottom:1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   #email {
