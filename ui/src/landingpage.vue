@@ -66,9 +66,8 @@ export default {
       return randomWords({
         exactly: 1,
         wordsPerString: 2,
-        separator: '',
-        formatter: (word) => word.slice(0, 1).toUpperCase().concat(word.slice(1))
-      })
+        separator: ''
+      }) + Math.floor(Math.random() * 90 + 10)
     },
     scrollDown () {
       $('html, body').animate({
