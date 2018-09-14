@@ -2,7 +2,7 @@
   <div class="app">
     <div class="nav">
 
-      <div class="back-button" @click="goToMain"> < Back</div>
+      <div class="back-button" @click="goToMain"> &lt; Back</div>
       <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @{{domain}}
       <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Fetch!</button>
     </div>
