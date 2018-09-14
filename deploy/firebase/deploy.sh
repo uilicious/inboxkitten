@@ -12,18 +12,7 @@ firebaseDir="`pwd`"
 projectDir="$(cd "$firebaseDir/../.."; pwd)"
 echo ">> Assuming project directory of : $projectDir"
 
-# Build the UI + CLI
-echo ">> Building the UI (NPM install + run build)"
-cd "$projectDir/ui"
-npm install;
-npm run build;
-
-# Build the CLI
-echo ">> Building the CLI"
-cd "$projectDir/cli"
-make build;
-
-# Clearing out firebase public folder
+# Clearing out firebase public / functions folder
 rm -rf "$firebaseDir/functions/"; 
 rm -rf "$firebaseDir/public/"; 
 mkdir -p "$firebaseDir/public/cli/";
@@ -31,14 +20,22 @@ mkdir -p "$firebaseDir/functions/";
 
 # Transfering files into fire base deploy folder
 echo ">> Preparing build files for firebase upload"
-cp -r "$projectDir/ui/dist/" "$firebaseDir/public/"
-cp -r "$projectDir/cli/bin/" "$firebaseDir/public/cli/"
-cp -r "$projectDir/api/" "$firebaseDir/functions/"
+cp -a "$projectDir/ui/dist/." "$firebaseDir/public/"
+cp -a "$projectDir/cli/bin/." "$firebaseDir/public/cli/"
+cp -a "$projectDir/api/." "$firebaseDir/functions/"
 
 # Reconfigure the API function for firebase
 cp "$firebaseDir/functions/firebase.js" "$firebaseDir/functions/index.js"
 
-# Calling firebase deploy
+# Add in commit hash, to help debug deployment build
+git rev-parse HEAD > "$firebaseDir/public/GITHASH"
+
+# Debug for file tree
 cd "$firebaseDir"
+if [ ! -z "DISPLAY_DEPLOY_FILE_TREE" ]; then
+	tree -L 3;
+fi
+
+# Calling firebase deploy, with parameters passing forward
 echo ">> Deploying to firebase"
-firebase deploy
+firebase deploy $@

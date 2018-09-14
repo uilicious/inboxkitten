@@ -1,0 +1,34 @@
+sudo: false
+language: go
+
+# Our CLI toolchain is based on node_js
+node_js: "8.10"
+# Installation of subdependencies
+before_install:
+  # Install firebase tools
+  - npm install -g firebase-tools
+  # # Installing of uilicious toolchain
+  # - npm install -g uilicious-cli
+# Addons (for build debugging)
+addons:
+  apt:
+    packages:
+      - tree
+# Building and testing on travis
+script:
+  - ./config.sh
+  - ./build.sh
+  - echo "Displaying project file tree (for easy debugging)" && tree -L 2
+# The actual deploy scripts
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: cd ./deploy/firebase && ./deploy.sh --token "$FIREBASE_TOKEN" --project "$FIREBASE_PROJECT"
+    on:
+      branch: master
+# Dependencies caching (for NPM, and GO)
+cache:
+  directories:
+    - api/node_modules
+    - ui/node_modules
+    - cli/gopath
