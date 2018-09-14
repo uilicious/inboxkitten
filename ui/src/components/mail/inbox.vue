@@ -1,6 +1,8 @@
 <template>
   <div class="app">
     <div class="nav">
+
+      <div class="back-button" @click="goToMain"> < Back</div>
       <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @{{domain}}
       <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Fetch!</button>
     </div>
@@ -130,6 +132,11 @@ export default {
         timeDisplay = 'about ' + Math.floor(difference / 86400) + ' days ago'
       }
       return timeDisplay
+    },
+    goToMain () {
+      this.$router.push({
+        name: 'Kitten Land'
+      })
     }
   },
 
@@ -166,7 +173,7 @@ export default {
   #email {
     text-align: right;
     margin-right: 0.25rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
     border-radius: 10px;
     padding-right: 0.5rem;
   }
@@ -223,5 +230,10 @@ export default {
     vertical-align: center;
     overflow: hidden;
     margin-top: 2rem;
+  }
+
+  .back-button {
+    cursor: pointer;
+    margin-left: 2rem;
   }
 </style>
