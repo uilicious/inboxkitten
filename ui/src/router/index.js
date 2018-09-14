@@ -20,6 +20,7 @@ Vue.use(Router)
 Vue.use(vuescroll)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -27,9 +28,13 @@ export default new Router({
       component: LandingPage
     },
     {
-      path: '/inbox',
+      path: '/inbox/:email',
       name: 'Inbox',
       component: Inbox
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })

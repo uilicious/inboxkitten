@@ -36,7 +36,7 @@
 
 <script>
 import MessageDisplay from './MessageDisplay.vue'
-import {mapState} from 'vuex'
+import config from '@/../config/apiconfig.js'
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
@@ -56,25 +56,18 @@ export default {
     }
   },
   computed: {
-
-    currentEmail: {
-      get: function () {
-        return this.$store.state.email.currentEmail
-      }
-    },
-    ...mapState({
-      domain: state => state.email.domain,
-      apiUrl: state => state.email.apiUrl
-    })
-
+    domain () {
+      return config.domain
+    }
   },
 
   mounted () {
-    if (this.currentEmail === '') {
+    let currentEmail = this.$route.params.email
+    if (currentEmail === '') {
       this.$router.push({name: 'Kitten Land'})
     }
 
-    this.email = this.currentEmail
+    this.email = currentEmail
     this.getMessageList()
 
     this.retrieveMessage = window.setInterval(this.getMessageList, 10000)
@@ -91,7 +84,7 @@ export default {
       console.log('Protocol: ' + protocol + empty)
       console.log('Domain: ', remainingHost)
 
-      axios.get(this.apiUrl + '/getKey?mailKey=' + region + '-' + uri[uri.length - 1])
+      axios.get(config.apiUrl + '/getKey?mailKey=' + region + '-' + uri[uri.length - 1])
         .then(res => {
           this.emailContent = res.data
           this.$eventHub.$emit('iframe_content', res.data['body-html'])
@@ -102,7 +95,7 @@ export default {
       this.getMessageList()
     },
     getMessageList () {
-      axios.get(this.apiUrl + '/list?recipient=' + this.email.toLowerCase() + '@test.popskitten.com')
+      axios.get(config.apiUrl + '/list?recipient=' + this.email.toLowerCase())
         .then(res => {
           this.listOfMessages = res.data
           this.refreshing = false
@@ -111,10 +104,14 @@ export default {
         })
     },
     changeInbox () {
-      this.$store.commit('changeEmail', this.email)
+      this.$router.push({
+        params: {
+          email: this.email
+        }
+      })
       this.emailContent = {}
       this.$eventHub.$emit('iframe_content', '')
-      this.getMessageList()
+      this.refreshList()
     },
 
     calculateTime (msg) {

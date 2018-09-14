@@ -17,7 +17,7 @@
       </div>
       <form class="pure-form bottom-element">
         <input type="text" v-model="randomName" id="email-input"/> @{{domain}} <br>
-        <router-link class="pure-button pure-button-primary inbox-button" :to="goToInbox">Check inbox</router-link>
+        <button class="pure-button pure-button-primary inbox-button" @click="goToInbox">Check inbox</button>
       </form>
       <div class="intermission-header">
         <p>Host your own InboxKitten!</p>
@@ -37,7 +37,7 @@
 </template>
 <script>
 import $ from 'jquery'
-import {mapState} from 'vuex'
+import config from '@/../config/apiconfig.js'
 
 export default {
   name: 'LandingPage',
@@ -49,16 +49,11 @@ export default {
   },
   mounted () {
     this.randomName = this.generateRandomName().toString()
-    this.$store.commit('changeEmail', this.randomName)
   },
   computed: {
-    goToInbox: function () {
-      this.$store.commit('changeEmail', this.randomName)
-      return '/inbox'
-    },
-    ...mapState({
-      domain: state => state.email.domain
-    })
+    domain () {
+      return config.domain
+    }
   },
   methods: {
     generateRandomName () {
@@ -73,6 +68,14 @@ export default {
       $('html, body').animate({
         scrollTop: $('#express-js').offset().top
       }, 1000)
+    },
+    goToInbox () {
+      this.$router.push({
+        name: 'Inbox',
+        params: {
+          email: this.randomName
+        }
+      })
     }
   }
 }
