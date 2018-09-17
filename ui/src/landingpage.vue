@@ -252,12 +252,13 @@
 					border-top-right-radius: $input-box-el-border-radius;
 					border-bottom-left-radius: 0;
 					width: 100%;
+					height:2rem;
 				}
 			}
 
 			// Increase submit button height
 			.submit-box {
-				margin-top:1rem;
+				margin-top:1.25rem;
 				margin-left:0;
 
 				display: block;
@@ -266,6 +267,7 @@
 				.submit {
 					display: inline;
 					width: 75%;
+					height:2.5rem;
 				}
 			}
 		}
