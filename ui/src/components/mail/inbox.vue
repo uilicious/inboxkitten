@@ -123,13 +123,13 @@ export default {
       var timeDisplay = date.toLocaleString()
 
       if (difference < 60) {
-        timeDisplay = difference + ' seconds ago'
+        timeDisplay = Math.round(difference) + ' seconds ago'
       } else if (difference < 3600) {
-        timeDisplay = 'about ' + Math.floor(difference / 60) + ' minutes ago'
+        timeDisplay = 'about ' + Math.round(Math.floor(difference / 60)) + ' minutes ago'
       } else if (difference < 86400) {
-        timeDisplay = 'about ' + Math.floor(difference / 3600) + ' hours ago'
+        timeDisplay = 'about ' + Math.round(Math.floor(difference / 3600)) + ' hours ago'
       } else if (difference >= 86400) {
-        timeDisplay = 'about ' + Math.floor(difference / 86400) + ' days ago'
+        timeDisplay = 'about ' + Math.round(Math.floor(difference / 86400)) + ' days ago'
       }
       return timeDisplay
     },
