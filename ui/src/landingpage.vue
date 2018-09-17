@@ -14,7 +14,11 @@
 				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
 			</form>
 		</div>
-
+		<div class="love-notes">
+			<p>
+				Made with <span style="color: #e25555;">&hearts;</span> by uilicious
+			</p>
+		</div>
 		<!--
 
 		<div class="intermission-header">
@@ -277,45 +281,5 @@
 			}
 		}
 	}
-	/*
-	#email-input {
-		border: none;
-		border-color: transparent;
-		text-align: right;
-		margin-right: 0.5rem;
-	}
-
-	.intermission-header {
-		height: 2vh;
-		position: relative;
-		top: 40%;
-	}
-
-
-	@media only screen and (min-width:410px) {
-		.display-form {
-			display: flex;
-			flex-direction: row;
-		}
-	}
-
-	.display-form{
-		margin-top: 3rem;
-		margin-bottom: 1rem;
-	}
-
-	.main-section {
-		height: 70vh;
-		width: 100vw;
-		display:flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: flex-start;
-		margin-top: 5rem;
-	}
-
-	.intermission-header {
-		height: 30vh;
-	}
-	*/
+	
 </style>
