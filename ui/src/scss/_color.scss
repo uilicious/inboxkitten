@@ -24,3 +24,17 @@ $color2-light: lighten($color2-base, 10%);
 $color3-light: lighten($color3-base, 10%);
 $color4-light: lighten($color4-base, 10%);
 $color5-light: lighten($color5-base, 10%);
+
+//-----------------------------------------------
+// Text colors
+//-----------------------------------------------
+$bright-text: #FFFFFF;
+$dark-text: #040404;
+
+//-----------------------------------------------
+// CALL TO ACTION - colors
+//-----------------------------------------------
+$cta-base: #FF4377;
+$cta-base-text: #FFFFFF;
+$cta-hover: #ff0;
+$cta-hover-text: #040404;

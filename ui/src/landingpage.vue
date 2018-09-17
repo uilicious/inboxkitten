@@ -2,13 +2,18 @@
 	<div class="landing-page">
 		<div class="header">
 			<img class="logo" src="@/assets/logo.png"/>
+			<h1>Open-Source Disposable Email</h1>
+			<h2>(Served by Kittens)</h2>
 		</div>
-		<!-- <div class="email-selection">
-			<form class="pure-form display-form">
-				<input type="text" v-model="randomName" id="email-input"/> <p>@{{domain}}</p>
+		<div class="email-selection">
+			<form v-on:submit.prevent="goToInbox">
+				<div class="input-box">
+					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/> 
+					<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
+				</div>
+				<input type="submit" class="submit" value="Get Mail Meow!"/>
 			</form>
-			<button class="pure-button pure-button-primary inbox-button" @click="goToInbox">Check inbox</button>
-		</div> -->
+		</div>
 
 		<!--
 
@@ -26,6 +31,7 @@
 <script>
 	import $ from 'jquery'
 	import config from '@/../config/apiconfig.js'
+	import 'normalize.css';
 
 	export default {
 		name: 'LandingPage',
@@ -49,13 +55,8 @@
 				return randomWords({
 					exactly: 1,
 					wordsPerString: 2,
-					separator: ''
-				}) + Math.floor(Math.random() * 90 + 10)
-			},
-			scrollDown () {
-				$('html, body').animate({
-					scrollTop: $('#express-js').offset().top
-				}, 1000)
+					separator: '-'
+				}) + "-"+Math.floor(Math.random() * 90 + 10)
 			},
 			goToInbox () {
 				this.$router.push({
@@ -64,6 +65,9 @@
 						email: this.randomName
 					}
 				})
+			},
+			emailInputFocus() {
+				$('#email-input').select()
 			}
 		}
 	}
@@ -82,13 +86,25 @@
 	//
 	.header {
 		padding-top: 3rem;
-		padding-bottom: 3rem;
+		padding-bottom: 2rem;
 		width: 100vw;
 		background-color: $color1-base;
 
 		.logo {
 			width:40vw;
 			max-width: 800px;
+			margin-bottom:1rem;
+		}
+
+		h1 {
+			color:$bright-text;
+		}
+		h2 {
+			color:$dark-text;
+		}
+
+		h1,h2 {
+			margin:0;
 		}
 
 		@media only screen and (max-width:760px) {
@@ -98,6 +114,84 @@
 		}
 	}
 
+	//
+	// Email selection box
+	//
+	.email-selection {
+		width: 100vw;
+		background-color: $color2-base;
+
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+
+		// Adust the input box elements borders
+		$input-box-el-border-radius: 0.4rem;
+
+		// The main input box
+		.input-box {
+			
+			// Remove space between inline-blocks
+			font-size:0; 
+
+			// Input-box radius : note you will need 
+			// to update input left top/bottom radius as well
+			background-color:$color5-base;
+			display: inline-block;
+			border-radius: $input-box-el-border-radius;
+
+			// Common settings for input, and suffix label
+			.input-email, .input-suffix {
+				padding:0;
+				margin:0;
+				font-size:1rem;
+				padding-top:0.25rem;
+				padding-bottom:0.25rem;
+			}
+
+			.input-email {
+				border:0px;
+				width: 12rem;
+				display: inline-block;
+				text-align:center;
+				border-top-left-radius: $input-box-el-border-radius;
+				border-bottom-left-radius: $input-box-el-border-radius;
+				border-top-right-radius: 0rem;
+				border-bottom-right-radius: 0rem;
+			}
+			.input-suffix {
+				width: 10rem;
+				display: inline-block;
+				padding-left:1rem;
+				padding-right:1rem;
+			}
+		}
+
+		// Submission button styling
+		.submit  {
+			padding: 0.25rem 1rem 0.25rem 1rem;
+			margin:0;
+			border: 0;
+
+			font-size:1rem;
+			font-weight: bold;
+			margin-left:1rem;
+			
+			background: $cta-base;
+			color: $cta-base-text;
+
+			border-radius: $input-box-el-border-radius;
+
+			font-size: 100%;
+			font-family: inherit;
+			text-transform: none;
+			-webkit-appearance: button;
+		}
+
+		.submit:hover {
+			background: $cta-hover;
+			color: $cta-hover-text;
+		}
+	}
 	/*
 	#email-input {
 		border: none;
