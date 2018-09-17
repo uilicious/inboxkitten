@@ -1,0 +1,26 @@
+//-----------------------------------------------
+// Base Color
+//-----------------------------------------------
+$color1-base: #119DA4;
+$color2-base: #0C7489;
+$color3-base: #13505B;
+$color4-base: #040404;
+$color5-base: #D7D9CE;
+
+//-----------------------------------------------
+// Dark Color varient
+//-----------------------------------------------
+$color1-dark: darken($color1-base, 10%);
+$color2-dark: darken($color2-base, 10%);
+$color3-dark: darken($color3-base, 10%);
+$color4-dark: darken($color4-base, 10%);
+$color5-dark: darken($color5-base, 10%);
+
+//-----------------------------------------------
+// Light Color varient
+//-----------------------------------------------
+$color1-light: lighten($color1-base, 10%);
+$color2-light: lighten($color2-base, 10%);
+$color3-light: lighten($color3-base, 10%);
+$color4-light: lighten($color4-base, 10%);
+$color5-light: lighten($color5-base, 10%);
