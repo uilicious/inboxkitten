@@ -242,4 +242,18 @@ export default {
     margin-left:1rem;
     order:3
   }
+
+  @media only screen and (max-width: 800px) {
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left {
+      width: 100vw;
+      border-bottom: 1px solid lightgray;
+      margin-bottom: 1rem;
+      height: 20vh;
+    }
+  }
 </style>
