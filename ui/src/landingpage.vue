@@ -11,7 +11,7 @@
 					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/> 
 					<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
 				</div>
-				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Neow!"/></div>
+				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
 			</form>
 		</div>
 
