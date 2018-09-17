@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div style="position:fixed; top:3vh; right:2vw; z-index:10;" v-if="isShare">
-      <a href="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-size="large" :data-text="tweetMsg" :data-url="tweetDataUrl" data-show-count="false">Tweet</a>
-      <a class="github-button" :href="githubLink" data-size="large" :aria-label="githubAriaLabel">Fork</a>
+      <!--<a href="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-size="large" :data-text="tweetMsg" :data-url="tweetDataUrl" data-show-count="false">Tweet</a>-->
+      <!--<a class="github-button" :href="githubLink" data-size="large" :aria-label="githubAriaLabel">Fork</a>-->
     </div>
     <router-view/>
   </div>
