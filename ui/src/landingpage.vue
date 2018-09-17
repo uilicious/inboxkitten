@@ -1,11 +1,11 @@
 <template>
 	<div class="landing-page">
-		<div class="header">
+		<div class="header header-gradient-background">
 			<img class="logo" src="@/assets/logo.png"/>
 			<h1>Open-Source <a></a> Disposable Email</h1>
 			<h2>(Served by Kittens)</h2>
 		</div>
-		<div class="email-selection">
+		<div class="email-selection header-gradient-background">
 			<form v-on:submit.prevent="goToInbox">
 				<div class="input-box">
 					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/> 
@@ -16,10 +16,9 @@
 		</div>
 		<div class="love-notes">
 			<p>
-				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a>
+				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">singapore</a>
 			</p>
 		</div>
-		<div class="line-break"></div>
 		<div class="deployment-guide">
 			<p>
 				@TODO : deployment guide

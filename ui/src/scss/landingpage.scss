@@ -8,7 +8,7 @@
 // Min-width for body (for some sanity)
 body {
 	min-width: 280px;
-	background: rgb(199, 199, 199);
+	background: #dddddd;
 }
 
 //
@@ -18,12 +18,8 @@ body {
 	padding-top: 3rem;
 	padding-bottom: 2rem;
 	width: 100vw;
-  background: #36D1DC;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-
-  .logo {
+	.logo {
 		width:40vw;
 		max-width: 800px;
 		margin-bottom:1rem;
@@ -63,8 +59,8 @@ body {
 	width: 100vw;
 	background-color: $color2-base;
 
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+	padding-top: 1rem;
+	padding-bottom: 3rem;
 
 	// Adust the input box elements borders
 	$input-box-el-border-radius: 0.4rem;
@@ -211,6 +207,7 @@ body {
 //
 .love-notes {
 	padding: 1rem;
+	background: white;
 
 	p {
 		font-size:1.2rem;
