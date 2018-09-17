@@ -14,21 +14,21 @@
           <!--</div>-->
         <!--</div>-->
       <!--</div>-->
-      <img class="logo" src="assets/logo.png"/>
+      <img class="logo" src="@/assets/logo.png"/>
       <form class="pure-form display-form">
         <input type="text" v-model="randomName" id="email-input"/> <p>@{{domain}}</p>
       </form>
       <button class="pure-button pure-button-primary inbox-button" @click="goToInbox">Check inbox</button>
     </div>
 
-    <!--<div class="intermission-header">-->
-      <!--<p>Host your own InboxKitten!</p>-->
-      <!--<i class="fa fa-chevron-down" @click="scrollDown"></i>-->
-    <!--</div>-->
-    <!-- Detail setup guide-->
-    <!--<section id="express-js">-->
-      <!--<h2>Deploy on ExpressJS</h2>-->
-    <!--</section>-->
+    <div class="intermission-header">
+      <p>Host your own InboxKitten!</p>
+      <i class="fa fa-chevron-down" @click="scrollDown"></i>
+    </div>
+     Set up guide
+    <section id="express-js">
+      <h2>Coming Soon!</h2>
+    </section>
 
     <!--<section id="google-js">-->
       <!--<h2>Deploy using Google Lambda functions</h2>-->
@@ -113,13 +113,17 @@ export default {
   }
 
   .main-section {
-    height: 40vh;
+    height: 70vh;
     width: 100vw;
-    position: absolute;
+    /*position: absolute;*/
     display:flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 5rem;
+  }
+
+  .intermission-header {
+    height: 30vh;
   }
 </style>
