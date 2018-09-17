@@ -11,7 +11,7 @@
 					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/> 
 					<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
 				</div>
-				<input type="submit" class="submit" value="Get Mail Meow!"/>
+				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Meow!"/></div>
 			</form>
 		</div>
 
@@ -148,24 +148,40 @@
 				padding-bottom:0.25rem;
 			}
 
+			// Input email styling
 			.input-email {
 				border:0px;
 				width: 12rem;
 				display: inline-block;
 				text-align:center;
+
+				// Border radius overwrite
 				border-top-left-radius: $input-box-el-border-radius;
 				border-bottom-left-radius: $input-box-el-border-radius;
 				border-top-right-radius: 0rem;
 				border-bottom-right-radius: 0rem;
+
+				// input text color
+				color: $dark-text;
 			}
+
+			// Input email suffix
 			.input-suffix {
 				width: 10rem;
 				display: inline-block;
 				padding-left:1rem;
 				padding-right:1rem;
+
+				// Text with subtle fade out
+				color: fade-out($dark-text, 0.3);
 			}
 		}
 
+		// Submit box 
+		.submit-box {
+			display:inline-block;
+			margin-left:1rem;
+		}
 		// Submission button styling
 		.submit  {
 			padding: 0.25rem 1rem 0.25rem 1rem;
@@ -174,7 +190,6 @@
 
 			font-size:1rem;
 			font-weight: bold;
-			margin-left:1rem;
 			
 			background: $cta-base;
 			color: $cta-base-text;
@@ -187,9 +202,33 @@
 			-webkit-appearance: button;
 		}
 
+		// Hover submit button styling
 		.submit:hover {
 			background: $cta-hover;
 			color: $cta-hover-text;
+		}
+
+		@media only screen and (max-width:760px) {
+			// Collapes the inbox input into 2 lines
+			.input-box {
+				display: inline-block;
+				vertical-align: middle;
+				width: 12rem;
+				.input-email {
+					border-top-right-radius: $input-box-el-border-radius;
+					border-bottom-left-radius: 0;
+				}
+			}
+
+			// Increase submit button height
+			.submit-box {
+				display: inline-block;
+				vertical-align: middle;
+				.submit {
+					display: inline;
+					height: 3.5rem;
+				}
+			}
 		}
 	}
 	/*
