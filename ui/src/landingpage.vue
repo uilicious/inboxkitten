@@ -11,7 +11,7 @@
 					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/> 
 					<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
 				</div>
-				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Meow!"/></div>
+				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Neow!"/></div>
 			</form>
 		</div>
 
@@ -81,6 +81,11 @@
 	// Loading of color scheme
 	@import "scss/_color.scss";
 	
+	// Min-width for body (for some sanity)
+	body {
+		min-width: 280px;
+	}
+
 	//
 	// Landing page header and logo
 	//
@@ -98,9 +103,13 @@
 
 		h1 {
 			color:$bright-text;
+			padding-left:2rem;
+			padding-right:2rem;
 		}
 		h2 {
 			color:$dark-text;
+			padding-left:2rem;
+			padding-right:2rem;
 		}
 
 		h1,h2 {
@@ -208,6 +217,7 @@
 			color: $cta-hover-text;
 		}
 
+		/*
 		@media only screen and (max-width:760px) {
 			// Collapes the inbox input into 2 lines
 			.input-box {
@@ -227,6 +237,35 @@
 				.submit {
 					display: inline;
 					height: 3.5rem;
+				}
+			}
+		}
+		*/
+
+		@media only screen and (max-width:760px) {
+			// Collapes the inbox input into 2 lines
+			.input-box {
+				display: inline-block;
+				vertical-align: middle;
+				width: 75%;
+				.input-email {
+					border-top-right-radius: $input-box-el-border-radius;
+					border-bottom-left-radius: 0;
+					width: 100%;
+				}
+			}
+
+			// Increase submit button height
+			.submit-box {
+				margin-top:1rem;
+				margin-left:0;
+
+				display: block;
+				vertical-align: middle;
+				
+				.submit {
+					display: inline;
+					width: 75%;
 				}
 			}
 		}
