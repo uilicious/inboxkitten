@@ -123,7 +123,7 @@ func main() {
 	}
 
 	//
-	// Processing of list command
+	// Processing of LIST command
 	//
 	if listCommand.Parsed() {
 		var listArgs = listCommand.Args();
@@ -139,6 +139,9 @@ func main() {
 		fmt.Println( jsonPrettifier( string(body) ) );
 	}
 
+	//
+	// Processing of GET command
+	//
 	if getCommand.Parsed() {
 		var getArgs = getCommand.Args();
 		if len(getArgs) <= 1 {
