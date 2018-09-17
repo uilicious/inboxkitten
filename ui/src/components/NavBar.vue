@@ -4,12 +4,10 @@
 			<img class="logo" src="@/assets/logo_no_text.svg" @click="goMainPage"/>
 		</div>
 
-    <div class="email-selection">
       <form v-on:submit.prevent="goToInbox" class="form-box">
         <input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
         <input type="submit" class="submit" value="Go!"/>
       </form>
-    </div>
 	</nav>
 </template>
 
