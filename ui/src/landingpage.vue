@@ -30,10 +30,6 @@
       <h2>Coming Soon!</h2>
     </section>
 
-    <!--<section id="google-js">-->
-      <!--<h2>Deploy using Google Lambda functions</h2>-->
-    <!--</section>-->
-
   </div>
 </template>
 <script>
@@ -98,6 +94,11 @@ export default {
     height: 2vh;
     position: relative;
     top: 40%;
+  }
+
+  .logo {
+    width:30vw;
+    max-width: 500px;
   }
 
   @media only screen and (min-width:410px) {
