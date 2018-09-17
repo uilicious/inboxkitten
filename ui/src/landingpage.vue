@@ -2,7 +2,7 @@
 	<div class="landing-page">
 		<div class="header">
 			<img class="logo" src="@/assets/logo.png"/>
-			<h1>Open-Source Disposable Email</h1>
+			<h1>Open-Source <a></a> Disposable Email</h1>
 			<h2>(Served by Kittens)</h2>
 		</div>
 		<div class="email-selection">
@@ -119,6 +119,11 @@
 		@media only screen and (max-width:760px) {
 			.logo {
 				width: 80vw;
+			}
+
+			// Line display hack to force a new block
+			h1 a {
+				display:block;
 			}
 		}
 	}
