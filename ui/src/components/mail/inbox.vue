@@ -4,7 +4,8 @@
 
       <div class="back-button" @click="goToMain"> &lt; Back</div>
       <input v-model="email" v-on:keyup.enter="changeInbox" id="email"/> @{{domain}}
-      <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Fetch!</button>
+      <button @click="changeInbox" class="pure-button pure-button-primary fetch-button">Retrieve Emails</button>
+      <pulse-loader v-if="refreshing" class="loading"></pulse-loader>
     </div>
     <div class="content">
       <div class="left">
@@ -162,9 +163,9 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 10vh;
+    height: 8vh;
     background: #F3F3F3;
-    align-items: center;
+    align-items: baseline;
     justify-content: baseline;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -235,5 +236,10 @@ export default {
   .back-button {
     cursor: pointer;
     margin-left: 2rem;
+  }
+
+  .loading {
+    margin-left:1rem;
+    order:3
   }
 </style>
