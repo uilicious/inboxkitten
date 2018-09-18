@@ -1,18 +1,188 @@
 <template>
-  <nav-bar></nav-bar>
+  <div>
+    <nav-bar></nav-bar>
+    <vue-scroll :ops="vueScrollBarOps">
+      <div class="table-box">
+        <div class="table-row" v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
+          <div class="row-icon">
+          </div>
+
+          <div class="row-info">
+            <div class="row-name">{{formatName(msg.message.headers.from)}}</div>
+            <div class="row-subject">{{(msg.message.headers.subject)}}</div>
+          </div>
+
+          <div class="row-time">{{calculateTime(msg)}}</div>
+        </div>
+      </div>
+    </vue-scroll>
+  </div>
 </template>
 
 <script>
   import NavBar from '../NavBar.vue'
+  import 'normalize.css'
+  import config from '@/../config/apiconfig.js'
+  import axios from 'axios'
+  import moment from 'moment'
 
   export default {
     name: 'inbox',
+    data: () => {
+      return {
+        listOfMessages: [],
+        vueScrollBarOps: {
+          bar: {
+            background: 'darkgrey'
+          }
+        },
+        refreshing: false
+      }
+    },
+
+    mounted () {
+      let currentEmail = this.$route.params.email
+      if (currentEmail === '') {
+        this.$router.push({name: 'Kitten Land'})
+      }
+
+      this.getMessageList()
+
+      this.retrieveMessage = window.setInterval(this.getMessageList, 10000)
+
+      this.$eventHub.$on('refreshInbox', this.getMessageList)
+    },
+
+    beforeDestroy () {
+      window.clearInterval(this.retrieveMessage)
+
+      this.$eventHub.$off('refreshInbox', this.getMessageList)
+    },
+    methods: {
+
+      calculateTime (msg) {
+        // var date = new Date(Math.round(msg.timestamp * 1000))
+        // var currentTime = new Date().getTime()
+        // var difference = currentTime / 1000 - Math.floor(msg.timestamp)
+        // var timeDisplay = date.toLocaleString()
+        let now = moment()
+        let theDate = moment(msg.timestamp*1000)
+        console.log()
+        let diff = now.diff(theDate, 'day')
+        if(diff == 0){
+          return theDate.format('hh:mm a')
+        }
+        // if (difference < 60) {
+        //   timeDisplay = Math.round(difference) + ' seconds ago'
+        // } else if (difference < 3600) {
+        //   timeDisplay = 'about ' + Math.round(Math.floor(difference / 60)) + ' minutes ago'
+        // } else if (difference < 86400) {
+        //   timeDisplay = 'about ' + Math.round(Math.floor(difference / 3600)) + ' hours ago'
+        // } else if (difference >= 86400) {
+        //   timeDisplay = 'about ' + Math.round(Math.floor(difference / 86400)) + ' days ago'
+        // }
+        return timeDisplay
+      },
+      refreshList () {
+        this.refreshing = true
+        this.getMessageList()
+      },
+      getMessageList () {
+        let email = this.$route.params.email
+        axios.get(config.apiUrl + '/list?recipient=' + email.toLowerCase())
+          .then(res => {
+            this.listOfMessages = res.data
+            this.refreshing = false
+          }).catch((e) => {
+          this.refreshing = false
+        })
+      },
+      changeInbox () {
+        this.$router.push({
+          params: {
+            email: this.email
+          }
+        })
+        this.emailContent = {}
+        this.$eventHub.$emit('iframe_content', '')
+        this.refreshList()
+      },
+      formatName (sender) {
+        let [name, ...rest] = sender.split(' <')
+        return name
+      }
+    },
     components: {
-      NavBar:NavBar
+      NavBar: NavBar
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss" rel="stylesheet/scss">
+  @import '@/scss/_color.scss';
 
+  .table-box {
+    width:100%;
+    height:auto;
+    .table-row {
+      .row-info {
+      }
+
+    }
+
+    @media (max-width: 760px) {
+      .table-row {
+        display:flex;
+        flex-direction: row;
+        width:100vw;
+        background-color: $color5-base;
+        border-bottom:1px solid #20a0ff;
+
+        .row-icon {
+          width:0;
+        }
+
+        .row-info {
+          text-align: left;
+          padding-left: 0.5rem;
+          width: 75%;
+          .row-name{
+            font-size: 1rem;
+            font-weight: bold;
+            padding:0.5rem;
+            /*background: #06FFAB;*/
+            width:100%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .row-subject{
+            /*background-color: coral;*/
+            width:100%;
+            padding-left:0.5rem;
+            padding-bottom:0.5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+
+        .row-time{
+          width:20%;
+          font-size:12px;
+          text-align: center;
+          vertical-align: middle;
+          padding: 0.5rem;
+          padding-left:0;
+          /*background:yellow;*/
+        }
+      }
+
+      .table-row:hover{
+        background-color: $color5-dark;
+      }
+    }
+  }
 </style>
