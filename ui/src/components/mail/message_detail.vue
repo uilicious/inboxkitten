@@ -76,6 +76,9 @@
   .message-details {
     width: 100vw;
     height: auto;
+    position:absolute;
+    top:12rem;
+    bottom:0;
 
     .subject {
       font-weight: bold;
@@ -96,12 +99,18 @@
       }
 
     }
+  }
 
-    #message-content{
-      height: 80%;
-      width: 100%;
-      overflow: auto;
-      border: 0;
+  @media (max-width: 760px) {
+    .message-details{
+      top: 8rem;
     }
+  }
+
+  #message-content{
+    height: 80%;
+    width: 100%;
+    overflow: auto;
+    flex:1;
   }
 </style>
