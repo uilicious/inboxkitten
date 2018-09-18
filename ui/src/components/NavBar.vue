@@ -5,7 +5,8 @@
 		</div>
 
       <form v-on:submit.prevent="goToInbox" class="form-box">
-        <input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
+        <input class="input-email" name="email" aria-label="email" type="text" v-model="email" id="email-input"/>
+        <div class="domain-text" @click="emailInputFocus">@{{domain}}</div>
         <input type="submit" class="submit" value="Go!"/>
       </form>
 	</nav>
@@ -14,27 +15,32 @@
 <script>
 	import config from '@/../config/apiconfig.js'
   import 'normalize.css'
+  import $ from 'jquery'
 	export default {
 		name: 'NavBar',
 		computed: {
 			domain () {
 				return config.domain
-			}
+			},
+      email () {
+			  return this.$route.params.email;
+      }
 		},
 		methods: {
 			goMainPage () {
 				this.$router.push({
 					name: 'Kitten Land'
 				})
-			}
+			},
+      emailInputFocus() {
+        $('#email-input').select()
+      }
 		}
 	}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
 	@import "@/scss/_color.scss";
-  $submit-box-width: 3rem;
-  $box-height: 2rem;
 	.nav {
     background: #36D1DC;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
@@ -62,36 +68,65 @@
 	}
 
   //
-  // Email selection box
+  // Email form box
   //
-  .submit {
-    background: $cta-base;
-    color: $cta-base-text;
-    border: 3px solid black;
-    border-left-width: 0;
-  }
-
-  .input-email {
-    border: 3px solid black;
-  }
 
   .form-box {
     display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: stretch;
+
+    .domain-text {
+      visibility: hidden;
+      width:0;
+    }
+
+    .input-email {
+      border: 3px solid black;
+    }
+    .submit {
+      background: $cta-base;
+      color: $cta-base-text;
+      border: 3px solid black;
+      border-left-width: 0;
+    }
+
+    .submit:hover {
+      background-color: $cta-hover;
+      color: $cta-hover-text;
+    }
   }
 
   @media (min-width: 760px){
     .nav{
       .logo-box{
-        height:4rem;
+        height:6rem;
         .logo{
-          width:10rem;
+          width:16rem;
         }
       }
     }
 
+    .form-box{
+
+      .input-email{
+        text-align: right;
+      }
+      .domain-text{
+        visibility: visible;
+        width: 10rem;
+        background:white;
+        text-align: center;
+        margin: 0;
+        padding-top:0.2rem; // need help on this
+        vertical-align: middle;
+        border: 3px solid black;
+        border-left-width: 0;
+        background-color: $domain-base;
+        cursor: pointer;
+      }
+    }
 
   }
 
