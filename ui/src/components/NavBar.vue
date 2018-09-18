@@ -28,9 +28,9 @@
 				return config.domain
 			}
 		},
-		mounted() {
+		mounted () {
 			this.email = this.$route.params.email
-			if(this.email === ''){
+			if (this.email === '') {
 				this.goMainPage()
 			}
 		},
@@ -40,7 +40,7 @@
 					name: 'Kitten Land'
 				})
 			},
-			emailInputFocus() {
+			emailInputFocus () {
 				$('#email-input').select()
 			},
 			changeInbox () {
@@ -49,8 +49,8 @@
 						email: this.email
 					}
 				})
-				this.$eventHub.$emit('refreshInbox', {email:this.email})
-			},
+				this.$eventHub.$emit('refreshInbox', {email: this.email})
+			}
 		}
 	}
 </script>

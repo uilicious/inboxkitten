@@ -30,7 +30,7 @@
 			<p>Host your own InboxKitten!</p>
 			<i class="fa fa-chevron-down" @click="scrollDown"></i>
 		</div>
-		 Set up guide
+		Set up guide
 		<section id="express-js">
 			<h2>Coming Soon!</h2>
 		</section>
@@ -40,7 +40,7 @@
 <script>
 	import $ from 'jquery'
 	import config from '@/../config/apiconfig.js'
-	import 'normalize.css';
+	import 'normalize.css'
 
 	export default {
 		name: 'LandingPage',
@@ -65,7 +65,7 @@
 					exactly: 1,
 					wordsPerString: 2,
 					separator: '-'
-				}) + "-"+Math.floor(Math.random() * 90 + 10)
+				}) + '-' + Math.floor(Math.random() * 90 + 10)
 			},
 			goToInbox () {
 				this.$router.push({
@@ -75,7 +75,7 @@
 					}
 				})
 			},
-			emailInputFocus() {
+			emailInputFocus () {
 				$('#email-input').select()
 			}
 		}

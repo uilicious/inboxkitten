@@ -1,7 +1,8 @@
 <template>
   <vue-scroll :ops="vueScrollBarOps">
     <div class="table-box">
-      <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
+      <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
+           @click="getMessage(msg.storage.url)">
         <div class="row-icon">
         </div>
 
@@ -60,6 +61,7 @@ export default {
       this.getMessageList()
     },
     getMessageList () {
+      console.log('testing')
       let email = this.$route.params.email
       axios.get(config.apiUrl + '/list?recipient=' + email.toLowerCase())
         .then(res => {
@@ -85,7 +87,7 @@ export default {
       let [region, ...remainingHost] = host.split('.')
       let mailkey = region + '-' + uri[uri.length - 1]
       this.$router.push({
-        name:'Detail',
+        name: 'Detail',
         params: {
           key: mailkey
         }
@@ -100,12 +102,11 @@ export default {
 
     calculateTime (msg) {
       let now = moment()
-      let theDate = moment(msg.timestamp*1000)
-      console.log()
+      let theDate = moment(msg.timestamp * 1000)
       let diff = now.diff(theDate, 'day')
-      if(diff == 0){
+      if (diff === 0) {
         return theDate.format('hh:mm a')
-      } else if (diff > 0){
+      } else if (diff > 0) {
         return theDate.format('DD MMM')
       }
     },
@@ -115,11 +116,11 @@ export default {
       return name
     },
 
-    rowCls(index){
-      if (index%2==0){
-        return "table-row even"
+    rowCls (index) {
+      if (index % 2 === 0) {
+        return 'table-row even'
       }
-      return "table-row odd"
+      return 'table-row odd'
     }
   },
   components: {
@@ -155,53 +156,52 @@ export default {
     }
   }
 
-
-  .table-row:hover{
+  .table-row:hover {
     border: 3px solid black;
     background-color: $cta-hover;
   }
 
-  @media (min-width:760px) {
-    .table-row{
+  @media (min-width: 760px) {
+    .table-row {
       padding: 1rem;
-      .row-info{
-        display:flex;
+      .row-info {
+        display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        .row-name{
+        .row-name {
         }
       }
-      border-bottom:1px solid #20a0ff;
+      border-bottom: 1px solid #20a0ff;
     }
   }
 
   @media (max-width: 760px) {
     .table-row {
-      display:flex;
+      display: flex;
       flex-direction: row;
-      width:98vw;
-      margin:auto;
+      width: 98vw;
+      margin: auto;
       background-color: white;
-      border-bottom:1px solid #20a0ff;
+      border-bottom: 1px solid #20a0ff;
 
       .row-info {
         text-align: left;
         padding-left: 0.5rem;
-        .row-name{
+        .row-name {
           font-size: 1rem;
           font-weight: bold;
-          padding:0.5rem;
+          padding: 0.5rem;
           /*background: #06FFAB;*/
-          width:100%;
+          width: 100%;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
         }
-        .row-subject{
+        .row-subject {
           /*background-color: coral;*/
-          width:100%;
-          padding-left:0.5rem;
-          padding-bottom:0.5rem;
+          width: 100%;
+          padding-left: 0.5rem;
+          padding-bottom: 0.5rem;
           font-size: 0.75rem;
           font-weight: bold;
           text-overflow: ellipsis;
@@ -210,15 +210,14 @@ export default {
         }
       }
 
-      .row-time{
-        width:20%;
-        font-size:12px;
+      .row-time {
+        width: 20%;
+        font-size: 12px;
         text-align: center;
         vertical-align: middle;
         padding: 0.5rem;
-        padding-left:0;
+        padding-left: 0;
       }
     }
   }
 </style>
-

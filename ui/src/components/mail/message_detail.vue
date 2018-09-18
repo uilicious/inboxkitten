@@ -18,28 +18,27 @@
   import axios from 'axios'
 
   export default {
-	  name: 'MessageDetail',
+    name: 'MessageDetail',
     data: () => {
-	    return {
+      return {
         emailContent: {}
       }
-
     },
     mounted () {
-	    if(this.$route.params.key === undefined) {
-	      this.$router.push({
+      if (this.$route.params.key === undefined) {
+        this.$router.push({
           name: 'Kitten Land'
         })
       }
 
-	    this.getMessage()
+      this.getMessage()
     },
     beforeDestroy () {
     },
     methods: {
-      getMessage(){
+      getMessage () {
         let mailKey = this.$route.params.key
-        axios.get(config.apiUrl + '/getKey?mailKey=' +mailKey)
+        axios.get(config.apiUrl + '/getKey?mailKey=' + mailKey)
           .then(res => {
             this.$router.push({
               name: 'Detail'
@@ -47,12 +46,12 @@
             this.emailContent = res.data
             let [name, ...rest] = this.formatName(this.emailContent.from)
             this.emailContent.name = name
-            this.emailContent.emailAddress = " <" + rest
+            this.emailContent.emailAddress = ' <' + rest
             this.formatHtml(res.data['body-html'])
           }).catch((e) => {
-            this.emailContent.name = "Kitten Squads"
-            this.emailContent.recipients = "Master"
-            this.formatHtml("The kittens found no messages :(")
+            this.emailContent.name = 'Kitten Squads'
+            this.emailContent.recipients = 'Master'
+            this.formatHtml('The kittens found no messages :(')
           console.log(this.emailContent)
         })
       },
