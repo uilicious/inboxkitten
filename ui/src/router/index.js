@@ -3,6 +3,9 @@ import Vuex from 'vuex'
 import Router from 'vue-router'
 import LandingPage from '@/landingpage.vue'
 import Inbox from '@/components/mail/inbox.vue'
+import OldInbox from '@/components/mail/inbox_archive.vue'
+import MessageDetail from '@/components/mail/message_detail.vue'
+import MessageList from '@/components/mail/message_list.vue'
 import vuescroll from 'vuescroll'
 import 'vuescroll/dist/vuescroll.css'
 
@@ -30,7 +33,23 @@ export default new Router({
     {
       path: '/inbox/:email',
       name: 'Inbox',
-      component: Inbox
+      component: Inbox,
+      children: [
+        {
+          path: 'list',
+          name: 'List',
+          component: MessageList
+        },
+        {
+          path: 'detail/:key',
+          name: 'Detail',
+          component: MessageDetail
+        },
+        {
+          path: '*',
+          redirect: 'list'
+        }
+      ]
     },
     {
       path: '*',
