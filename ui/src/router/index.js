@@ -32,8 +32,13 @@ export default new Router({
     {
       path: '/inbox/:email',
       name: 'Inbox',
+      redirect: {name: 'List'},
       component: Inbox,
       children: [
+        {
+          path: '',
+          redirect: {name: 'List'},
+        },
         {
           path: 'list',
           name: 'List',
@@ -46,13 +51,13 @@ export default new Router({
         },
         {
           path: '*',
-          redirect: 'list'
+          redirect: {name: 'List'},
         }
       ]
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: {name: 'Kitten Land'},
     }
   ]
 })
