@@ -3,7 +3,7 @@
     <nav-bar></nav-bar>
     <vue-scroll :ops="vueScrollBarOps">
       <div class="table-box">
-        <div class="table-row" v-for="msg in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
+        <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
           <div class="row-icon">
           </div>
 
@@ -39,7 +39,6 @@
         refreshing: false
       }
     },
-
     mounted () {
       let currentEmail = this.$route.params.email
       if (currentEmail === '') {
@@ -61,27 +60,15 @@
     methods: {
 
       calculateTime (msg) {
-        // var date = new Date(Math.round(msg.timestamp * 1000))
-        // var currentTime = new Date().getTime()
-        // var difference = currentTime / 1000 - Math.floor(msg.timestamp)
-        // var timeDisplay = date.toLocaleString()
         let now = moment()
         let theDate = moment(msg.timestamp*1000)
         console.log()
         let diff = now.diff(theDate, 'day')
         if(diff == 0){
           return theDate.format('hh:mm a')
+        } else if (diff > 0){
+          return theDate.format('DD MMM')
         }
-        // if (difference < 60) {
-        //   timeDisplay = Math.round(difference) + ' seconds ago'
-        // } else if (difference < 3600) {
-        //   timeDisplay = 'about ' + Math.round(Math.floor(difference / 60)) + ' minutes ago'
-        // } else if (difference < 86400) {
-        //   timeDisplay = 'about ' + Math.round(Math.floor(difference / 3600)) + ' hours ago'
-        // } else if (difference >= 86400) {
-        //   timeDisplay = 'about ' + Math.round(Math.floor(difference / 86400)) + ' days ago'
-        // }
-        return timeDisplay
       },
       refreshList () {
         this.refreshing = true
@@ -110,6 +97,12 @@
       formatName (sender) {
         let [name, ...rest] = sender.split(' <')
         return name
+      },
+      rowCls(index){
+        if (index%2==0){
+          return "table-row even"
+        }
+        return "table-row odd"
       }
     },
     components: {
@@ -134,8 +127,9 @@
       .table-row {
         display:flex;
         flex-direction: row;
-        width:100vw;
-        background-color: $color5-base;
+        width:98vw;
+        margin:auto;
+        background-color: white;
         border-bottom:1px solid #20a0ff;
 
         .row-icon {
@@ -176,12 +170,12 @@
           vertical-align: middle;
           padding: 0.5rem;
           padding-left:0;
-          /*background:yellow;*/
         }
       }
 
       .table-row:hover{
-        background-color: $color5-dark;
+        border: 3px solid black;
+        background-color: $cta-hover;
       }
     }
   }
