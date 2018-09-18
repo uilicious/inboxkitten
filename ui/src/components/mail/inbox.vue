@@ -58,18 +58,6 @@
       this.$eventHub.$off('refreshInbox', this.getMessageList)
     },
     methods: {
-
-      calculateTime (msg) {
-        let now = moment()
-        let theDate = moment(msg.timestamp*1000)
-        console.log()
-        let diff = now.diff(theDate, 'day')
-        if(diff == 0){
-          return theDate.format('hh:mm a')
-        } else if (diff > 0){
-          return theDate.format('DD MMM')
-        }
-      },
       refreshList () {
         this.refreshing = true
         this.getMessageList()
@@ -94,10 +82,39 @@
         this.$eventHub.$emit('iframe_content', '')
         this.refreshList()
       },
+
+      getMessage (url) {
+        let [protocol, empty, host, ...uri] = url.split('/')
+        let [region, ...remainingHost] = host.split('.')
+
+        axios.get(config.apiUrl + '/getKey?mailKey=' + region + '-' + uri[uri.length - 1])
+          .then(res => {
+            this.emailContent = res.data
+            this.$eventHub.$emit('iframe_content', res.data['body-html'])
+          })
+      },
+
+      //
+      // Utility Functions
+      //
+
+      calculateTime (msg) {
+        let now = moment()
+        let theDate = moment(msg.timestamp*1000)
+        console.log()
+        let diff = now.diff(theDate, 'day')
+        if(diff == 0){
+          return theDate.format('hh:mm a')
+        } else if (diff > 0){
+          return theDate.format('DD MMM')
+        }
+      },
+
       formatName (sender) {
         let [name, ...rest] = sender.split(' <')
         return name
       },
+
       rowCls(index){
         if (index%2==0){
           return "table-row even"
@@ -115,12 +132,45 @@
   @import '@/scss/_color.scss';
 
   .table-box {
-    width:100%;
-    height:auto;
+    width: 100%;
+    height: auto;
     .table-row {
-      .row-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      text-align: left;
+
+      .row-icon {
+        width: 0;
       }
 
+      .row-info {
+        width: 75%;
+        .row-name {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+
+  .table-row:hover{
+    border: 3px solid black;
+    background-color: $cta-hover;
+  }
+
+    @media (min-width:760px) {
+      .table-row{
+        padding: 1rem;
+        .row-info{
+          display:flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          .row-name{
+          }
+        }
+        border-bottom:1px solid #20a0ff;
+      }
     }
 
     @media (max-width: 760px) {
@@ -132,14 +182,9 @@
         background-color: white;
         border-bottom:1px solid #20a0ff;
 
-        .row-icon {
-          width:0;
-        }
-
         .row-info {
           text-align: left;
           padding-left: 0.5rem;
-          width: 75%;
           .row-name{
             font-size: 1rem;
             font-weight: bold;
@@ -172,11 +217,5 @@
           padding-left:0;
         }
       }
-
-      .table-row:hover{
-        border: 3px solid black;
-        background-color: $cta-hover;
-      }
     }
-  }
 </style>
