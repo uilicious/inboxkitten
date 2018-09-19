@@ -20,6 +20,7 @@
 			</p>
 		</div>
 		<div class="deployment-guide">
+			<h1>Note that this is currently a BETA build</h1>
 			<p>
 				@TODO : deployment guide
 			</p>
