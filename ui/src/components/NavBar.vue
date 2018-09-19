@@ -8,6 +8,7 @@
 				<input class="input-email" name="email" aria-label="email" type="text" v-model="email" id="email-input"/>
 				<div class="domain-text" @click="emailInputFocus">@{{domain}}</div>
 				<input type="submit" class="submit" value="Go!"/>
+				<button class="refresh" @click="emitRefresh">Refresh</button>
 			</form>
 	</nav>
 </template>
@@ -42,6 +43,9 @@
 			},
 			emailInputFocus () {
 				$('#email-input').select()
+			},
+			emitRefresh () {
+				this.$eventHub.$emit('refreshList', '')
 			},
 			changeInbox () {
 				this.$router.push({
@@ -111,6 +115,17 @@
 		}
 
 		.submit:hover {
+			background-color: $cta-hover;
+			color: $cta-hover-text;
+		}
+		.refresh {
+			background: #005CFF;
+			color: $cta-base-text;
+			border: 3px solid black;
+			border-left-width: 0;
+		}
+
+		.refresh:hover {
 			background-color: $cta-hover;
 			color: $cta-hover-text;
 		}

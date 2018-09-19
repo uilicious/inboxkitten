@@ -1,5 +1,6 @@
 <template>
     <vue-scroll :ops="vueScrollBarOps">
+      <pulse-loader v-if="refreshing" class="loading"></pulse-loader>
       <div class="table-box" v-if="listOfMessages.length > 0">
         <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
              @click="getMessage(msg.storage.url)">
@@ -18,7 +19,6 @@
           Press on the 'Refresh' button if you want to overwork the kittens...
         </p>
         <button class="refresh-button" @click="refreshList" v-if="!refreshing">Refresh</button>
-        <pulse-loader v-if="refreshing" style="z-index:9;"></pulse-loader>
       </div>
     </vue-scroll>
 </template>
@@ -55,12 +55,15 @@ export default {
     this.retrieveMessage = window.setInterval(this.getMessageList, 10000)
 
     this.$eventHub.$on('refreshInbox', this.getMessageList)
+    this.$eventHub.$on('refreshList', this.getMessageList)
+
   },
 
   beforeDestroy () {
     window.clearInterval(this.retrieveMessage)
 
     this.$eventHub.$off('refreshInbox', this.getMessageList)
+    this.$eventHub.$off('refreshList', this.getMessageList)
   },
   methods: {
     refreshList () {
@@ -68,7 +71,7 @@ export default {
       this.getMessageList()
     },
     getMessageList () {
-      console.log('testing')
+      this.refreshing = true
       let email = this.$route.params.email
       axios.get(config.apiUrl + '/list?recipient=' + email.toLowerCase())
         .then(res => {
@@ -170,7 +173,7 @@ export default {
   .no-mails {
     text-align: center;
     vertical-align: center;
-    overflow: hidden;
+    overflow: auto;
     margin-top: 2rem;
     z-index: 10;
   }
@@ -184,6 +187,13 @@ export default {
   .refresh-button:hover {
     background-color: $cta-hover;
     color: $cta-hover-text;
+  }
+
+  .loading {
+    z-index:9;
+    position:absolute;
+    padding-top: 5rem;
+    left:50%;
   }
 
   @media (min-width: 760px) {
@@ -243,6 +253,10 @@ export default {
         padding: 0.5rem;
         padding-left: 0;
       }
+    }
+
+    .loading{
+      left:40%;
     }
   }
 </style>
