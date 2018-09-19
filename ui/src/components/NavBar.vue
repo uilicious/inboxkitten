@@ -45,6 +45,7 @@
 			},
 			changeInbox () {
 				this.$router.push({
+					name: 'List',
 					params: {
 						email: this.email
 					}
