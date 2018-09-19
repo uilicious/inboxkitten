@@ -62,9 +62,11 @@
 		background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
 		background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 		width: 100vw;
+		height: 10rem;
 		text-align: left;
 		padding-top:2rem;
 		padding-bottom:2rem;
+		top: 0;
 
 		.logo-box{
 			width:100%;
@@ -141,7 +143,12 @@
 				cursor: pointer;
 			}
 		}
+	}
 
+	@media (max-width:760px){
+		.nav {
+			height:4rem;
+		}
 	}
 
 </style>

@@ -73,16 +73,16 @@
 <style lang="scss" rel="stylesheet/scss">
 
   .message-details {
-    width: 100vw;
     height: auto;
-    position:absolute;
-    top:12rem;
-    bottom:0;
+    overflow:auto;
+    display:flex;
+    flex-direction: column;
 
     .subject {
       font-weight: bold;
       font-size:1.5rem;
       padding:1rem;
+      padding-bottom:0;
       text-align: left;
     }
 
@@ -92,24 +92,31 @@
       justify-content: space-between;
       text-align: left;
       padding: 1rem;
-      border-bottom: 1px solid #20a0ff;
-      .date {
-        /*align-self: flex-end;*/
-      }
 
+      background-color: white;
+      border-bottom: 1px solid #20a0ff;
     }
   }
 
   @media (max-width: 760px) {
     .message-details{
       top: 8rem;
+      .subject{
+        font-size:1rem;
+      }
+      .meta-info{
+        font-size:0.6rem;
+      }
+    }
+    #message-content{
+      flex:1;
     }
   }
 
   #message-content{
-    height: 100%;
     width: 100%;
+    height: 100%;
     overflow: auto;
-    flex:1;
+    border: none;
   }
 </style>

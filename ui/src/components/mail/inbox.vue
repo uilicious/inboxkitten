@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <nav-bar></nav-bar>
-    <router-view></router-view>
+  <div class="wrapper">
+    <nav-bar class="nav-bar"></nav-bar>
+    <router-view class="inbox"></router-view>
   </div>
 </template>
 
@@ -16,4 +16,17 @@
   }
 </script>
 <style>
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    width:100vw;
+    height:100vh;
+  }
+  .nav-bar{
+  }
+  .inbox{
+    flex: 1;
+    z-index:9;
+  }
+
 </style>
