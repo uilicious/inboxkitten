@@ -1,20 +1,26 @@
 <template>
-  <vue-scroll :ops="vueScrollBarOps">
-    <div class="table-box">
-      <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
-           @click="getMessage(msg.storage.url)">
-        <div class="row-icon">
-        </div>
+    <vue-scroll :ops="vueScrollBarOps">
+      <div class="table-box" v-if="listOfMessages.length > 0">
+        <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
+             @click="getMessage(msg.storage.url)">
 
-        <div class="row-info">
-          <div class="row-name">{{formatName(msg.message.headers.from)}}</div>
-          <div class="row-subject">{{(msg.message.headers.subject)}}</div>
-        </div>
+          <div class="row-info">
+            <div class="row-name">{{formatName(msg.message.headers.from)}}</div>
+            <div class="row-subject">{{(msg.message.headers.subject)}}</div>
+          </div>
 
-        <div class="row-time">{{calculateTime(msg)}}</div>
+          <div class="row-time">{{calculateTime(msg)}}</div>
+        </div>
       </div>
-    </div>
-  </vue-scroll>
+      <div class="no-mails" v-if="listOfMessages.length == 0">
+        <p>
+          There for no messages for this kitten :(<br/><br/>
+          Press on the 'Refresh' button if you want to overwork the kittens...
+        </p>
+        <button class="refresh-button" @click="refreshList" v-if="!refreshing">Refresh</button>
+        <pulse-loader v-if="refreshing" style="z-index:9;"></pulse-loader>
+      </div>
+    </vue-scroll>
 </template>
 
 <script>
@@ -23,6 +29,7 @@ import 'normalize.css'
 import config from '@/../config/apiconfig.js'
 import axios from 'axios'
 import moment from 'moment'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
   name: 'MessageList',
@@ -124,7 +131,8 @@ export default {
     }
   },
   components: {
-    NavBar: NavBar
+    NavBar: NavBar,
+    PulseLoader: PulseLoader
   }
 }
 </script>
@@ -138,19 +146,17 @@ export default {
     .table-row {
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
-      text-align: left;
+      /*justify-content: space-evenly;*/
+      justify-content: flex-start;
       border: 3px solid white;
       border-bottom: 3px solid #20a0ff;
 
-      .row-icon {
-        width: 0;
-      }
-
       .row-info {
         width: 75%;
+
         .row-name {
           font-weight: bold;
+          text-align: left;
         }
       }
     }
@@ -159,6 +165,25 @@ export default {
   .table-row:hover {
     border: 3px solid black;
     background-color: $cta-hover;
+  }
+
+  .no-mails {
+    text-align: center;
+    vertical-align: center;
+    overflow: hidden;
+    margin-top: 2rem;
+    z-index: 10;
+  }
+
+  .refresh-button {
+    border: 3px solid black;
+    background-color: $cta-base;
+    color: $cta-base-text;
+  }
+
+  .refresh-button:hover {
+    background-color: $cta-hover;
+    color: $cta-hover-text;
   }
 
   @media (min-width: 760px) {
