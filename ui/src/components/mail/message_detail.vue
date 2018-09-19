@@ -32,17 +32,17 @@
       }
 
       this.getMessage()
+      this.$eventHub.$on('refresh', this.getMessage)
     },
     beforeDestroy () {
+      this.$eventHub.$off('refresh', this.getMessage)
     },
     methods: {
       getMessage () {
         let mailKey = this.$route.params.key
+        this.formatHtml('')
         axios.get(config.apiUrl + '/getKey?mailKey=' + mailKey)
           .then(res => {
-            this.$router.push({
-              name: 'Detail'
-            })
             this.emailContent = res.data
             let [name, ...rest] = this.formatName(this.emailContent.from)
             this.emailContent.name = name
@@ -52,7 +52,6 @@
             this.emailContent.name = 'Kitten Squads'
             this.emailContent.recipients = 'Master'
             this.formatHtml('The kittens found no messages :(')
-          console.log(this.emailContent)
         })
       },
       formatHtml (content) {
@@ -92,8 +91,6 @@
       justify-content: space-between;
       text-align: left;
       padding: 1rem;
-
-      background-color: white;
       border-bottom: 1px solid #20a0ff;
     }
   }

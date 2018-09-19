@@ -55,7 +55,7 @@ export default {
     this.retrieveMessage = window.setInterval(this.getMessageList, 10000)
 
     this.$eventHub.$on('refreshInbox', this.getMessageList)
-    this.$eventHub.$on('refreshList', this.getMessageList)
+    this.$eventHub.$on('refresh', this.getMessageList)
 
   },
 
@@ -63,7 +63,7 @@ export default {
     window.clearInterval(this.retrieveMessage)
 
     this.$eventHub.$off('refreshInbox', this.getMessageList)
-    this.$eventHub.$off('refreshList', this.getMessageList)
+    this.$eventHub.$off('refresh', this.getMessageList)
   },
   methods: {
     refreshList () {

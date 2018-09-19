@@ -4,10 +4,10 @@
 			<img class="logo" src="@/assets/logo_no_text.svg" @click="goMainPage"/>
 		</div>
 
-			<form v-on:submit.prevent="changeInbox" class="form-box">
+			<form v-on:submit.prevent="" class="form-box">
 				<input class="input-email" name="email" aria-label="email" type="text" v-model="email" id="email-input"/>
 				<div class="domain-text" @click="emailInputFocus">@{{domain}}</div>
-				<input type="submit" class="submit" value="Go!"/>
+				<input type="submit" class="submit" value="Go!" @click="changeInbox"/>
 				<button class="refresh" @click="emitRefresh">Refresh</button>
 			</form>
 	</nav>
@@ -45,7 +45,7 @@
 				$('#email-input').select()
 			},
 			emitRefresh () {
-				this.$eventHub.$emit('refreshList', '')
+				this.$eventHub.$emit('refresh', '')
 			},
 			changeInbox () {
 				this.$router.push({
