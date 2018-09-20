@@ -6,21 +6,21 @@ Inboxkitten is an open-source disposable email service that you can freely deplo
 
 Follow the 5 steps guide below to get started!
 
-- [Step 0 - Clone Me](https://github.com/uilicious/inboxkitten#clone-me)
-- [Step 1 - Mailgun & Firebase signup](https://github.com/uilicious/inboxkitten#mailgun-firebase-signup)
-- [Step 2 - Configuration](https://github.com/uilicious/inboxkitten#configuration)
-- [Step 3 - Build the package](https://github.com/uilicious/inboxkitten#build)
-- [Step 4 - Deployment](https://github.com/uilicious/inboxkitten#deploy)
+- [Step 0 - Clone Me](https://github.com/uilicious/inboxkitten#step-0---clone-me)
+- [Step 1 - Mailgun & Firebase signup](https://github.com/uilicious/inboxkitten#step-1---mailgun--firebase-signup)
+- [Step 2 - Configuration](https://github.com/uilicious/inboxkitten#step-2---configuration)
+- [Step 3 - Build the package](https://github.com/uilicious/inboxkitten#step-3---build-the-package)
+- [Step 4 - Deployment](https://github.com/uilicious/inboxkitten#step-4---deployment)
 
 # Firebase Deployment Guide
 
-## [Step 0 - Clone Me](#clone-me)
+## Step 0 - Clone Me
 
 ```
 	$ git clone https://github.com/uilicious/inboxkitten.git
 ```
 
-## [Step 1 - Mailgun & Firebase signup](#mailgun-firebase-signup)
+## Step 1 - Mailgun & Firebase signup
 
 ### Mailgun
 To sign up for a Mailgun account, go to the [signup](https://signup.mailgun.com/new/signup) page.
@@ -74,7 +74,7 @@ On your local machine where your InboxKitten is located at,
 ```
 
 
-## [Step 2 - Configuration](#configuration)
+## Step 2 - Configuration
 
 In the root directory of Inboxkitten, run the following command
 ```
@@ -89,7 +89,7 @@ During the run time of `./config.sh`, there are three environment variables that
 
 <img src="./assets/configuration.png" alt="configuration" width="500px"/>
 
-## [Step 3 - Build the package](#build)
+## Step 3 - Build the package
 
 ```
 	$ ./build.sh
@@ -98,7 +98,7 @@ During the run time of `./config.sh`, there are three environment variables that
 `./build.sh` will package the three components to be ready for deployment.
 
 
-## [Step 4 - Deployment](#deploy)
+## Step 4 - Deployment
 
 ```
 	# Run the deployment script
