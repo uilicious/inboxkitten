@@ -23,13 +23,13 @@ To sign up for a Mailgun account, go to the [signup](https://signup.mailgun.com/
 If not, you can use the default domain that was provided by Mailgun.
 
 #### Routes Configuration
-After setting up your domain, in order for you to receive email, you have to configure the routes. [Routes](https://documentation.mailgun.com/en/latest/quickstart-receiving.html) act as rules that will filter through all the incoming mails and the actions to take upon matched conditions.
+After setting up your domain, in order for you to receive email, you have to configure the routes. [Routes](https://documentation.mailgun.com/en/latest/quickstart-receiving.html) act as rules that will filter through all the incoming mails and execute actions on matched conditions.
 
 In your Routes panel, simply click on `Create Route` button and follow the steps accordingly.
 
-<img src="./assets/mailgun_create_route.png" alt="Mailgun Route" width="300px"/>
+<img src="./assets/mailgun_create_route.png" alt="Mailgun Route" width="600px"/>
 
-The above route will match `.*@inboxkitten.com` recipients and store them in the storage that mailgun provides and stop processing any other rules once this is matched. 
+The above route will match all names ending with `@inboxkitten.com`, store them in the storage that mailgun provides (only for 3 days) and stop processing any other rules once this route is matched. 
 
 #### Mailgun API Key
 You can locate your Mailgun API key by clicking on the domain that you are managing. In it you can see your API key.
@@ -45,13 +45,13 @@ Or you can go to the security settings and locate the API key there.
 
 1. Go to [Firebase](https://firebase.google.com) and click on `Get Started`.
 2. Sign in with your favorite Google account.
-3. Click on `Add Project` and create your own inboxkitten project.
+3. Click on `Add Project` and create your own firebase inboxkitten project.
 4. Remember the project ID  
 
 On your local machine where your InboxKitten is located at,
 ```
 	# Go to the root folder of InboxKitten
-	$ cd <the directory you cloned InboxKitten>/Inboxkitten
+	$ cd <the place where you clone your inboxkitten>
 	
 	# Ensure that firebase CLI tool is installed
 	$ npm install -g firebase-tools
@@ -144,4 +144,3 @@ To run without compilation of `inboxkitten.go` in the src/ folder
 ```
 	$ ./go.sh run src/inboxkitten.go
 ```
-
