@@ -4,8 +4,64 @@
 
 # Firebase Deployment Guide
 
+## Step 0 - Clone Me
+
+```
+	$ git clone https://github.com/uilicious/inboxkitten.git
+```
+
 ## Step 1 - Mailgun & Firebase signup
 
+### Mailgun
+To sign up for a Mailgun account, go to the [signup](https://signup.mailgun.com/new/signup) page.
+
+#### Custom Domain
+```
+	1. Click on `Add New Domain` button under your Domains panel. 
+	2. Follow the steps accordingly
+```
+If not, you can use the default domain that was provided by Mailgun.
+
+#### Routes Configuration
+After setting up your domain, in order for you to receive email, you have to configure the routes. [Routes](https://documentation.mailgun.com/en/latest/quickstart-receiving.html) act as rules that will filter through all the incoming mails and the actions to take upon matched conditions.
+
+In your Routes panel, simply click on `Create Route` button and follow the steps accordingly.
+
+<img src="./assets/mailgun_create_route.png" alt="Mailgun Route" width="300px"/>
+
+The above route will match `.*@inboxkitten.com` recipients and store them in the storage that mailgun provides and stop processing any other rules once this is matched. 
+
+#### Mailgun API Key
+You can locate your Mailgun API key by clicking on the domain that you are managing. In it you can see your API key.
+
+<img src="./assets/mailgun_api_key.png" alt="Mailgun API key" width="500px"/>
+
+Or you can go to the security settings and locate the API key there.
+
+<img src="./assets/mailgun_api_key_2.png" alt="Mailgun API key" width="500px"/>
+
+
+### Firebase
+
+1. Go to [Firebase](https://firebase.google.com) and click on `Get Started`.
+2. Sign in with your favorite Google account.
+3. Click on `Add Project` and create your own inboxkitten project.
+4. Remember the project ID  
+
+On your local machine where your InboxKitten is located at,
+```
+	# Go to the root folder of InboxKitten
+	$ cd <the directory you cloned InboxKitten>/Inboxkitten
+	
+	# Ensure that firebase CLI tool is installed
+	$ npm install -g firebase-tools
+	
+	# Login to your firebase account
+	$ firebase login
+	
+	# Set your firebase project
+	$ firebase use --add <project name that you remembered>
+```
 
 
 ## Step 2 - Configuration
@@ -18,11 +74,10 @@ In the root directory of Inboxkitten, run the following command
 During the run time of `./config.sh`, there are three environment variables that is being used to set the configuration for your configuration files.
 
 1. `MAILGUN_EMAIL_DOMAIN` - any custom domain that you owned or the default domain in Mailgun
-2. `WEBSITE_DOMAIN`  - any custom domain that you owned
+2. `WEBSITE_DOMAIN`  - any custom domain that you owned. If you use your default firebase url, it will be `<Your project>.firebaseapp.com`
 3. `MAILGUN_API_KEY` - retrieve the api key from your Mailgun account
 
- ![configuration](./assets/configuration.png)
-
+<img src="./assets/configuration.png" alt="configuration" width="500px"/>
 
 ## Step 3 - Build the package
 
@@ -35,18 +90,7 @@ During the run time of `./config.sh`, there are three environment variables that
 
 ## Step 4 - Deployment
 
-Assuming that you have your Firebase configuration ready (if it is not ready, read here).
-
 ```
-	# Ensure that firebase CLI tool is installed
-	$ npm install -g firebase-tools
-	
-	# Login to your firebase account
-	$ firebase login
-	
-	# Set your firebase project
-	$ firebase use --add <project name you created in your firebase account>
-	
 	# Run the deployment script
 	$ ./deploy/firebase/deploy.sh 
 ```
