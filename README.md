@@ -23,7 +23,7 @@ Follow the 5 steps guide below to get started!
 ## Step 1 - Mailgun & Firebase signup
 
 ### Mailgun
-To sign up for a Mailgun account, go to the [signup](https://signup.mailgun.com/new/signup) page.
+To sign up for a Mailgun account, go to the <a href="https://signup.mailgun.com/new/signup" target="_blank">signup</a> page.
 
 #### Custom Domain
 ```
@@ -33,7 +33,7 @@ To sign up for a Mailgun account, go to the [signup](https://signup.mailgun.com/
 If not, you can use the default domain that was provided by Mailgun.
 
 #### Routes Configuration
-After setting up your domain, in order for you to receive email, you have to configure the routes. [Routes](https://documentation.mailgun.com/en/latest/quickstart-receiving.html) act as rules that will filter through all the incoming mails and execute actions on matched conditions.
+After setting up your domain, in order for you to receive email, you have to configure the routes. <a href="https://documentation.mailgun.com/en/latest/quickstart-receiving.html" target="_blank">Routes</a> act as rules that will filter through all the incoming mails and execute actions on matched conditions.
 
 In your Routes panel, simply click on `Create Route` button and follow the steps accordingly.
 
@@ -53,7 +53,7 @@ Or you can go to the security settings and locate the API key there.
 
 ### Firebase
 
-1. Go to [Firebase](https://firebase.google.com) and click on `Get Started`.
+1. Go to <a href="https://firebase.google.com" target="_blank">Firebase</a> and click on `Get Started`.
 2. Sign in with your favorite Google account.
 3. Click on `Add Project` and create your own firebase inboxkitten project.
 4. Remember the project ID  
@@ -154,3 +154,9 @@ To run without compilation of `inboxkitten.go` in the src/ folder
 ```
 	$ ./go.sh run src/inboxkitten.go
 ```
+# Code Guide
+If you are interested to modify Inboxkitten, this is the structure that Inboxkitten has adopted.
+
+3 Main Components
+ - API - that serves as the backbone to connect to MailGun
+ - UI - the user interface that you see on <a href="https://inboxkitten.com" target="_blank">Inboxkitten</a>
