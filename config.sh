@@ -44,6 +44,13 @@ else
 	echo ">> Detected MAILGUN_EMAIL_DOMAIN env variable : $MAILGUN_EMAIL_DOMAIN";
 fi
 
+if [ -z "$WEBSITE_DOMAIN" ]; then
+	echo ">> Please type in your WEBSITE_DOMAIN (eg: inboxkitten.com)";
+	read -p '>> WEBSITE_DOMAIN : ' WEBSITE_DOMAIN;
+else
+	echo ">> Detected WEBSITE_DOMAIN env variable : $WEBSITE_DOMAIN";
+fi
+
 if [ -z "$MAILGUN_API_KEY" ]; then
 	echo ">> Please type in your MAILGUN_API_KEY";
 	read -sp '>> MAILGUN_API_KEY : ' MAILGUN_API_KEY;
@@ -57,6 +64,7 @@ fi
 #
 export MAILGUN_EMAIL_DOMAIN="$MAILGUN_EMAIL_DOMAIN"
 export MAILGUN_API_KEY="$MAILGUN_API_KEY"
+export WEBSITE_DOMAIN="$WEBSITE_DOMAIN"
 
 #
 # Applying the configuration
