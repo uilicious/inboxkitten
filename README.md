@@ -2,15 +2,25 @@
 
 [![Build Status](https://travis-ci.org/uilicious/inboxkitten.svg?branch=master)](https://travis-ci.org/uilicious/inboxkitten)
 
+Inboxkitten is an open-source disposable email service that you can freely deploy adopt on your own!
+
+Follow the 5 steps guide below to get started!
+
+- [Step 0 - Clone Me](https://github.com/uilicious/inboxkitten#clone-me)
+- [Step 1 - Mailgun & Firebase signup](https://github.com/uilicious/inboxkitten#mailgun-firebase-signup)
+- [Step 2 - Configuration](https://github.com/uilicious/inboxkitten#configuration)
+- [Step 3 - Build the package](https://github.com/uilicious/inboxkitten#build)
+- [Step 4 - Deployment](https://github.com/uilicious/inboxkitten#deploy)
+
 # Firebase Deployment Guide
 
-## Step 0 - Clone Me
+## [Step 0 - Clone Me](#clone-me)
 
 ```
 	$ git clone https://github.com/uilicious/inboxkitten.git
 ```
 
-## Step 1 - Mailgun & Firebase signup
+## [Step 1 - Mailgun & Firebase signup](#mailgun-firebase-signup)
 
 ### Mailgun
 To sign up for a Mailgun account, go to the [signup](https://signup.mailgun.com/new/signup) page.
@@ -64,7 +74,7 @@ On your local machine where your InboxKitten is located at,
 ```
 
 
-## Step 2 - Configuration
+## [Step 2 - Configuration](#configuration)
 
 In the root directory of Inboxkitten, run the following command
 ```
@@ -79,7 +89,7 @@ During the run time of `./config.sh`, there are three environment variables that
 
 <img src="./assets/configuration.png" alt="configuration" width="500px"/>
 
-## Step 3 - Build the package
+## [Step 3 - Build the package](#build)
 
 ```
 	$ ./build.sh
@@ -88,7 +98,7 @@ During the run time of `./config.sh`, there are three environment variables that
 `./build.sh` will package the three components to be ready for deployment.
 
 
-## Step 4 - Deployment
+## [Step 4 - Deployment](#deploy)
 
 ```
 	# Run the deployment script
