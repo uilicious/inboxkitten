@@ -20,6 +20,8 @@ Follow the 5 steps guide below to get started!
 	$ git clone https://github.com/uilicious/inboxkitten.git
 ```
 
+___
+
 ## Step 1 - Mailgun & Firebase signup
 
 ### Mailgun
@@ -30,7 +32,7 @@ To sign up for a Mailgun account, go to the <a href="https://signup.mailgun.com/
 	1. Click on `Add New Domain` button under your Domains panel. 
 	2. Follow the steps accordingly
 ```
-If not, you can use the default domain that was provided by Mailgun.
+> You can use the default domain that was provided by Mailgun if you do not have your own domain.
 
 #### Routes Configuration
 After setting up your domain, in order for you to receive email, you have to configure the routes. <a href="https://documentation.mailgun.com/en/latest/quickstart-receiving.html" target="_blank">Routes</a> act as rules that will filter through all the incoming mails and execute actions on matched conditions.
@@ -39,7 +41,7 @@ In your Routes panel, simply click on `Create Route` button and follow the steps
 
 <img src="./assets/mailgun_create_route.png" alt="Mailgun Route" width="600px"/>
 
-The above route will match all names ending with `@inboxkitten.com`, store them in the storage that mailgun provides (only for 3 days) and stop processing any other rules once this route is matched. 
+> The above route will match all names ending with `@inboxkitten.com`, store them in the storage that mailgun provides (only for 3 days) and stop processing any other rules once this route is matched. 
 
 #### Mailgun API Key
 You can locate your Mailgun API key by clicking on the domain that you are managing. In it you can see your API key.
@@ -50,6 +52,7 @@ Or you can go to the security settings and locate the API key there.
 
 <img src="./assets/mailgun_api_key_2.png" alt="Mailgun API key" width="500px"/>
 
+___
 
 ### Firebase
 
@@ -73,6 +76,7 @@ On your local machine where your InboxKitten is located at,
 	$ firebase use --add <project name that you remembered>
 ```
 
+___
 
 ## Step 2 - Configuration
 
@@ -89,6 +93,8 @@ During the run time of `./config.sh`, there are three environment variables that
 
 <img src="./assets/configuration.png" alt="configuration" width="500px"/>
 
+___
+
 ## Step 3 - Build the package
 
 ```
@@ -97,6 +103,7 @@ During the run time of `./config.sh`, there are three environment variables that
 
 `./build.sh` will package the three components to be ready for deployment.
 
+___
 
 ## Step 4 - Deployment
 
@@ -104,6 +111,7 @@ During the run time of `./config.sh`, there are three environment variables that
 	# Run the deployment script
 	$ ./deploy/firebase/deploy.sh 
 ```
+---
 
 # Developing on localhost
 
