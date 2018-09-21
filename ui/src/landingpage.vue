@@ -69,6 +69,7 @@
 				<br/>
 				<p>
 					*You will need to have signed up to firebase and mailgun, where you can deploy on their "free" tier. <br/>
+					We take zero responsiblity over your email, laptop, or life (or lack of)<br/>
 					Optionally you should have some basic programming knowledge<br/>
 					For more details (or other deplyment options) see our <a href="https://github.com/uilicious/inboxkitten">github repository</a>
 				</p>
@@ -76,7 +77,6 @@
 			<div class="line-break"></div>
 		</div>
 		<!--
-
 		<div class="intermission-header">
 			<p>Host your own InboxKitten!</p>
 			<i class="fa fa-chevron-down" @click="scrollDown"></i>
