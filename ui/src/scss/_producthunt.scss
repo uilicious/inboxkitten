@@ -6,6 +6,7 @@
 	padding: 1rem;
 	vertical-align: middle;
 	color: black;
+	width:100%;
 
 	margin:auto;
 	display:flex;
@@ -33,5 +34,10 @@
 	cursor: pointer;
 	&:hover {
 		background: darken(#fafad2, 25%);
+	}
+
+	@media (max-width:400px){
+		font-size:14px;
+		padding-left:0;
 	}
 }

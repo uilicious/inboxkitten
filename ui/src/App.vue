@@ -13,7 +13,7 @@
 			<!--<a href="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-size="large" :data-text="tweetMsg" :data-url="tweetDataUrl" data-show-count="false">Tweet</a>-->
 			<!--<a class="github-button" :href="githubLink" data-size="large" :aria-label="githubAriaLabel">Fork</a>-->
 		<!-- </div> -->
-		<router-view/>
+		<router-view class="app-router-view"/>
 	</div>
 </template>
 
@@ -42,6 +42,14 @@ export default {
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
 		color: #2c3e50;
+		width:100vw;
+		height:100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.app-router-view {
+		flex:1;
 	}
 
 	// Some forceful scroll bar fixing
