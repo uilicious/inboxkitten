@@ -125,7 +125,6 @@ body {
 	.submit-box {
 		display:inline-block;
 		margin-left:1rem;
-		border: 3px solid black;
 	}
 	// Submission button styling
 	.submit  {
@@ -145,6 +144,7 @@ body {
 		font-family: inherit;
 		text-transform: none;
 		-webkit-appearance: button;
+		border: 3px solid black;
 	}
 
 	// Hover submit button styling
