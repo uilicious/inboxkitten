@@ -203,6 +203,19 @@ body {
 }
 
 //
+// Product Hunt banner
+//
+.product-hunt {
+	background-color: white;
+	padding: 1rem;
+	vertical-align: middle;
+	color: black;
+	.ph-icon{
+		width: 5vw;
+	}
+}
+
+//
 // Love notes
 //
 .love-notes {

@@ -14,6 +14,10 @@
 				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
 			</form>
 		</div>
+		<div class="product-hunt">
+			<img src="@/assets/product-hunt-240.png" class="ph-icon"/>
+			<p>Launching on Product Hunt on 22 September 2018</p>
+		</div>
 		<div class="love-notes">
 			<p>
 				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">singapore</a>
