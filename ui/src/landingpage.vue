@@ -1,29 +1,64 @@
 <template>
 	<div class="landing-page">
-		<div class="header header-gradient-background">
-			<img class="logo" src="@/assets/logo.svg"/>
-			<h1>Open-Source <a></a> Disposable Email</h1>
-			<h2>(Served by Kittens)</h2>
-		</div>
-		<div class="email-selection header-gradient-background">
-			<form v-on:submit.prevent="goToInbox">
-				<div class="input-box">
-					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
-					<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
-				</div>
-				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
-			</form>
+		<div class="header-gradient-background">
+			<div class="header">
+				<img class="logo" src="@/assets/logo.svg"/>
+				<h1>Open-Source <a></a> Disposable Email</h1>
+				<h2>(Served by Serverless Kittens)</h2>
+			</div>
+			<div class="email-selection">
+				<form v-on:submit.prevent="goToInbox">
+					<div class="input-box">
+						<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
+						<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
+					</div>
+					<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
+				</form>
+			</div>
 		</div>
 		<div class="love-notes">
 			<p>
 				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">singapore</a>
 			</p>
 		</div>
-		<div class="deployment-guide">
-			<h1>Note that this is currently a BETA build</h1>
-			<p>
-				@TODO : deployment guide
-			</p>
+		<div class="info-guide">
+			<div class="features">
+				<div class="feature-card">
+					<h3><i class="fas fa-mail-bulk"></i> Use any inbox to avoid spam</h3>
+					<p>
+						Use inboxkitten when you don't want to get spammed by revealing your real email address.		
+					</p>
+				</div>
+				<div class="feature-card">
+					<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
+					<p>
+						Test your web application user signup flows, and email notification.
+						<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
+					</p>
+				</div>
+				<div class="feature-card">
+					<h3><i class="fas fa-trash-alt"></i> Email Auto-Deletes</h3>
+					<p>inboxkitten.com emails are in the public domain, and auto deletes after several hours.</p>
+				</div>
+			</div>
+			<div class="line-break"></div>
+			<div>
+				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
+				<p>Clone and adopt your own inboxkitten</p>
+				<p class="code deploy-code">
+					git clone "https://github.com/uilicious/inboxkitten"</br>
+					cd inboxkitten</br>
+					./config.sh</br>
+					firebase login</br>
+					./deploy/firebase/deploy.sh
+				</p>
+				<p>
+					<br/>
+					You will need to have signed up to firebase and mailgun, and have the respective API keys ready.
+					For more details see our <a href="https://github.com/uilicious/inboxkitten">github repository</a>
+				</p>
+			</div>
+			<div class="line-break"></div>
 		</div>
 		<!--
 
@@ -84,5 +119,6 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+	@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 	@import "scss/landingpage.scss";
 </style>
