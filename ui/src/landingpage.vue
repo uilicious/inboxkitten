@@ -44,7 +44,7 @@
 			<div class="line-break"></div>
 			<div class="deploy-segmet">
 				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
-				<p>Clone and adopt your own inboxkitten</p>
+				<p>Clone and adopt your own inboxkitten (for free!)</p>
 				<p class="code deploy-code">
 					git clone "https://github.com/uilicious/inboxkitten.git"<br/>
 					cd inboxkitten<br/>
@@ -54,7 +54,7 @@
 				</p>
 				<br/>
 				<p>
-					You will need to have signed up to firebase and mailgun, and have the respective API keys ready.
+					You will need to have signed up to firebase and mailgun, where you can deploy on their "free" tier.<br/>
 					For more details (or other deplyment options) see our <a href="https://github.com/uilicious/inboxkitten">github repository</a>
 				</p>
 			</div>
