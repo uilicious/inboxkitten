@@ -202,3 +202,7 @@ The UI component code is under `ui` folder. It is constructed using Vue.js for i
 - The `uilicious-test` is an uilicious test script that can be ran on [test.uilicious.com](https://test.uilicious.com) to check if your email has been received properly.
 
 The main entrypoint will be the `App.vue` and by default the Vue router will direct to `landingpage.vue`.
+
+
+### CLI
+The CLI is under the `cli` folder. There are only one file that performs the tasks to connect to the API component. It is `inboxkitten.go` under the `src` folder. The `go.sh` script is a custom go script that ensures the environment is within the `cli` folder.
