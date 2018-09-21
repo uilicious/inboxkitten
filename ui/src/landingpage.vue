@@ -26,7 +26,7 @@
 				<div class="feature-card">
 					<h3><i class="fas fa-mail-bulk"></i> Use any inbox to avoid spam</h3>
 					<p>
-						Use inboxkitten when you don't want to get spammed by revealing your real email address.		
+						Use inboxkitten when you don't want to get spammed by revealing your real email address.
 					</p>
 				</div>
 				<div class="feature-card">
