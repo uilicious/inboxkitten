@@ -1,5 +1,6 @@
 <template>
 	<nav class="nav">
+		<div class="back-button" @click="backAPage"><i class="fa fa-arrow-left fa-3x"/></div>
 		<div class="logo-box">
 			<img class="logo" src="@/assets/logo_no_text.svg" @click="goMainPage"/>
 		</div>
@@ -55,6 +56,17 @@
 					}
 				})
 				this.$eventHub.$emit('refreshInbox', {email: this.email})
+			},
+			backAPage () {
+				if(this.$route.name === "List"){
+					this.$router.push({
+						name: "Kitten Land"
+					})
+				} else {
+					this.$router.push({
+						name: "List"
+					})
+				}
 			}
 		}
 	}
@@ -87,6 +99,15 @@
 			.logo:hover {
 				cursor: pointer;
 			}
+		}
+
+		.back-button {
+			position:absolute;
+			padding:4rem;
+			padding-left:8rem;
+			padding-top:3rem;
+			cursor: pointer;
+			margin:0;
 		}
 	}
 
@@ -133,7 +154,7 @@
 		}
 	}
 
-	@media (min-width: 760px){
+	@media (min-width: 760px){ // IPad and above
 		.nav{
 			.logo-box{
 				height:6rem;
@@ -160,9 +181,43 @@
 		}
 	}
 
-	@media (max-width:760px){
+	@media (max-width: 768px) { // IPad portrait
+		.nav{
+			.back-button{
+				padding:3rem;
+				padding-left:3rem;
+			}
+		}
+	}
+
+	@media (max-width:760px){ // Smartphones
 		.nav {
 			height:4rem;
+
+			.back-button {
+				padding: 1rem;
+				padding-left: 2rem;
+			
+				font-size: 10px;
+			}
+		}
+
+		.form-box{
+			.input-email{
+				width: 9rem;
+			}
+			.refresh {
+				display:none;
+			}
+		}
+	}
+
+	@media (max-width: 320px){ // IPhone 5/SE
+
+		.form-box{
+			.input-email{
+				width: 7rem;
+			}
 		}
 	}
 
