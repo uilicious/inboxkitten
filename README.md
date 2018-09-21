@@ -1,4 +1,6 @@
-# Cute disposible email - served by a kitten
+[![inboxkitten header](./ui/static/inbox-kitten-opengraph.jpg)](https://inboxkitten.com)
+
+# Open-Source Disposable Email - Served by Serverless Kittens
 
 [![Build Status](https://travis-ci.org/uilicious/inboxkitten.svg?branch=master)](https://travis-ci.org/uilicious/inboxkitten)
 
