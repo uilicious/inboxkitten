@@ -4,7 +4,9 @@
 
 [![Build Status](https://travis-ci.org/uilicious/inboxkitten.svg?branch=master)](https://travis-ci.org/uilicious/inboxkitten)
 
-Inboxkitten is an open-source disposable email service that you can freely deploy adopt on your own!
+[Inboxkitten](https://inboxkitten.com) is an open-source disposable email service that you can freely deploy adopt on your own!
+
+Visit [our site](https://inboxkitten.com) to give a spin, or ...
 
 Follow the 5 steps guide below to get started!
 
