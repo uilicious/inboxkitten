@@ -173,6 +173,8 @@ If you have your API running on port `8800`,
 	$ curl localhost:8800/api/v1/mail/list\?mailKey=se-eyJwIjpmYWxzZSwiayI6ImVlMWNiMTAzLWZhZjMtNDg3Ni04MjI2LWE1YmE1ZTU3YzMxMiIsInMiOiI3NTdhNTY5ZGFkIiwiYyI6InRhbmtiIn0=
 ```
 
+If you have it hosted on the net, change the endpoint to where you have hosted it on :)
+
 # Code Guide
 If you are interested to developing Inboxkitten, this is a brief guide of how  Inboxkitten has been structured.
 
