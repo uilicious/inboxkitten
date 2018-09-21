@@ -284,3 +284,19 @@ body {
 	border-radius: 8px;
 	scroll-behavior: auto;
 }
+
+@media only screen and (max-width:800px) {
+	.deploy-code {
+		font-size:0.75rem;
+	}
+}
+
+.deploy-segmet {
+	p {
+		padding:1rem;
+	}
+	h3 {
+		padding-left:1rem;
+		padding-right:1rem;
+	}
+}

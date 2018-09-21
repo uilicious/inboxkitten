@@ -42,20 +42,20 @@
 				</div>
 			</div>
 			<div class="line-break"></div>
-			<div>
+			<div class="deploy-segmet">
 				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
 				<p>Clone and adopt your own inboxkitten</p>
 				<p class="code deploy-code">
-					git clone "https://github.com/uilicious/inboxkitten"</br>
-					cd inboxkitten</br>
-					./config.sh</br>
-					firebase login</br>
+					git clone "https://github.com/uilicious/inboxkitten.git"<br/>
+					cd inboxkitten<br/>
+					./config.sh<br/>
+					firebase login<br/>
 					./deploy/firebase/deploy.sh
 				</p>
+				<br/>
 				<p>
-					<br/>
 					You will need to have signed up to firebase and mailgun, and have the respective API keys ready.
-					For more details see our <a href="https://github.com/uilicious/inboxkitten">github repository</a>
+					For more details (or other deplyment options) see our <a href="https://github.com/uilicious/inboxkitten">github repository</a>
 				</p>
 			</div>
 			<div class="line-break"></div>
