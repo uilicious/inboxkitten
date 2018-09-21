@@ -102,9 +102,11 @@
 
 		.domain-text {
 			display: none;
+			width:14rem;
 		}
 
 		.input-email {
+			text-align: center;
 			border: 3px solid black;
 		}
 		.submit {
@@ -142,10 +144,6 @@
 		}
 
 		.form-box{
-
-			.input-email{
-				text-align: right;
-			}
 			.domain-text{
 				display: inline-block;
 				background:white;
@@ -157,6 +155,7 @@
 				border-left-width: 0;
 				background-color: $domain-base;
 				cursor: pointer;
+				width:10rem;
 			}
 		}
 	}
