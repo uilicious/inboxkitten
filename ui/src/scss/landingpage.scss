@@ -62,7 +62,8 @@ body {
 	padding-bottom: 3rem;
 
 	// Adust the input box elements borders
-	$input-box-el-border-radius: 0.4rem;
+	// $input-box-el-border-radius: 0.4rem;
+	$input-box-el-border-radius: 0rem;
 
 	// The main input box
 	.input-box {
@@ -74,7 +75,9 @@ body {
 		// to update input left top/bottom radius as well
 		background-color:$color5-base;
 		display: inline-block;
+		
 		border-radius: $input-box-el-border-radius;
+		border: 3px solid black;
 
 		// Common settings for input, and suffix label
 		.input-email, .input-suffix {
@@ -100,6 +103,9 @@ body {
 
 			// input text color
 			color: $dark-text;
+
+			// Right border
+			border-right: 3px solid black;
 		}
 
 		// Input email suffix
@@ -111,6 +117,7 @@ body {
 
 			// Text with subtle fade out
 			color: fade-out($dark-text, 0.3);
+
 		}
 	}
 
@@ -118,6 +125,7 @@ body {
 	.submit-box {
 		display:inline-block;
 		margin-left:1rem;
+		border: 3px solid black;
 	}
 	// Submission button styling
 	.submit  {
@@ -323,7 +331,7 @@ body {
 		.tier-title {
 			
 			margin:0;
-			background: #44b7df;
+			background: #5a86e4;
 			padding:1rem;
 			border-bottom:2px solid black;
 
