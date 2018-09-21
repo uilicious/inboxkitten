@@ -37,7 +37,7 @@ export default new Router({
       children: [
         {
           path: '',
-          redirect: {name: 'List'},
+          redirect: {name: 'List'}
         },
         {
           path: 'list',
@@ -51,13 +51,13 @@ export default new Router({
         },
         {
           path: '*',
-          redirect: {name: 'List'},
+          redirect: {name: 'List'}
         }
       ]
     },
     {
       path: '*',
-      redirect: {name: 'Kitten Land'},
+      redirect: {name: 'Kitten Land'}
     }
   ]
 })

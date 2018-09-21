@@ -56,9 +56,7 @@ export default {
 
     this.$eventHub.$on('refreshInbox', this.getMessageList)
     this.$eventHub.$on('refresh', this.getMessageList)
-
   },
-
   beforeDestroy () {
     window.clearInterval(this.retrieveMessage)
 
