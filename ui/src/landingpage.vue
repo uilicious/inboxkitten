@@ -1,22 +1,20 @@
 <template>
 	<div class="landing-page">
-		<div class="header header-gradient-background">
-			<img class="logo" src="@/assets/logo.svg"/>
-			<h1>Open-Source <a></a> Disposable Email</h1>
-			<h2>(Served by Kittens)</h2>
-		</div>
-		<div class="email-selection header-gradient-background">
-			<form v-on:submit.prevent="goToInbox">
-				<div class="input-box">
-					<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
-					<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
-				</div>
-				<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
-			</form>
-		</div>
-		<div class="product-hunt">
-			<img src="@/assets/product-hunt-240.png" class="ph-icon"/>
-			<p>Launching on Product Hunt on 22 September 2018</p>
+		<div class="header-gradient-background">
+			<div class="header">
+				<img class="logo" src="@/assets/logo.svg"/>
+				<h1>Open-Source <a></a> Disposable Email</h1>
+				<h2>(Served by Kittens)</h2>
+			</div>
+			<div class="email-selection">
+				<form v-on:submit.prevent="goToInbox">
+					<div class="input-box">
+						<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
+						<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
+					</div>
+					<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
+				</form>
+			</div>
 		</div>
 		<div class="love-notes">
 			<p>
