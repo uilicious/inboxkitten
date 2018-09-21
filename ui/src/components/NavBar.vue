@@ -103,9 +103,8 @@
 
 		.back-button {
 			position:absolute;
-			padding:4rem;
+			padding:3rem;
 			padding-left:8rem;
-			padding-top:3rem;
 			cursor: pointer;
 			margin:0;
 		}
@@ -161,6 +160,10 @@
 				.logo{
 					width:16rem;
 				}
+			}
+
+			.back-button {
+				padding-left:2rem;
 			}
 		}
 

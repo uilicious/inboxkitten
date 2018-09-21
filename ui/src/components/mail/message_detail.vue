@@ -4,7 +4,7 @@
     <div class="meta-info">
       <div class="left">
         <div class="sender"><b>{{emailContent.name}}</b>{{emailContent.emailAddress}}</div>
-        <div class="to">to {{emailContent.recipients}}</div>
+        <div class="to">to: {{emailContent.recipients}}</div>
       </div>
       <div class="date">{{emailContent.Date}}</div>
     </div>
@@ -47,7 +47,8 @@
             let [name, ...rest] = this.formatName(this.emailContent.from)
             this.emailContent.name = name
             this.emailContent.emailAddress = ' <' + rest
-            this.formatHtml(res.data['body-html'])
+            let content = res.data['body-html'] || res.data['body-plain']
+            this.formatHtml(content)
           }).catch((e) => {
             this.emailContent.name = 'Kitten Squads'
             this.emailContent.recipients = 'Master'
