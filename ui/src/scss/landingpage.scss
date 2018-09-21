@@ -226,6 +226,61 @@ body {
 //
 // Deployment guide content
 //
-.deployment-guide {
+.info-guide {
 	padding: 1rem;
+
+	.features {
+		padding-top:0.5rem;
+		margin:auto;
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+	}
+
+	.feature-card {
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 0;
+		padding-left:1rem;
+		padding-right:1rem;
+	}
+
+	.fas {
+		margin-right:0.5rem;
+	}
+
+	@media only screen and (max-width:800px) {
+		.features {
+			flex-direction:column;
+		}
+	}
+}
+
+.line-break {
+	height:2px;
+
+	// Fallback
+	background:black;
+	// Gradient
+	background:linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
+
+	width:50%;
+	margin:auto;
+	margin-top:2rem;
+	margin-bottom:4rem;
+}
+
+.code {
+	font-family:monospace;
+	background:black;
+	color:white;
+	padding:1rem;
+}
+
+.deploy-code {
+	width: 30rem;
+	max-width:90%;
+	margin:auto;
+	border-radius: 8px;
+	scroll-behavior: auto;
 }
