@@ -2,7 +2,7 @@
 	<div class="landing-page">
 		<div class="header-gradient-background">
 			<div class="header">
-				<img class="logo" src="@/assets/logo.svg"/>
+				<img class="logo" src="@/assets/inbox_kitten.png"/>
 				<h1>Open-Source <a></a> Disposable Email</h1>
 				<h2>(Served by Serverless Kittens)</h2>
 			</div>
@@ -68,7 +68,8 @@
 				</p>
 				<br/>
 				<p>
-					*You will need to have signed up to firebase and mailgun, where you can deploy on their "free" tier. Optionally you should have some basic programming knowledge<br/>
+					*You will need to have signed up to firebase and mailgun, where you can deploy on their "free" tier. <br/>
+					Optionally you should have some basic programming knowledge<br/>
 					For more details (or other deplyment options) see our <a href="https://github.com/uilicious/inboxkitten">github repository</a>
 				</p>
 			</div>
