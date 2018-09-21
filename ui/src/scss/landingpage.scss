@@ -292,11 +292,61 @@ body {
 }
 
 .deploy-segmet {
+
 	p {
 		padding:1rem;
 	}
 	h3 {
 		padding-left:1rem;
 		padding-right:1rem;
+	}
+
+	.self-host-tier-link {
+		text-decoration: none;
+		cursor: pointer;
+		display:inline-block;
+		width:12rem;
+	}
+
+	.self-host-tier {
+		border:3px solid black;
+		border-radius:5px;
+		display:flex;
+		flex-direction: column;
+		padding:0;
+		max-width:12rem;
+		margin:auto;
+		background:white;
+
+		text-decoration: none;
+
+		.tier-title {
+			
+			margin:0;
+			background: #44b7df;
+			padding:1rem;
+			border-bottom:2px solid black;
+
+			h3 {
+				display: inline-block;
+				color:white;
+				margin:0;
+				padding:0;
+			}
+		}
+
+		.price {
+			margin:0;
+			padding:1rem;
+			color:black;
+			
+			h3 {
+				color:black;
+				font-size: 4rem;
+				margin:0;
+				padding:0;
+			}
+		}
+
 	}
 }
