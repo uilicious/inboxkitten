@@ -120,8 +120,9 @@ export default {
     },
 
     formatName (sender) {
-      let [name, ...rest] = sender.split(' <')
-      return name
+      let [name, emailUnformatted, ...rest] = sender.split(' <')
+      let [email, ...unknown] = emailUnformatted.split(">")
+      return email
     },
 
     rowCls (index) {
