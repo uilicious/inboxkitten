@@ -163,6 +163,16 @@ To run without compilation of `inboxkitten.go` in the src/ folder
 	$ ./go.sh run src/inboxkitten.go
 ```
 
+## Calling the API using curl
+If you have your API running on port `8800`,
+```
+	# Get list of email
+	$ curl localhost:8800/api/v1/mail/list\?recipient=hard-dust-64
+
+	# Get individual email
+	$ curl localhost:8800/api/v1/mail/list\?mailKey=se-eyJwIjpmYWxzZSwiayI6ImVlMWNiMTAzLWZhZjMtNDg3Ni04MjI2LWE1YmE1ZTU3YzMxMiIsInMiOiI3NTdhNTY5ZGFkIiwiYyI6InRhbmtiIn0=
+```
+
 # Code Guide
 If you are interested to developing Inboxkitten, this is a brief guide of how  Inboxkitten has been structured.
 
