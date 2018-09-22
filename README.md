@@ -16,6 +16,18 @@ Follow the 5 steps guide below to get started!
 - [Step 3 - Build the package](https://github.com/uilicious/inboxkitten#step-3---build-the-package)
 - [Step 4 - Deployment](https://github.com/uilicious/inboxkitten#step-4---deployment)
 
+> Also do let us know how we can help make this better 😺
+
+# Support us on product hunt 🚀
+
+https://www.producthunt.com/posts/inboxkitten
+
+# Somewhat related blog / articles
+
+[The Stack : Making a free open-source disposable email service prototype (inboxkitten.com) in 14 hours](https://dev.to/picocreator/the-stack-making-a-free-open-source-disposable-email-service-prototype-inboxkittencom-in-14-hours-206g)
+[What I have learnt from a 14 hours project](https://dev.to/jmtiong/what-i-have-learnt-from-a-14-hours-project-2joo)
+[Development timeline](https://blog.uilicious.com/development-timeline-for-inboxkitten-com-lessons-learnt-e802a2f0a47c)
+
 # Firebase Deployment Guide
 
 ## Step 0 - Clone Me
