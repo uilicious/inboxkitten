@@ -6,7 +6,7 @@
 		<div>
 			<a href="https://www.producthunt.com/posts/inboxkitten" target="_blank" class="product-hunt">
 				<img src="@/assets/product-hunt-240.png" class="ph-icon"/>
-				<p>Support our launch on 22 September</p>
+				<p>Support our product hunt launch here</p>
 			</a>
 		</div>
 		<!-- <div style="position:fixed; top:3vh; right:2vw; z-index:10;" v-if="isShare"> -->
