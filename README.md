@@ -24,9 +24,9 @@ https://www.producthunt.com/posts/inboxkitten
 
 # Somewhat related blog / articles
 
-[The Stack : Making a free open-source disposable email service prototype (inboxkitten.com) in 14 hours](https://dev.to/picocreator/the-stack-making-a-free-open-source-disposable-email-service-prototype-inboxkittencom-in-14-hours-206g)
-[What I have learnt from a 14 hours project](https://dev.to/jmtiong/what-i-have-learnt-from-a-14-hours-project-2joo)
-[Development timeline](https://blog.uilicious.com/development-timeline-for-inboxkitten-com-lessons-learnt-e802a2f0a47c)
++ [The Stack : Making a free open-source disposable email service prototype (inboxkitten.com) in 14 hours](https://dev.to/picocreator/the-stack-making-a-free-open-source-disposable-email-service-prototype-inboxkittencom-in-14-hours-206g)
++ [What I have learnt from a 14 hours project](https://dev.to/jmtiong/what-i-have-learnt-from-a-14-hours-project-2joo)
++ [Development timeline](https://blog.uilicious.com/development-timeline-for-inboxkitten-com-lessons-learnt-e802a2f0a47c)
 
 # Firebase Deployment Guide
 
