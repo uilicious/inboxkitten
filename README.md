@@ -10,15 +10,15 @@ Visit [our site](https://inboxkitten.com) to give a spin, or ...
 
 Follow the 5 steps guide below to get started on Firebase!
 
-- [Step 0 - Clone Me](https://github.com/uilicious/inboxkitten#step-0---clone-me)
-- [Step 1 - Mailgun & Firebase signup](https://github.com/uilicious/inboxkitten#step-1---mailgun--firebase-signup)
-- [Step 2 - Configuration](https://github.com/uilicious/inboxkitten#step-2---configuration)
-- [Step 3 - Build the package](https://github.com/uilicious/inboxkitten#step-3---build-the-package)
-- [Step 4 - Deployment](https://github.com/uilicious/inboxkitten#step-4---deployment)
+- [Step 0 - Clone Me](#step-0---clone-me)
+- [Step 1 - Mailgun & Firebase signup](#step-1---mailgun--firebase-signup)
+- [Step 2 - Configuration](#step-2---configuration)
+- [Step 3 - Build the package](#step-3---build-the-package)
+- [Step 4 - Deployment](#step-4---deployment)
 
 For other deployment options, refer to the following guide.
 
-- [localhost/custom manual configuration guide](#developing-on-localhost)
+- [localhost/custom manual configuration guide](#developing-on-localhost--custom-deployment)
 
 > Also do let us know how we can help make this better 😺
 
