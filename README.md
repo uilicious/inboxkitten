@@ -70,7 +70,7 @@ Or you can go to the security settings and locate the API key there.
 
 ___
 
-### Firebase
+### Firebase Deployment
 
 1. Go to <a href="https://firebase.google.com" target="_blank">Firebase</a> and click on `Get Started`.
 2. Sign in with your favorite Google account.
@@ -129,11 +129,27 @@ ___
 ```
 ---
 
-# Developing on localhost
+# Developing on localhost / Custom deployment
 
-After running the `./config.sh` you can follow the steps below to run Inboxkitten on your localhost.
+Instead of running `./config.sh`, you should setup the config files respectively for the deployment.
 
 ## Running api
+
+**Configuring : api/config/mailgunConfig.js**
+
+```
+module.exports = {
+	"apiKey" : "<MAILGUN_API_KEY>",
+	"emailDomain" : "<MAILGUN_EMAIL_DOMAIN>",
+	"corsOrigin" : "http://localhost:8000"
+}
+```
+
++ MAILGUN_API_KEY : Mailgun private api key
++ MAILGUN_EMAIL_DOMAIN : domain for mailgun 
++ UI_HOST : Url to the UI domain. `http://localhost:8000` is the default for the UI `npm run dev`, 
+
+**Running the express.js API server**
 
 ```
 	# Assuming that you are on the root directory of Inboxkitten
@@ -143,7 +159,25 @@ After running the `./config.sh` you can follow the steps below to run Inboxkitte
 	$ npm start
 ```
 
+Validate your API server is online at `http://localhost:8800/api/v1/mail/list?recipient=hello-world`
+
+You should see an empty array representing an empty inbox.
+
 ## Running ui
+
+**ui/config/apiconfig.js**
+```
+export default {
+	apiUrl: 'http://localhost:8800/api/v1/mail',
+	domain: '<MAILGUN_EMAIL_DOMAIN>'
+}
+```
+
++ apiUrl : Api server to point to, `localhost:8800` is the default for the api server `npm start`
++ MAILGUN_EMAIL_DOMAIN : domain for mailgun 
+
+**Running the nodejs+webpack UI server**
+
 ```
 	# Assuming that you are on the root directory of Inboxkitten
 	$ cd ui
@@ -152,7 +186,7 @@ After running the `./config.sh` you can follow the steps below to run Inboxkitte
 	$ npm run dev
 ```
 
-You can now access it on `http://localhost:8080` and enjoy your kitten-ventures.
+You can now access it on `http://localhost:8000` and enjoy your kitten-ventures.
 
 ## Running cli
 
