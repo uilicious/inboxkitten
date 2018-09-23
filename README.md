@@ -8,13 +8,17 @@
 
 Visit [our site](https://inboxkitten.com) to give a spin, or ...
 
-Follow the 5 steps guide below to get started!
+Follow the 5 steps guide below to get started on Firebase!
 
-- [Step 0 - Clone Me](https://github.com/uilicious/inboxkitten#step-0---clone-me)
-- [Step 1 - Mailgun & Firebase signup](https://github.com/uilicious/inboxkitten#step-1---mailgun--firebase-signup)
-- [Step 2 - Configuration](https://github.com/uilicious/inboxkitten#step-2---configuration)
-- [Step 3 - Build the package](https://github.com/uilicious/inboxkitten#step-3---build-the-package)
-- [Step 4 - Deployment](https://github.com/uilicious/inboxkitten#step-4---deployment)
+- [Step 0 - Clone Me](#step-0---clone-me)
+- [Step 1 - Mailgun & Firebase signup](#step-1---mailgun--firebase-signup)
+- [Step 2 - Configuration](#step-2---configuration)
+- [Step 3 - Build the package](#step-3---build-the-package)
+- [Step 4 - Deployment](#step-4---deployment)
+
+For other deployment options, refer to the following guide.
+
+- [localhost/custom manual configuration guide](#developing-on-localhost--custom-deployment)
 
 > Also do let us know how we can help make this better 😺
 
@@ -70,7 +74,7 @@ Or you can go to the security settings and locate the API key there.
 
 ___
 
-### Firebase
+### Firebase Deployment
 
 1. Go to <a href="https://firebase.google.com" target="_blank">Firebase</a> and click on `Get Started`.
 2. Sign in with your favorite Google account.
@@ -129,11 +133,29 @@ ___
 ```
 ---
 
-# Developing on localhost
+# Developing on localhost / Custom deployment
 
-After running the `./config.sh` you can follow the steps below to run Inboxkitten on your localhost.
+Note: You will still need to do the mail gun setup in the firebase guide.
 
-## Running api
+Instead of running `./config.sh`, you should setup the config files respectively for the deployment.
+
+## Running the api server
+
+**Configuring : api/config/mailgunConfig.js**
+
+```
+module.exports = {
+	"apiKey" : "<MAILGUN_API_KEY>",
+	"emailDomain" : "<MAILGUN_EMAIL_DOMAIN>",
+	"corsOrigin" : "http://localhost:8000"
+}
+```
+
++ MAILGUN_API_KEY : Mailgun private api key
++ MAILGUN_EMAIL_DOMAIN : domain for mailgun 
++ UI_HOST : Url to the UI domain. `http://localhost:8000` is the default for the UI `npm run dev`, 
+
+**Running the express.js API server**
 
 ```
 	# Assuming that you are on the root directory of Inboxkitten
@@ -143,7 +165,25 @@ After running the `./config.sh` you can follow the steps below to run Inboxkitte
 	$ npm start
 ```
 
-## Running ui
+Validate your API server is online at `http://localhost:8800/api/v1/mail/list?recipient=hello-world`
+
+You should see an empty array representing an empty inbox.
+
+## Running the ui server - in development mode
+
+**Configuring ui/config/apiconfig.js**
+```
+export default {
+	apiUrl: 'http://localhost:8800/api/v1/mail',
+	domain: '<MAILGUN_EMAIL_DOMAIN>'
+}
+```
+
++ apiUrl : Api server to point to, `localhost:8800` is the default for the api server `npm start`
++ MAILGUN_EMAIL_DOMAIN : domain for mailgun 
+
+**Running the nodejs+webpack UI server**
+
 ```
 	# Assuming that you are on the root directory of Inboxkitten
 	$ cd ui
@@ -152,7 +192,7 @@ After running the `./config.sh` you can follow the steps below to run Inboxkitte
 	$ npm run dev
 ```
 
-You can now access it on `http://localhost:8080` and enjoy your kitten-ventures.
+You can now access it on `http://localhost:8000` and enjoy your kitten-ventures.
 
 ## Running cli
 
