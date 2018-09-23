@@ -20,7 +20,7 @@ Follow the 5 steps guide below to get started!
 
 # Support us on product hunt 🚀
 
-https://www.producthunt.com/posts/inboxkitten
++ https://www.producthunt.com/posts/inboxkitten
 
 # Somewhat related blog / articles
 
