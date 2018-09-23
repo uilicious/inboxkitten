@@ -63,6 +63,7 @@
 					git clone "https://github.com/uilicious/inboxkitten.git"<br/>
 					cd inboxkitten<br/>
 					./config.sh<br/>
+					./build.sh<br/>
 					firebase login<br/>
 					./deploy/firebase/deploy.sh
 				</p>
