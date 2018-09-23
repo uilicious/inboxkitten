@@ -139,7 +139,7 @@ Note: You will still need to do the mail gun setup in the firebase guide.
 
 Instead of running `./config.sh`, you should setup the config files respectively for the deployment.
 
-## Running api
+## Running the api server
 
 **Configuring : api/config/mailgunConfig.js**
 
@@ -169,9 +169,9 @@ Validate your API server is online at `http://localhost:8800/api/v1/mail/list?re
 
 You should see an empty array representing an empty inbox.
 
-## Running ui
+## Running the ui server - in development mode
 
-**ui/config/apiconfig.js**
+**Configuring ui/config/apiconfig.js**
 ```
 export default {
 	apiUrl: 'http://localhost:8800/api/v1/mail',
