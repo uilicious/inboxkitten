@@ -58,6 +58,13 @@
       formatHtml (content) {
         let iframe = document.getElementById('message-content')
         let html = content
+
+        // Add JS injection 
+        html += "<script>"+
+          "let linkArray = document.getElementsByTagName('a');"+
+          "for (let i=0; i<linkArray.length; ++i) { linkArray[i].target='_blank'; }"+
+          "<\/script>";
+
         iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
       },
       formatName (sender) {
