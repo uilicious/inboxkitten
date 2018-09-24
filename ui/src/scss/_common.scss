@@ -1,0 +1,10 @@
+
+// Fix scroll alignment issues
+html, body, #app {
+	min-height: 100%;
+	height: 100%;
+}
+
+html {
+	min-height: 600px;
+}
