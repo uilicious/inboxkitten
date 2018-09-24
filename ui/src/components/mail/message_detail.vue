@@ -59,7 +59,8 @@
         let iframe = document.getElementById('message-content')
         let html = content
 
-        // Add JS injection 
+        // Add JS injection to force all links to open as a new tab 
+        // instead of opening inside the iframe
         html += "<script>"+
           "let linkArray = document.getElementsByTagName('a');"+
           "for (let i=0; i<linkArray.length; ++i) { linkArray[i].target='_blank'; }"+
