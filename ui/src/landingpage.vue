@@ -38,7 +38,7 @@
 				</div>
 				<div class="feature-card">
 					<h3><i class="fas fa-trash-alt"></i> Email Auto-Deletes</h3>
-					<p>inboxkitten.com emails are in the public domain, and auto deletes after several hours.</p>
+					<p>inboxkitten.com emails are in the public domain, and auto deletes after several hours. (officially 3 days according to mailgun)</p>
 				</div>
 			</div>
 			<div class="line-break"></div>
