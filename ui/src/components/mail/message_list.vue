@@ -14,11 +14,7 @@
         </div>
       </div>
       <div class="no-mails" v-if="listOfMessages.length == 0">
-        <p>
-          There for no messages for this kitten :(<br/><br/>
-          Press on the 'Refresh' button if you want to overwork the kittens...
-        </p>
-        <button class="refresh-button" @click="refreshList" v-if="!refreshing">Refresh</button>
+        <p>Tua mãe, aquela ursa, ainda não recebeu nenhum email =/</p>
       </div>
     </vue-scroll>
 </template>
@@ -170,6 +166,7 @@ export default {
   }
 
   .no-mails {
+    color: #818181;
     text-align: center;
     vertical-align: center;
     overflow: auto;
