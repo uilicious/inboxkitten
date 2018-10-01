@@ -3,7 +3,7 @@
 // @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 
 // Loading of color scheme
-@import "_color.scss";
+@import '_color.scss';
 
 // Min-width for body (for some sanity)
 body {
@@ -26,14 +26,15 @@ body {
 	}
 
 	h1 {
-		color:$bright-text;
-		padding-left:2rem;
-		padding-right:2rem;
-	}
-	h2 {
 		color:$dark-text;
 		padding-left:2rem;
 		padding-right:2rem;
+	}
+	h3 {
+		color:$bright-text;
+		padding-left:2rem;
+		padding-right:2rem;
+		margin-bottom: 0;
 	}
 
 	h1,h2 {
@@ -62,8 +63,7 @@ body {
 	padding-bottom: 3rem;
 
 	// Adust the input box elements borders
-	// $input-box-el-border-radius: 0.4rem;
-	$input-box-el-border-radius: 0rem;
+	$input-box-el-border-radius: 0.4rem;
 
 	// The main input box
 	.input-box {
@@ -75,23 +75,23 @@ body {
 		// to update input left top/bottom radius as well
 		background-color:$color5-base;
 		display: inline-block;
-		
+
 		border-radius: $input-box-el-border-radius;
-		border: 3px solid black;
 
 		// Common settings for input, and suffix label
 		.input-email, .input-suffix {
 			padding:0;
 			margin:0;
 			font-size:1rem;
-			padding-top:0.25rem;
-			padding-bottom:0.25rem;
+			padding-top:0.5rem;
+			padding-bottom:0.5rem;
+			outline: none;
 		}
 
 		// Input email styling
 		.input-email {
 			border:0px;
-			width: 12rem;
+			width: 14rem;
 			display: inline-block;
 			text-align:center;
 
@@ -103,14 +103,11 @@ body {
 
 			// input text color
 			color: $dark-text;
-
-			// Right border
-			border-right: 3px solid black;
 		}
 
 		// Input email suffix
 		.input-suffix {
-			width: 10rem;
+			width: 12rem;
 			display: inline-block;
 			padding-left:1rem;
 			padding-right:1rem;
@@ -127,8 +124,8 @@ body {
 		margin-left:1rem;
 	}
 	// Submission button styling
-	.submit  {
-		padding: 0.25rem 1rem 0.25rem 1rem;
+	.submit	{
+		padding: 0.5rem 1rem 0.5rem 1rem;
 		margin:0;
 		border: 0;
 
@@ -144,7 +141,6 @@ body {
 		font-family: inherit;
 		text-transform: none;
 		-webkit-appearance: button;
-		border: 3px solid black;
 	}
 
 	// Hover submit button styling
@@ -152,31 +148,6 @@ body {
 		background: $cta-hover;
 		color: $cta-hover-text;
 	}
-
-	/*
-	@media only screen and (max-width:760px) {
-		// Collapes the inbox input into 2 lines
-		.input-box {
-			display: inline-block;
-			vertical-align: middle;
-			width: 12rem;
-			.input-email {
-				border-top-right-radius: $input-box-el-border-radius;
-				border-bottom-left-radius: 0;
-			}
-		}
-
-		// Increase submit button height
-		.submit-box {
-			display: inline-block;
-			vertical-align: middle;
-			.submit {
-				display: inline;
-				height: 3.5rem;
-			}
-		}
-	}
-	*/
 
 	@media only screen and (max-width:760px) {
 		// Collapes the inbox input into 2 lines
@@ -210,28 +181,6 @@ body {
 }
 
 //
-// Love notes
-//
-.love-notes {
-	padding: 1rem;
-	background: white;
-
-	p {
-		font-size:1.2rem;
-	}
-}
-
-//
-// Line break
-//
-.line-break {
-	width: 80vw;
-	background: black;
-	margin: auto;
-	height: 1px;
-}
-
-//
 // Deployment guide content
 //
 .info-guide {
@@ -251,6 +200,8 @@ body {
 		flex-basis: 0;
 		padding-left:1rem;
 		padding-right:1rem;
+		color: #818181;
+		h3 { color: $dark-text; }
 	}
 
 	.fas {
@@ -264,100 +215,196 @@ body {
 	}
 }
 
-.line-break {
-	height:2px;
-
-	// Fallback
-	background:black;
-	// Gradient
-	background:linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
-
-	width:50%;
-	margin:auto;
-	margin-top:2rem;
-	margin-bottom:4rem;
+.footer {
+	color: #818181;
+	font-size: 13px;
+	text-align: center;
+	margin-top: 50px;
 }
 
-.code {
-	font-family:monospace;
-	background:black;
-	color:white;
-	padding:1rem;
-}
+//
+// Bear
+//
+.bear-container {
+	position: relative;
+	margin: auto;
+	background: #DDE8F9;
+	width: 300px;
+	height: 300px;
+	border-radius: 100%;
+	overflow: hidden;
+	border: $black solid 10px;
 
-.deploy-code {
-	width: 30rem;
-	max-width:90%;
-	margin:auto;
-	border-radius: 8px;
-	scroll-behavior: auto;
-}
-
-@media only screen and (max-width:800px) {
-	.deploy-code {
-		font-size:0.75rem;
+	.bear {
+		border: $black solid 10px;
+		background: $dark-brown;
+		width: 176px;
+		height: 300px;
+		z-index: 10;
+		position: absolute;
+		top: 150px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		border-radius: 110px;
 	}
-}
-
-.deploy-segmet {
-
-	p {
-		padding:1rem;
+	.left-ear {
+		border: $black solid 10px;
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		background-color: $light-brown;
+		border-radius: 100%;
+		top: 58px;
+		left: 50px;
 	}
-	h3 {
-		padding-left:1rem;
-		padding-right:1rem;
+	.right-ear {
+		border: $black solid 10px;
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		background-color: $light-brown;
+		border-radius: 100%;
+		top: 58px;
+		right: 50px;
+		animation: wiggle 2s ease-in-out;
+		animation-iteration-count: infinite;
+	}
+	.left-eye {
+		position: absolute;
+		width: 22px;
+		height: 22px;
+		background-color: $black;
+		border-radius: 100%;
+		top: 135px;
+		left: 96px;
+		z-index: 10;
+		animation: blink 2s ease-in-out forwards;
+		animation-iteration-count: infinite;
+	}
+	.right-eye {
+		position: absolute;
+		width: 22px;
+		height: 22px;
+		background-color: $black;
+		border-radius: 100%;
+		top: 135px;
+		right: 96px;
+		z-index: 10;
+		animation: blink 2s ease-in-out forwards;
+		animation-iteration-count: infinite;
 	}
 
-	.self-host-tier-link {
-		text-decoration: none;
-		cursor: pointer;
-		display:inline-block;
-		width:12rem;
-	}
+	.nose {
+		position: absolute;
+		width: 100px;
+		height: 80px;
+		background-color: $light-brown;
+		border-radius: 100%;
+		top: 150px;
+		left: 0px;
+		right: 0px;
+		margin: auto;
+		z-index: 10;
 
-	.self-host-tier {
-		border:3px solid black;
-		border-radius:5px;
-		display:flex;
-		flex-direction: column;
-		padding:0;
-		max-width:12rem;
-		margin:auto;
-		background:white;
-
-		text-decoration: none;
-
-		.tier-title {
-			
-			margin:0;
-			background: #5a86e4;
-			padding:1rem;
-			border-bottom:2px solid black;
-
-			h3 {
-				display: inline-block;
-				color:white;
-				margin:0;
-				padding:0;
-			}
+		&::before {
+			content: '';
+			background-color: $black;
+			width: 36px;
+			height: 30px;
+			display: block;
+			border-radius: 100%;
+			left: 0;
+			right: 0;
+			margin: auto;
+			margin-top: 8px;
 		}
+	}
+	.mouth {
+		width: 55px;
+		height: 15px;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+		border: 10px solid $black;
+		border-top: 0;
+		position: absolute;
+		top: 192px;
+		z-index: 10;
+		left: 0;
+		right: 0;
+		margin: auto;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
 
-		.price {
-			margin:0;
-			padding:1rem;
-			color:black;
-			
-			h3 {
-				color:black;
-				font-size: 4rem;
-				margin:0;
-				padding:0;
-			}
+		&::before {
+			content: '';
+			width: 10px;
+			height: 22px;
+			background-color: $black;
+			display: block;
+			left: 0;
+			right: 0;
+			margin: auto;
+			margin-top: -10px;
 		}
 	}
 
-	.disclaimer {
-		font-size:0.75rem;
+	.hand {
+		border: $black solid 10px;
+		z-index: 120;
+		background: #775D46;
+		background-image: radial-gradient(circle at 10px 25px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 20px 18px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 32px 18px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 42px 25px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 26px 40px, $light-brown 12px, transparent 12px );
+		width: 51px;
+		height: 150px;
+		position: absolute;
+		top: 150px;
+		left: 0;
+		border-radius: 100px;
+		animation: move .6s ease-in-out forwards;
+		animation-iteration-count: infinite;
+	}
+}
+
+@keyframes move {
+	0% { top: 170px; }
+	35% { top: 150px; }
+	100% { top: 170px; }
+}
+
+@keyframes blink {
+	0% { height: 22px; }
+	10% {
+		margin-top: 8px;
+		height: 6px;
+	}
+	30% {
+		margin-top: 0px;
+		height: 22px;
+	}
+	100% { height: 22px; }
+}
+
+@keyframes wiggle {
+	0% {
+		top: 58px;
+		right: 50px;
+	}
+	10% {
+		top: 63px;
+		right: 45px;
+	}
+	20% {
+		top: 58px;
+		right: 50px;
+	}
+	30% {
+		top: 63px;
+		right: 45px;
+	}
+	50% {
+		top: 58px;
+		right: 50px;
 	}
 }
