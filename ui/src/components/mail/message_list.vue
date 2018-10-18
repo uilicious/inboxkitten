@@ -71,7 +71,7 @@ export default {
     getMessageList () {
       this.refreshing = true
       let email = this.$route.params.email
-      axios.get(config.apiUrl + '/list?recipient=' + email.toLowerCase())
+      axios.get(config.apiUrl + '/list?recipient=' + email)
         .then(res => {
           this.listOfMessages = res.data
           this.refreshing = false
