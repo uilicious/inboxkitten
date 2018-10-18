@@ -58,13 +58,13 @@
 				this.$eventHub.$emit('refreshInbox', {email: this.email})
 			},
 			backAPage () {
-				if(this.$route.name === "List"){
+				if (this.$route.name === 'List') {
 					this.$router.push({
-						name: "Kitten Land"
+						name: 'Kitten Land'
 					})
 				} else {
 					this.$router.push({
-						name: "List"
+						name: 'List'
 					})
 				}
 			}
@@ -200,7 +200,7 @@
 			.back-button {
 				padding: 1rem;
 				padding-left: 2rem;
-			
+
 				font-size: 10px;
 			}
 		}
