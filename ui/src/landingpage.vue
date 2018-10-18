@@ -45,7 +45,7 @@
 			<div class="deploy-segmet">
 				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
 				<p>Clone and adopt your own inboxkitten using our self-hosting package</p>
-				
+
 				<a href="https://github.com/uilicious/inboxkitten" class="self-host-tier-link">
 					<div class="self-host-tier">
 						<div class="tier-title">
@@ -57,7 +57,7 @@
 						</div>
 					</div>
 				</a>
-				
+
 				<p>All you need to do is the following steps</p>
 				<p class="code deploy-code">
 					git clone "https://github.com/uilicious/inboxkitten.git"<br/>
