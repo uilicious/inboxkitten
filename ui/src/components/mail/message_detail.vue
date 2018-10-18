@@ -48,6 +48,11 @@
 						this.emailContent.name = name
 						this.emailContent.emailAddress = ' <' + rest
 						let content = res.data['body-html'] || res.data['body-plain']
+
+						// when it is plain text, add in <pre> to keep the format of the message same
+						if (res.data['body-html'] === undefined) {
+							content = '<pre>' + content + '</pre>'
+						}
 						this.formatHtml(content)
 					}).catch((e) => {
 						this.emailContent.name = 'Kitten Squads'
@@ -59,12 +64,13 @@
 				let iframe = document.getElementById('message-content')
 				let html = content
 
-				// Add JS injection to force all links to open as a new tab 
+				// Add JS injection to force all links to open as a new tab
 				// instead of opening inside the iframe
-				html += "<script>"+
-					"let linkArray = document.getElementsByTagName('a');"+
-					"for (let i=0; i<linkArray.length; ++i) { linkArray[i].target='_blank'; }"+
-					"<\/script>";
+				html += '<script>' +
+					'let linkArray = document.getElementsByTagName("a");' +
+					'for (let i=0; i<linkArray.length; ++i) { linkArray[i].target="_blank"; }' +
+					// eslint-disable-next-line
+					'<\/script>'
 
 				iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
 			},
