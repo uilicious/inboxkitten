@@ -6,7 +6,7 @@
 		<div>
 			<a href="https://www.producthunt.com/posts/inboxkitten" target="_blank" class="product-hunt">
 				<img src="@/assets/product-hunt-240.png" class="ph-icon"/>
-				<p>Support our launch on 22 September</p>
+				<p>Support our product hunt launch here</p>
 			</a>
 		</div>
 		<!-- <div style="position:fixed; top:3vh; right:2vw; z-index:10;" v-if="isShare"> -->
@@ -36,6 +36,7 @@ export default {
 <style lang="scss" rel="stylesheet/scss">
 	@import url("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
 	@import "scss/_producthunt.scss";
+	@import "scss/_common.scss";
 	#app {
 		font-family: 'Avenir', Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
