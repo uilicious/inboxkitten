@@ -48,6 +48,11 @@
             this.emailContent.name = name
             this.emailContent.emailAddress = ' <' + rest
             let content = res.data['body-html'] || res.data['body-plain']
+
+            // when it is plain text, add in <pre> to keep the format of the message same
+            if (res.data['body-html'] === undefined) {
+              content = '<pre>' + content + '</pre>'
+            }
             this.formatHtml(content)
           }).catch((e) => {
             this.emailContent.name = 'Kitten Squads'
