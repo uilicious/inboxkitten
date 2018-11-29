@@ -20,7 +20,11 @@
 			<p>
 				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">singapore</a>
 			</p>
+			<p>
+				<a href="https://www.producthunt.com/posts/inboxkitten" target="_blank">btw: thanks for making us 3rd on product hunt</a>
+			</p>
 		</div>
+		<div class="line-break" style="margin-top:0.5rem; margin-bottom:0.5rem;"></div>
 		<div class="info-guide">
 			<div class="features">
 				<div class="feature-card">

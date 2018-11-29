@@ -27,6 +27,14 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     "no-unused-vars": 'off',//['error', {'args': 'none'}],
     "indent": 'off',//["warn", "tab"],
-    "no-tabs": 0
+    "no-tabs": 0, // Disable no tabs check
+    "no-trailing-spaces": 'warn',
+    "quotes": 'warn',
+    "space-infix-ops": 'warn',
+    "no-useless-escape": 'warn',
+    "semi": 'warn',
+    "no-trailing-spaces": 'warn',
+    "space-before-blocks": 'warn',
+    "keyword-spacing": 'warn'
   }
 }
