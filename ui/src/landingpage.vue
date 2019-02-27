@@ -10,7 +10,7 @@
 				<form v-on:submit.prevent="goToInbox">
 					<div class="input-box">
 						<input class="input-email" name="email" aria-label="email" type="text" v-model="randomName" id="email-input"/>
-						<div class="input-suffix" @click="emailInputFocus">@{{domain}}</div>
+						<div class="input-suffix" id="div-domain" data-clipboard-target="#email-input">@{{domain}}</div>
 					</div>
 					<div class="submit-box"><input type="submit" class="submit" value="Get Mail Nyow!"/></div>
 				</form>
@@ -97,6 +97,7 @@
 	import $ from 'jquery'
 	import config from '@/../config/apiconfig.js'
 	import 'normalize.css'
+	import ClipboardJS from 'clipboard'
 
 	export default {
 		name: 'LandingPage',
@@ -108,6 +109,33 @@
 		},
 		mounted () {
 			this.randomName = this.generateRandomName().toString()
+
+			this.$clipboard = []
+
+			let self = this
+
+			this.$clipboard[0] = new ClipboardJS('#div-domain', {
+				text: function (trigger) {
+					return self.randomName + '@' + config.domain
+				}
+			})
+
+			this.$clipboard[0].on('success', function (e) {
+				$('#email-input').select()
+				$('#div-domain').addClass('tooltipped tooltipped-s')
+				$('#div-domain').attr('aria-label', 'Copied!')
+				$('#div-domain').on('mouseleave', function () {
+					$('#div-domain').removeClass('tooltipped tooltipped-s')
+					$('#div-domain').removeAttr('aria-label')
+				})
+			})
+		},
+		beforeDestroy () {
+			if (this.$clipboard !== null) {
+				this.$clipboard.forEach((cb) => {
+					cb.destroy()
+			})
+			}
 		},
 		computed: {
 			domain () {
@@ -130,9 +158,6 @@
 						email: this.randomName
 					}
 				})
-			},
-			emailInputFocus () {
-				$('#email-input').select()
 			}
 		}
 	}
@@ -141,4 +166,5 @@
 <style lang="scss" rel="stylesheet/scss">
 	@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 	@import "scss/landingpage.scss";
+	@import "primer-tooltips/index.scss";
 </style>

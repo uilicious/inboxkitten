@@ -7,7 +7,7 @@
 
 			<form v-on:submit.prevent="" class="form-box">
 				<input class="input-email" name="email" aria-label="email" type="text" v-model="email" id="email-input"/>
-				<div class="domain-text" @click="emailInputFocus">@{{domain}}</div>
+				<div class="domain-text" id="div-domain" data-clipboard-target="#email-input">@{{domain}}</div>
 				<input type="submit" class="submit" value="Go!" @click="changeInbox"/>
 				<button class="refresh" @click="emitRefresh">Refresh</button>
 			</form>
@@ -18,6 +18,8 @@
 	import config from '@/../config/apiconfig.js'
 	import 'normalize.css'
 	import $ from 'jquery'
+	import ClipboardJS from 'clipboard'
+
 	export default {
 		name: 'NavBar',
 		data: () => {
@@ -35,15 +37,39 @@
 			if (this.email === '') {
 				this.goMainPage()
 			}
+
+			this.$clipboard = []
+
+			let self = this
+
+			this.$clipboard[0] = new ClipboardJS('#div-domain', {
+				text: function (trigger) {
+					return self.email + '@' + config.domain
+				}
+			})
+
+			this.$clipboard[0].on('success', function (e) {
+				$('#email-input').select()
+				$('#div-domain').addClass('tooltipped tooltipped-s')
+				$('#div-domain').attr('aria-label', 'Copied!')
+				$('#div-domain').on('mouseleave', function () {
+					$('#div-domain').removeClass('tooltipped tooltipped-s')
+					$('#div-domain').removeAttr('aria-label')
+				})
+			})
+		},
+		beforeDestroy () {
+			if (this.$clipboard !== null) {
+				this.$clipboard.forEach((cb) => {
+					cb.destroy()
+				})
+			}
 		},
 		methods: {
 			goMainPage () {
 				this.$router.push({
 					name: 'Kitten Land'
 				})
-			},
-			emailInputFocus () {
-				$('#email-input').select()
 			},
 			emitRefresh () {
 				this.$eventHub.$emit('refresh', '')
@@ -73,6 +99,7 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+	@import "primer-tooltips/index.scss";
 	@import "@/scss/_color.scss";
 	.nav {
 		background: #36D1DC;  /* fallback for old browsers */
