@@ -50,6 +50,12 @@
 
 			this.$clipboard[0].on('success', function (e) {
 				$('#email-input').select()
+				$('#div-domain').addClass('tooltipped tooltipped-s')
+				$('#div-domain').attr('aria-label', 'Copied!')
+				$('#div-domain').on('mouseleave', function () {
+					$('#div-domain').removeClass('tooltipped tooltipped-s')
+					$('#div-domain').removeAttr('aria-label')
+				})
 			})
 		},
 		beforeDestroy () {
@@ -93,6 +99,7 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+	@import "primer-tooltips/index.scss";
 	@import "@/scss/_color.scss";
 	.nav {
 		background: #36D1DC;  /* fallback for old browsers */
