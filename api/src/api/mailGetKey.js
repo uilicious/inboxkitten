@@ -24,8 +24,10 @@ module.exports = function(req, res){
 			let [name, ...rest] = formatName(response.from)
 			emailDetails.name = name
 
-			// Extract the rest of the email domain
-			emailDetails.emailAddress = ' <' + rest
+			// Extract the rest of the email domain after splitting
+			if (rest[0].length > 0) {
+				emailDetails.emailAddress = ' <' + rest
+			}
 
 			// Extract the subject of the response
 			emailDetails.subject = response.subject
