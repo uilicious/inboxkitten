@@ -18,10 +18,28 @@ module.exports = function(req, res){
 	}
 
 	reader.getKey(mailKey).then(response => {
+			let emailDetails = {}
 
-		res.status(200).send(response)
+			// Format and extract the name of the user
+			let [name, ...rest] = formatName(response.from)
+			emailDetails.name = name
+
+			// Extract the rest of the email domain
+			emailDetails.emailAddress = ' <' + rest
+
+			// Extract the subject of the response
+			emailDetails.subject = response.subject
+
+			// Extract the recipients
+			emailDetails.recipients = response.recipients
+		res.status(200).send(emailDetails)
 	})
 	.catch(e => {
 		res.status(500).send("{error: '"+e+"'}")
 	});
+}
+
+function formatName (sender) {
+	let [name, ...rest] = sender.split(' <')
+	return [name, rest]
 }

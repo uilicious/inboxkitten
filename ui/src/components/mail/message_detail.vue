@@ -8,7 +8,7 @@
 			</div>
 			<div class="date">{{emailContent.Date}}</div>
 		</div>
-		<iframe id="message-content" scrolling="yes"></iframe>
+		<iframe id="message-content" scrolling="yes" :src="src"></iframe>
 	</div>
 </template>
 
@@ -21,7 +21,8 @@
 		name: 'MessageDetail',
 		data: () => {
 			return {
-				emailContent: {}
+				emailContent: {},
+				src: ''
 			}
 		},
 		mounted () {
@@ -40,46 +41,17 @@
 		methods: {
 			getMessage () {
 				let mailKey = this.$route.params.key
-				this.formatHtml('')
+				this.src = config.apiUrl + '/getHtml?mailKey=' + mailKey
 				axios.get(config.apiUrl + '/getKey?mailKey=' + mailKey)
 					.then(res => {
 						this.emailContent = res.data
-						let [name, ...rest] = this.formatName(this.emailContent.from)
-						this.emailContent.name = name
-						this.emailContent.emailAddress = ' <' + rest
-						let content = res.data['body-html'] || res.data['body-plain']
-
-						// when it is plain text, add in <pre> to keep the format of the message same
-						if (res.data['body-html'] === undefined) {
-							content = '<pre>' + content + '</pre>'
-						}
-						this.formatHtml(content)
 					}).catch((e) => {
 						this.emailContent.name = 'Kitten Squads'
 						this.emailContent.recipients = 'Master'
-						this.formatHtml('The kittens found no messages :(')
+						let iframe = document.getElementById('message-content')
+						iframe.src = 'data:text/html;charset=utf-8,' + encodeURI('The kittens found no messages :(')
 				})
-			},
-			formatHtml (content) {
-				let iframe = document.getElementById('message-content')
-				let html = content
-
-				// Add JS injection to force all links to open as a new tab
-				// instead of opening inside the iframe
-				html += '<script>' +
-					'let linkArray = document.getElementsByTagName("a");' +
-					'for (let i=0; i<linkArray.length; ++i) { linkArray[i].target="_blank"; }' +
-					// eslint-disable-next-line
-					'<\/script>'
-
-				iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
-			},
-			formatName (sender) {
-				let [name, ...rest] = sender.split(' <')
-				return [name, rest]
 			}
-		},
-		components: {
 		}
 	}
 </script>
