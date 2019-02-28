@@ -22,7 +22,16 @@ module.exports = function(req, res){
 		if( body === undefined || body == null) {
 			body = 'The kittens found no messages :('
 		}
-		res.status(200).send(body)
+
+		// Add JS injection to force all links to open as a new tab
+		// instead of opening inside the iframe
+		body += '<script>' +
+			'let linkArray = document.getElementsByTagName("a");' +
+			'for (let i=0; i<linkArray.length; ++i) { linkArray[i].target="_blank"; }' +
+			// eslint-disable-next-line
+			'<\/script>'
+
+	res.status(200).send(body)
 	})
 	.catch(e => {
 			res.status(500).send("{error: '"+e+"'}")
