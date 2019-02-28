@@ -116,6 +116,9 @@
 
 			this.$clipboard[0] = new ClipboardJS('#div-domain', {
 				text: function (trigger) {
+					if (self.randomName.includes('@' + config.domain)) {
+						return self.randomName
+					}
 					return self.randomName + '@' + config.domain
 				}
 			})

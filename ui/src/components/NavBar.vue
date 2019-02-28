@@ -44,6 +44,9 @@
 
 			this.$clipboard[0] = new ClipboardJS('#div-domain', {
 				text: function (trigger) {
+					if (self.email.includes('@' + config.domain)) {
+						return self.email
+					}
 					return self.email + '@' + config.domain
 				}
 			})
