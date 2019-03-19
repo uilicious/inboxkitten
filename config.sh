@@ -72,3 +72,8 @@ export WEBSITE_DOMAIN="$WEBSITE_DOMAIN"
 echo ">> Applying config settings"
 cat "$projectDir/api/config/mailgunConfig.sample.js" | envsubst > "$projectDir/api/config/mailgunConfig.js"
 cat "$projectDir/ui/config/apiconfig.sample.js" | envsubst > "$projectDir/ui/config/apiconfig.js"
+
+echo ">> Applying to cloudflare scripts"
+cat "$projectDir/api/src/cloudflare/mailList.sample.js" | envsubst > "$projectDir/api/src/cloudflare/mailList.js"
+cat "$projectDir/api/src/cloudflare/mailGetKey.sample.js" | envsubst > "$projectDir/api/src/cloudflare/mailGetKey.js"
+cat "$projectDir/api/src/cloudflare/mailGetHtml.sample.js" | envsubst > "$projectDir/api/src/cloudflare/mailGetHtml.js"
