@@ -1,6 +1,3 @@
-addEventListener('fetch', event => {
-	event.respondWith(fetchAndApply(event.request))
-})
 
 /**
  * Making a curl request that looks like
@@ -8,31 +5,33 @@ addEventListener('fetch', event => {
  * or
  * curl -X POST --form 'key=world' example.com
  */
-async function fetchAndApply(request) {
-    const myURL = new URL(request.url);
-    let mailKey = myURL.searchParams.get('mailKey')
+let config = require("../../config/mailgunConfig")
+
+module.exports = async function(url) {
+    let mailKey = url.searchParams.get('mailKey')
 	if (mailKey == null || mailKey === ""){
 		return new Response('Missing parameter - `mailKey`',
-			{ status: 400, statusText: 'No `mailKey` param found' });
+			{ status: 400, statusText: 'INVALID_PARAMETER' });
 	}
 
 	// Setup the authentication option object
-    let authenticationKey = this.btoa("api:${MAILGUN_API_KEY}");
+    let authenticationKey = this.btoa("api:" + config.apiKey);
 
 	let _authOption = {
 		headers: {
-			"Authorization" : "BASIC "+authenticationKey
+			"Authorization" : "BASIC " + authenticationKey
 		}
 	};
 
 	try {
-        let [prefix, key, ...remainder] = mailKey.split("-")
+		let [prefix, key, ...remainder] = mailKey.split("-")
+		
         // slice the mailgunApi to include the region
         let apiUrl = "https://api.mailgun.net/v3"
         apiUrl = apiUrl.replace("://", "://"+prefix+".")
-        let urlWithParams = apiUrl+"/domains/${MAILGUN_EMAIL_DOMAIN}/messages/"+key;
-        const response = await fetchGet(urlWithParams, _authOption);
-        
+        let urlWithParams = apiUrl+"/domains/" + config.emailDomain + "/messages/"+key;
+		const response = await fetchGet(urlWithParams, _authOption);
+
         let emailDetails = {}
 
         // Format and extract the name of the user
@@ -57,7 +56,11 @@ async function fetchAndApply(request) {
 		}
 		return new Response(JSON.stringify(emailDetails), responseInit)
 	} catch (err) {
-		return new Response(err)
+		return new Response("{error: '"+err+"'}",
+			{ status: 400, statusText: 'INVALID_PARAMETER', headers: {
+				"Content-Type": "application/json"
+			} 
+		});
 	}
 }
 
@@ -67,7 +70,7 @@ async function fetchAndApply(request) {
 * @param {String} urlWithParams
 * @param {Object} options
 */
-var fetchGet = function(urlWithParams, options){
+let fetchGet = function(urlWithParams, options){
 	return new Promise(function(resolve, reject){
 		fetch(urlWithParams, options).then(response => {
 			resolve(response.json())

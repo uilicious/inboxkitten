@@ -14,14 +14,16 @@
 	"devDependencies": {
 		"delay": "^4.0.0",
 		"mailgun-js": "^0.20.0",
+		"md5": "^2.2.1",
 		"mocha": "^5.2.0",
 		"shortid": "^2.2.13",
-		"md5": "^2.2.1",
-		"uuid": "^3.3.2"
+		"uuid": "^3.3.2",
+		"webpack-cli": "^3.3.0"
 	},
 	"scripts": {
 		"test": "mocha",
-		"start": "node app.js"
+		"start": "node app.js",
+		"build-cloudflare": "webpack cloudflare.js"
 	},
 	"author": "",
 	"license": "MIT"

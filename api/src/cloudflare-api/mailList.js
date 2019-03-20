@@ -1,17 +1,14 @@
-addEventListener('fetch', event => {
-	event.respondWith(fetchAndApply(event.request))
-})
-
 /**
  * Making a curl request that looks like
  * curl -X POST --data 'key=world' example.com
  * or
  * curl -X POST --form 'key=world' example.com
  */
-async function fetchAndApply(request) {
-	const myURL = new URL(request.url);
-	let recipient = myURL.searchParams.get('recipient')
+let config = require("../../config/mailgunConfig")
 
+module.exports = async function(url) {
+	let recipient = url.searchParams.get('recipient')
+	console.log(JSON.stringify(config))
 	if (recipient == null){
 		return new Response('Missing parameter - `recipient`',
 			{ status: 400, statusText: 'No `recipient` param found' });
@@ -23,16 +20,16 @@ async function fetchAndApply(request) {
 	}
 
 	// Setup the authentication option object
-    let authenticationKey = this.btoa("api:${MAILGUN_API_KEY}");
+    let authenticationKey = this.btoa("api:" + config.apiKey);
 
 	let _authOption = {
 		headers: {
-			"Authorization" : "BASIC "+authenticationKey
+			"Authorization" : "BASIC " + authenticationKey
 		}
 	};
 
 	try {
-		const postData = await fetchGet("https://api.mailgun.net/v3/${MAILGUN_EMAIL_DOMAIN}/events?recipient="+recipient+"@${MAILGUN_EMAIL_DOMAIN}", _authOption);
+		const postData = await fetchGet("https://api.mailgun.net/v3/" + config.emailDomain + "/events?recipient="+recipient+"@"+config.emailDomain, _authOption);
 		let responseInit = {
 			headers: {
 				"Content-Type": "application/json"
@@ -40,7 +37,11 @@ async function fetchAndApply(request) {
 		}
 		return new Response(JSON.stringify(postData.items), responseInit)
 	} catch (err) {
-		return new Response(err)
+		return new Response("{error: '"+err+"'}",
+			{ status: 400, statusText: 'INVALID_PARAMETER', headers: {
+				"Content-Type": "application/json"
+			} 
+		});
 	}
 }
 
