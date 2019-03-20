@@ -8,7 +8,6 @@ let config = require("../../config/mailgunConfig")
 
 module.exports = async function(url) {
 	let recipient = url.searchParams.get('recipient')
-	console.log(JSON.stringify(config))
 	if (recipient == null){
 		return new Response('Missing parameter - `recipient`',
 			{ status: 400, statusText: 'No `recipient` param found' });
