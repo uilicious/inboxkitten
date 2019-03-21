@@ -9,8 +9,11 @@ let config = require("../../config/mailgunConfig")
 module.exports = async function(url) {
 	let recipient = url.searchParams.get('recipient')
 	if (recipient == null){
-		return new Response('Missing parameter - `recipient`',
-			{ status: 400, statusText: 'No `recipient` param found' });
+		return new Response("{error: 'No `recipient` param found'}",
+			{ status: 400, statusText: 'INVALID_PARAMETER', headers: {
+				"Content-Type": "application/json"
+			} 
+		});
 	}
 
 	// strip off all @domain if there is any

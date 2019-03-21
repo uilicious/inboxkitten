@@ -75,7 +75,12 @@ export CLOUDFLARE_EMAIL="$CLOUDFLARE_EMAIL"
 # Calling cloudflare deploy, with parameters passing forward
 echo ">> Deploying to cloudflare"
 echo
-curl -v -X PUT "https://api.cloudflare.com/client/v4/zones/"$CLOUDFLARE_ZONE_ID"/workers/script" -H "X-Auth-Email:$CLOUDFLARE_EMAIL" -H "X-Auth-Key:$CLOUDFLARE_API_KEY" -H "Content-Type:application/javascript" --data-binary "@./dist/main.js"
+curl -X PUT "https://api.cloudflare.com/client/v4/zones/"$CLOUDFLARE_ZONE_ID"/workers/script" -H "X-Auth-Email:$CLOUDFLARE_EMAIL" -H "X-Auth-Key:$CLOUDFLARE_API_KEY" -H "Content-Type:application/javascript" --data-binary "@./dist/main.js"
 
-echo ">> Setting route on cloudflare"
-curl -X POST "https://api.cloudflare.com/client/v4/zones/"$CLOUDFLARE_ZONE_ID"/workers/filters" -H "X-Auth-Email:$CLOUDFLARE_EMAIL" -H "X-Auth-Key:$CLOUDFLARE_API_KEY" -H "Content-type: application/json" -d '{"pattern": "'$MAILGUN_EMAIL_DOMAIN'/api/*", "enabled": true}'
+read -p ">> Set up route on cloudflare? (yes/no)" CLOUDFLARE_SETUP_ROUTE;
+if [ "$CLOUDFLARE_SETUP_ROUTE" == "yes" ]; then
+    echo ">> Setting route on cloudflare"
+    curl -X POST "https://api.cloudflare.com/client/v4/zones/"$CLOUDFLARE_ZONE_ID"/workers/filters" -H "X-Auth-Email:$CLOUDFLARE_EMAIL" -H "X-Auth-Key:$CLOUDFLARE_API_KEY" -H "Content-type: application/json" -d '{"pattern": "'$MAILGUN_EMAIL_DOMAIN'/api/*", "enabled": true}'
+fi
+
+echo ">> Cloudflare script completed"

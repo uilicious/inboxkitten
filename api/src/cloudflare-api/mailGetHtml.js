@@ -10,8 +10,12 @@ let config = require("../../config/mailgunConfig")
 module.exports = async function(url) {
     let mailKey = url.searchParams.get('mailKey')
 	if (mailKey == null || mailKey === ""){
-		return new Response('Missing parameter - `mailKey`',
-			{ status: 400, statusText: 'No `mailKey` param found' });
+
+		return new Response("{error: 'No `mailKey` param found'}",
+			{ status: 400, statusText: 'INVALID_PARAMETER', headers: {
+				"Content-Type": "application/json"
+			} 
+		});
 	}
 
 	// Setup the authentication option object
