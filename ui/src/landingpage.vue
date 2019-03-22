@@ -34,15 +34,25 @@
 					</p>
 				</div>
 				<div class="feature-card">
-					<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
-					<p>
-						Test your web application user signup flows, and email notification.
-						<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
-					</p>
-				</div>
-				<div class="feature-card">
 					<h3><i class="fas fa-trash-alt"></i> Email Auto-Deletes</h3>
 					<p>inboxkitten.com emails are in the public domain, and auto deletes after several hours. (officially 3 days according to mailgun)</p>
+				</div>
+			</div>
+			<div class="line-break"></div>
+			<div class="info-guide">
+				<div class="features">
+					<div class="feature-card">
+						<a href="https://snippet.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" class="article-body-image-wrapper">
+							<img src="@/assets/catfeeding.gif" alt="uilicious test">
+						</a>
+					</div>
+					<div class="feature-card">
+						<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
+						<p>
+							Test your web application user signup flows, and email notification.
+							<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="line-break"></div>
