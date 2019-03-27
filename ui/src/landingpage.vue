@@ -18,15 +18,12 @@
 		</div>
 		<div class="love-notes">
 			<p>
-				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">singapore</a>
-			</p>
-			<p>
-				<a href="https://www.producthunt.com/posts/inboxkitten" target="_blank">btw: thanks for making us 3rd on product hunt</a>
+				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">Singapore</a>
 			</p>
 		</div>
 		<div class="line-break" style="margin-top:0.5rem; margin-bottom:0.5rem;"></div>
 		<div class="info-guide">
-			<div class="features">
+			<div class="features" style="max-width:1100px">
 				<div class="feature-card">
 					<h3><i class="fas fa-mail-bulk"></i> Use any inbox to avoid spam</h3>
 					<p>
@@ -42,16 +39,16 @@
 			<div class="info-guide">
 				<div class="features">
 					<div class="feature-card">
-						<a href="https://snippet.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" class="article-body-image-wrapper">
-							<img src="@/assets/catfeeding.gif" alt="uilicious test">
-						</a>
-					</div>
-					<div class="feature-card">
 						<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
 						<p>
 							Test your web application user signup flows, and email notification.
 							<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
 						</p>
+					</div>
+					<div class="feature-card">
+						<a href="https://snippet.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" class="article-body-image-wrapper">
+							<img src="@/assets/catfeeding.gif" alt="uilicious test">
+						</a>
 					</div>
 				</div>
 			</div>
