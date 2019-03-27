@@ -264,6 +264,55 @@ body {
 	}
 }
 
+.snippet {
+	padding: 1rem;
+	display: flex;
+	flex-direction: row;
+	margin:auto;
+	justify-content: center;
+	align-items: center;
+
+	.feature-card {
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 0;
+		padding-left:1rem;
+		padding-right:1rem;
+		padding-bottom: 1rem;
+		align-self: center;
+
+		a:hover {
+			cursor: pointer;
+		}
+	}
+	
+	.hljs {
+		text-align: left;
+		border-radius: 8px;
+	}
+
+	@media only screen and (max-width:1170px) {
+		.features {
+			flex-direction:column;
+			pre {
+				font-size:0.75rem;
+			}
+		}
+	}
+
+	@media only screen and (max-width:630px){
+		.feature-card {
+			img {
+				width:100%;
+				height: auto;
+			}
+			pre {
+				font-size:0.5rem;
+			}
+		}
+	}
+}
+
 .line-break {
 	height:2px;
 

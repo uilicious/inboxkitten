@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="line-break"></div>
-			<!-- <div class="info-guide"> -->
+			<div class="snippet">
 				<div class="features">
 					<div class="feature-card">
 						<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
@@ -44,39 +44,25 @@
 							Test your web application user signup flows, and email notification.<br/>
 							<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
 						</p>
-						<p class="code deploy-code" style="text-align:left;">
+<pre class="hljs" style="display: block; overflow-x: auto; background: rgb(25, 23, 28); color: rgb(139, 135, 146); padding: 0.5em;"><span class="hljs-comment" style="color: rgb(126, 120, 135);">// Let's go to inbox kitten</span>
+I<span class="hljs-selector-class" style="color: rgb(190, 70, 120);">.goTo</span>(<span class="hljs-string" style="color: rgb(42, 146, 146);">"https://inboxkitten.com"</span>)
+<span class="hljs-selector-tag" style="color: rgb(149, 90, 231);">I</span><span class="hljs-selector-class" style="color: rgb(190, 70, 120);">.see</span>(<span class="hljs-string" style="color: rgb(42, 146, 146);">"Open-Source Disposable Email"</span>)
 
-								// Lets goto inbox kitten<br/>
-								I.goTo("https://inboxkitten.com");<br/>
-								I.see("Open-Source Disposable Email");<br/><br/>
+<span class="hljs-comment" style="color: rgb(126, 120, 135);">// Let's fill up the email form and click on a button</span>
+<span class="hljs-selector-tag" style="color: rgb(149, 90, 231);">I</span><span class="hljs-selector-class" style="color: rgb(190, 70, 120);">.fill</span>(<span class="hljs-string" style="color: rgb(42, 146, 146);">"email"</span>, <span class="hljs-string" style="color: rgb(42, 146, 146);">"ik-reciever-f7s1g28"</span>)
+<span class="hljs-selector-tag" style="color: rgb(149, 90, 231);">I</span><span class="hljs-selector-class" style="color: rgb(190, 70, 120);">.click</span>(<span class="hljs-string" style="color: rgb(42, 146, 146);">"Get Mail Nyow!"</span>)
 
-								// Go to a random inbox inbox<br/>
-								I.fill("email", SAMPLE.id(22));<br/>
-								I.click("Get Mail Nyow!");<br/>
-
-								// Check that its empty<br/>
-								I.see("There for no messages for this kitten :(");<br/><br/>
-
-								//<br/>
-								// Testing for regular email<br/>
-								// (sent using a jenkins perodic build)<br/>
-								//<br/><br/>
-
-								// Lets go back inbox kitten mailbox<br/>
-								I.goTo("https://inboxkitten.com");<br/>
-								I.see("Open-Source Disposable Email");<br/>
-								I.fill("email", "ik-reciever-f7s1g28");<br/>
-								I.click("Get Mail Nyow!");<br/><br/>
-
-								// See an email we expect, nyow<br/>
-								I.see("Testing inboxkitten subject");<br/>
-							</p>
+<span class="hljs-comment" style="color: rgb(126, 120, 135);">// See an email we expect, nyow</span>
+<span class="hljs-selector-tag" style="color: rgb(149, 90, 231);">I</span><span class="hljs-selector-class" style="color: rgb(190, 70, 120);">.see</span>(<span class="hljs-string" style="color: rgb(42, 146, 146);">"Testing inboxkitten subject"</span>)
+</pre>
 					</div>
 					<div class="feature-card">
-						<iframe src="https://snippet.uilicious.com/embed/test/public/7t74nVS828weKMtzGgJppF?step=1&autoplay=1" frameborder="0" width="600px" height="400px;" style="border: 1px solid #eeeeee;"></iframe>
+						<a href="https://snippet.uilicious.com/test/public/DKf5ZaxMWa15v47LEboF9F" class="article-body-image-wrapper" target="_blank">
+							<img src="@/assets/snippet.gif" alt="uilicious test">
+						</a>
 					</div>
 				</div>
-			<!-- </div> -->
+			</div>
 			<div class="line-break"></div>
 			<div class="deploy-segmet">
 				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
