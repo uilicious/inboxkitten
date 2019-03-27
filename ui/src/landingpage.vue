@@ -36,22 +36,47 @@
 				</div>
 			</div>
 			<div class="line-break"></div>
-			<div class="info-guide">
+			<!-- <div class="info-guide"> -->
 				<div class="features">
 					<div class="feature-card">
 						<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
 						<p>
-							Test your web application user signup flows, and email notification.
+							Test your web application user signup flows, and email notification.<br/>
 							<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
 						</p>
+						<p class="code deploy-code" style="text-align:left;">
+
+								// Lets goto inbox kitten<br/>
+								I.goTo("https://inboxkitten.com");<br/>
+								I.see("Open-Source Disposable Email");<br/><br/>
+
+								// Go to a random inbox inbox<br/>
+								I.fill("email", SAMPLE.id(22));<br/>
+								I.click("Get Mail Nyow!");<br/>
+
+								// Check that its empty<br/>
+								I.see("There for no messages for this kitten :(");<br/><br/>
+
+								//<br/>
+								// Testing for regular email<br/>
+								// (sent using a jenkins perodic build)<br/>
+								//<br/><br/>
+
+								// Lets go back inbox kitten mailbox<br/>
+								I.goTo("https://inboxkitten.com");<br/>
+								I.see("Open-Source Disposable Email");<br/>
+								I.fill("email", "ik-reciever-f7s1g28");<br/>
+								I.click("Get Mail Nyow!");<br/><br/>
+
+								// See an email we expect, nyow<br/>
+								I.see("Testing inboxkitten subject");<br/>
+							</p>
 					</div>
 					<div class="feature-card">
-						<a href="https://snippet.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" class="article-body-image-wrapper">
-							<img src="@/assets/catfeeding.gif" alt="uilicious test">
-						</a>
+						<iframe src="https://snippet.uilicious.com/embed/test/public/7t74nVS828weKMtzGgJppF?step=1&autoplay=1" frameborder="0" width="600px" height="400px;" style="border: 1px solid #eeeeee;"></iframe>
 					</div>
 				</div>
-			</div>
+			<!-- </div> -->
 			<div class="line-break"></div>
 			<div class="deploy-segmet">
 				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
