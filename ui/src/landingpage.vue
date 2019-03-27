@@ -16,17 +16,8 @@
 				</form>
 			</div>
 		</div>
-		<div class="love-notes">
-			<p>
-				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">singapore</a>
-			</p>
-			<p>
-				<a href="https://www.producthunt.com/posts/inboxkitten" target="_blank">btw: thanks for making us 3rd on product hunt</a>
-			</p>
-		</div>
-		<div class="line-break" style="margin-top:0.5rem; margin-bottom:0.5rem;"></div>
 		<div class="info-guide">
-			<div class="features">
+			<div class="features" style="max-width:1100px">
 				<div class="feature-card">
 					<h3><i class="fas fa-mail-bulk"></i> Use any inbox to avoid spam</h3>
 					<p>
@@ -34,18 +25,37 @@
 					</p>
 				</div>
 				<div class="feature-card">
-					<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
-					<p>
-						Test your web application user signup flows, and email notification.
-						<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a>
-					</p>
-				</div>
-				<div class="feature-card">
 					<h3><i class="fas fa-trash-alt"></i> Email Auto-Deletes</h3>
 					<p>inboxkitten.com emails are in the public domain, and auto deletes after several hours. (officially 3 days according to mailgun)</p>
 				</div>
 			</div>
-			<div class="line-break"></div>
+			<div class="snippet">
+				<a href="https://snippet.uilicious.com/test/public/DKf5ZaxMWa15v47LEboF9F" class="article-body-image-wrapper" target="_blank" style="text-decoration:none; color: inherit; cursor:pointer;">
+				<div class="features">
+					<div class="feature-card">
+						<h3><i class="fas fa-clipboard-check"></i> Ideal for UI / QA Testing</h3>
+						<p>
+							Test your web application user signup flows, and email notification.<br/>
+							<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a><br/>
+						</p>
+<pre class="hljs"><span class="hljs-comment" style="color: rgb(117, 113, 94);">// Lets goto inbox kitten</span>
+<span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.goTo</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"https://inboxkitten.com"</span>)
+<span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.see</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"Open-Source Disposable Email"</span>)
+
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">// Lets fill up the email form, and click on a button</span>
+<span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.fill</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"email"</span>, <span class="hljs-string" style="color: rgb(230, 219, 116);">"ik-reciever-f7s1g28"</span>)
+<span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.click</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"Get Mail Nyow!"</span>)
+
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">// See an email we expect, nyow</span>
+<span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.see</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"Testing inboxkitten subject"</span>)
+</pre>
+					</div>
+					<div class="feature-gif">
+						<img src="@/assets/snippet.gif" alt="uilicious test" >
+					</div>
+				</div>
+				</a>
+			</div>
 			<div class="deploy-segmet">
 				<h3><i class="fas fa-user-secret"></i> Need a private / secure / selfhosted version?</h3>
 				<p>Clone and adopt your own inboxkitten using our self-hosting package</p>
@@ -80,6 +90,11 @@
 				</p>
 			</div>
 			<div class="line-break"></div>
+		</div>
+		<div class="love-notes">
+			<p>
+				made with <span style="color: #e25555;">&hearts;</span> by <a href="https://uilicious.com">uilicious</a> in <a href="https://www.google.com.sg/search?q=singapore">Singapore</a>
+			</p>
 		</div>
 		<!--
 		<div class="intermission-header">
