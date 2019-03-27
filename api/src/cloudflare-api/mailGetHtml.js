@@ -51,6 +51,7 @@ module.exports = async function(url) {
 		let responseInit = {
 			headers: {
 				"Content-Type": "text/html"
+				//@TODO : Consider caching here?
 			}
 		}
 		return new Response(body, responseInit)
