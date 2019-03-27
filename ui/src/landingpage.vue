@@ -38,11 +38,11 @@
 							Test your web application user signup flows, and email notification.<br/>
 							<a href="https://test.uilicious.com/test/public/7t74nVS828weKMtzGgJppF" target="_blank">Or even better, automate testing with uilicious!</a><br/>
 						</p>
-<pre class="hljs"><span class="hljs-comment" style="color: rgb(117, 113, 94);">// Lets goto inbox kitten</span>
+<pre class="hljs"><span class="hljs-comment" style="color: rgb(117, 113, 94);">// Let's go to inbox kitten</span>
 <span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.goTo</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"https://inboxkitten.com"</span>)
 <span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.see</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"Open-Source Disposable Email"</span>)
 
-<span class="hljs-comment" style="color: rgb(117, 113, 94);">// Lets fill up the email form, and click on a button</span>
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">// Let's fill up the email form, and click on a button</span>
 <span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.fill</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"email"</span>, <span class="hljs-string" style="color: rgb(230, 219, 116);">"ik-reciever-f7s1g28"</span>)
 <span class="hljs-selector-tag" style="color: rgb(249, 38, 114);">I</span><span class="hljs-selector-class" style="color: rgb(166, 226, 46);">.click</span>(<span class="hljs-string" style="color: rgb(230, 219, 116);">"Get Mail Nyow!"</span>)
 
