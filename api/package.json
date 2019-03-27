@@ -23,7 +23,7 @@
 	"scripts": {
 		"test": "mocha",
 		"start": "node app.js",
-		"build-cloudflare": "webpack cloudflare.js"
+		"build-cloudflare": "webpack --mode production cloudflare.js"
 	},
 	"author": "",
 	"license": "MIT"
