@@ -1,49 +1,31 @@
+/**
+ * Cloudflare fetch result handling
+ */
 addEventListener('fetch', event => {
-    event.respondWith(fetchAndApply(event.request))
-  })
-  
-  const mailGetKey = require("./src/cloudflare-api/mailGetKey")
-  const mailGetHtml = require("./src/cloudflare-api/mailGetHtml")
-  const mailList = require("./src/cloudflare-api/mailList")
-  
-  async function fetchAndApply(request) {
-    let url = new URL(request.url)
-    if (request.method === "OPTIONS") {
-      return require("./src/cloudflare-api/optionsHandler")(request)
-    } else if(url.pathname === "/api/v1/mail/list"){
-        return mailList(url)
-    } else if(url.pathname === "/api/v1/mail/getKey") {
-        return mailGetKey(url)
-    } else if (url.pathname === "/api/v1/mail/getHtml") {
-        return mailGetHtml(url)
-    }
+	event.respondWith(fetchAndApply(event.request))
+})
 
-    return new Response('Invalid endpoint - ' + url.pathname,
-        { status: 400, statusText: 'INVALID_ENDPOINT' });
-  }
+async function fetchAndApply(request) {
+	// Get the request URL
+	let url = new URL(request.url)
 
-  let config = require("./config/mailgunConfig")
+	// Does the CORS options hanlding
+	if (request.method === "OPTIONS") {
+		return require("./src/cloudflare-api/optionsHandler")(request)
+	} 
+	
+	// Does API processing
+	if(url.pathname === "/api/v1/mail/list"){
+		return require("./src/cloudflare-api/mailList")(url)
+	} else if(url.pathname === "/api/v1/mail/getKey") {
+		return require("./src/cloudflare-api/mailGetKey")(url)
+	} else if (url.pathname === "/api/v1/mail/getHtml") {
+		return require("./src/cloudflare-api/mailGetHtml")(url)
+	} else if (url.pathname.startsWith("/api/")) {
+		// Throw an exception for invalid API endpoints
+		return new Response('Invalid endpoint - ' + url.pathname, { status: 400, statusText: 'INVALID_ENDPOINT' });
+	}
 
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": config.corsOrigin,
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  }
-
-  function handleOptions(request) {
-    if (request.headers.get("Origin") !== null &&
-        request.headers.get("Access-Control-Request-Method") !== null &&
-        request.headers.get("Access-Control-Request-Headers") !== null) {
-      // Handle CORS pre-flight request.
-      return new Response(null, {
-        headers: corsHeaders
-      })
-    } else {
-      // Handle standard OPTIONS request.
-      return new Response(null, {
-        headers: {
-          "Allow": "GET, POST, OPTIONS",
-        }
-      })
-    }
-  }
+	// Throw an exception for invalid file request
+	return new Response('Invalid filepath - ' + url.pathname, { status: 404, statusText: 'UNKNOWN_FILEPATH' });
+}
