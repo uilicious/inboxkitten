@@ -26,6 +26,11 @@ async function fetchAndApply(request) {
 		return new Response('Invalid endpoint - ' + url.pathname, { status: 400, statusText: 'INVALID_ENDPOINT' });
 	}
 
+	// @TODO - KittenRouter handling for
+	// "/" root path
+	// "/static/{css,js,img}"
+	// "/inbox/*"
+
 	// Throw an exception for invalid file request
 	return new Response('Invalid filepath - ' + url.pathname, { status: 404, statusText: 'UNKNOWN_FILEPATH' });
 }
