@@ -9,7 +9,7 @@ addEventListener('fetch', event => {
   async function fetchAndApply(request) {
     let url = new URL(request.url)
     if (request.method === "OPTIONS") {
-      return handleOptions(request)
+      return require("./src/cloudflare-api/optionsHandler")(request)
     } else if(url.pathname === "/api/v1/mail/list"){
         return mailList(url)
     } else if(url.pathname === "/api/v1/mail/getKey") {
