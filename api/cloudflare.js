@@ -2,10 +2,16 @@
  * Cloudflare fetch result handling
  */
 addEventListener('fetch', event => {
-	event.respondWith(fetchAndApply(event.request))
+	event.respondWith(handleFetchEvent(event))
 })
 
-async function fetchAndApply(request) {
+const KittenRouter = require("./src/cloudflare-api/KittenRouter");
+const router = new KittenRouter({});
+
+async function handleFetchEvent(request) {
+
+	// Get the request object
+	let request = event.request;
 	// Get the request URL
 	let url = new URL(request.url)
 
@@ -13,24 +19,33 @@ async function fetchAndApply(request) {
 	if (request.method === "OPTIONS") {
 		return require("./src/cloudflare-api/optionsHandler")(request)
 	} 
+
+	// Get the pathname
+	let pathname = url.pathname;
 	
 	// Does API processing
-	if(url.pathname === "/api/v1/mail/list"){
+	if(pathname === "/api/v1/mail/list"){
 		return require("./src/cloudflare-api/mailList")(url)
-	} else if(url.pathname === "/api/v1/mail/getKey") {
+	} else if(pathname === "/api/v1/mail/getKey") {
 		return require("./src/cloudflare-api/mailGetKey")(url)
-	} else if (url.pathname === "/api/v1/mail/getHtml") {
+	} else if (pathname === "/api/v1/mail/getHtml") {
 		return require("./src/cloudflare-api/mailGetHtml")(url)
-	} else if (url.pathname.startsWith("/api/")) {
+	} else if (pathname.startsWith("/api/")) {
 		// Throw an exception for invalid API endpoints
-		return new Response('Invalid endpoint - ' + url.pathname, { status: 400, statusText: 'INVALID_ENDPOINT' });
+		return new Response('Invalid endpoint - ' + pathname, { status: 400, statusText: 'INVALID_ENDPOINT' });
 	}
 
-	// @TODO - KittenRouter handling for
-	// "/" root path
-	// "/static/{css,js,img}"
-	// "/inbox/*"
-
+	// KittenRouter handling
+	if( 
+		pathname === "" || pathname === "/" ||
+		pathname.startsWith("/inbox/") || 
+		pathname.startsWith("/static/css") || 
+		pathname.startsWith("/static/img") || 
+		pathname.startsWith("/static/js")
+	) {
+		return router.handleRequestEvent(event);
+	}
+	
 	// Throw an exception for invalid file request
 	return new Response('Invalid filepath - ' + url.pathname, { status: 404, statusText: 'UNKNOWN_FILEPATH' });
 }
