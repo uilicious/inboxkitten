@@ -35,29 +35,34 @@
 const exampleConfig = {
 
 	// logging endpoint to use
-	log : {
-		// Currently only elasticsearch is supported, scoped here for future alternatives
-		type : "elasticsearch",
+	log : [
+		{
+			// Currently only elasticsearch is supported, scoped here for future alternatives
+			// One possible option is google analytics endpoint
+			type : "elasticsearch",
 
-		//
-		// Elasticsearch index endpoint, note that a POST request will be done here
-		// the elasticsearch instance will then be expected to generate its own document id
-		// See : https://stackoverflow.com/questions/24756337/how-insert-data-to-elasticsearch-without-id
-		//
-		url : "https://user:password@elasticsearch-server.secret-domain.com/cluster/index",
+			//
+			// Elasticsearch index endpoint, note that a POST request will be done here
+			// the elasticsearch instance will then be expected to generate its own document id
+			// See : https://stackoverflow.com/questions/24756337/how-insert-data-to-elasticsearch-without-id
+			//
+			url : "https://user:password@elasticsearch-server.secret-domain.com/cluster/index",
 
 
-		// Enable logging of the full ipv4/6
-		//
-		// Else it mask (by default) the last digit of IPv4 address
-		// or the "network" routing for IPv6
-		// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
-		logTrueIP : false
-	},
+			// Enable logging of the full ipv4/6
+			//
+			// Else it mask (by default) the last digit of IPv4 address
+			// or the "network" routing for IPv6
+			// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
+			logTrueIP : false
+		}
+	],
 
 	// routing rules to evaluate, starting from 0 index
 	routes : [
 		{
+			// "" host routing will match all
+			host : [""],
 			// Routing prefix to check for, note that "" will match all
 			prefix : [""],
 			origins : [
@@ -79,6 +84,8 @@ const exampleConfig = {
 				// 	region : [
 				// 		"Europe"
 				// 	],
+				// 	// Timeout to abort request on
+				// 	
 				// 	// Fetching sub options (like cache overwrite)
 				// 	fetchConfig : { cf: { cacheEverything: true } }
 				// }
@@ -97,7 +104,7 @@ const exampleConfig = {
 
 //---------------------------------------------------------------------------------------------
 //
-// Class internal function logic
+// Logging internal logic
 //
 //---------------------------------------------------------------------------------------------
 
@@ -126,6 +133,7 @@ function getIPV4(request, logTrueIP = false) {
 	return ip_split.join(".");
 }
 
+// Extract from various possible options, a valid ipv6 from the request
 function getIPV6(request, logTrueIP = false) {
 	let headers = request.headers;
 	let ip = headers.get('cf-connecting-ipv6') || headers.get('cf-connecting-ip') || '';
@@ -149,7 +157,8 @@ function getIPV6(request, logTrueIP = false) {
 	return ip_split.join(":");
 }
 
-async function logRequest(logConfig, request, response, routeType, routeCount) {
+// Log request with a single config map
+async function logRequestWithConfigMap(logConfig, request, response, routeType, routeCount) {
 	// Does nothing if logconfig is null
 	if( logConfig == null || logConfig.url == null || logConfig.url.length <= 0 ) {
 		return null;
@@ -162,11 +171,11 @@ async function logRequest(logConfig, request, response, routeType, routeCount) {
 	var data = {
 		'timestamp':  Date.now(),
 
-		'route.type' :  routeType,
-		'route.count' : routeCount,
+		'route.type':  routeType,
+		'route.count': routeCount,
 
 		'req.url':        request.url,
-		'req.referer':    request.referrer,
+		'req.referer':    request.referrer || '',
 		'req.method':     request.method,
 
 		'req.ipv4':          getIPV4(request, logTrueIP),
@@ -176,7 +185,7 @@ async function logRequest(logConfig, request, response, routeType, routeCount) {
 		'req.country-code':  request.headers.get('cf-ipcountry') || '',
 
 		'req.cf.ray':     request.headers.get('cf-ray') || '',
-		'req.cf.colo':    request.cf.colo,
+		'req.cf.colo':    request.cf.colo || '',
 		'req.tlsVersion': request.cf.tlsVersion || '',
 		'req.tlsCipher':  request.cf.tlsCipher || '',
 
@@ -193,7 +202,7 @@ async function logRequest(logConfig, request, response, routeType, routeCount) {
 	};
 	
 	// The elasticsearch POST request to perform for logging
-	await fetch(
+	return await fetch(
 		logConfig.url, {
 		method: 'POST',
 		body: JSON.stringify(data),
@@ -201,6 +210,23 @@ async function logRequest(logConfig, request, response, routeType, routeCount) {
 		  'Content-Type': 'application/json',
 		})
 	})
+}
+
+// Log request with a config array
+async function logRequestWithConfigArray(configArr, request, response, routeType, routeCount) {
+	// Does nothing if configArr is null
+	if( configArr == null || configArr.length <= 0 ) {
+		return null;
+	}
+
+	// Lets iterate the config
+	let promiseArray = [];
+	for(let i=0; i<configArr.length; ++i) {
+		promiseArray = logRequestWithConfigMap(configArr[i], request, response, routeType, routeCount);
+	}
+
+	// Return with a single promise object
+	return Promise.all(promiseArray);
 }
 
 //---------------------------------------------------------------------------------------------
@@ -227,8 +253,11 @@ class KittenRouter {
 	 * 
 	 * @return response object for cloudflare
 	 */
-	await handleRequestEvent(event) {
+	async handleRequestEvent(event) {
 		// Get the request object
 		let request = event.request;
+
+		
+
 	}
 }
