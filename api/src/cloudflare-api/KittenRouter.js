@@ -32,6 +32,7 @@
 // and kinda serve as a semi-functional spec of how KittenRouter is expected to work.
 //
 //---------------------------------------------------------------------------------------------
+
 const exampleConfig = {
 
 	// logging endpoint to use
@@ -48,13 +49,18 @@ const exampleConfig = {
 			//
 			url : "https://user:password@elasticsearch-server.secret-domain.com/cluster/index",
 
-
 			// Enable logging of the full ipv4/6
 			//
 			// Else it mask (by default) the last digit of IPv4 address
 			// or the "network" routing for IPv6
 			// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
-			logTrueIP : false
+			logTrueIP : false,
+
+			// Additional cookies to log
+			//
+			// Be careful not to log "sensitive" cookies, that can compromise security
+			// typically this would be seesion keys.
+			cookies : ["__cfduid", "_ga", "_gid", "account_id"]
 		}
 	],
 
@@ -231,6 +237,23 @@ async function logRequestWithConfigArray(configArr, request, response, routeType
 
 //---------------------------------------------------------------------------------------------
 //
+// Routing internal logic
+//
+//---------------------------------------------------------------------------------------------
+
+async function processOriginRoutingStr(originStr, request) {
+	
+}
+
+async function processOriginRouting(origin, request) {
+	if( origin instanceof String ) {
+		return processOriginRoutingStr(origin, request);
+	}
+	throw "Object based routing config is NOT yet supported";
+}
+
+//---------------------------------------------------------------------------------------------
+//
 // Class implementation (and public interface)
 //
 //---------------------------------------------------------------------------------------------
@@ -257,7 +280,7 @@ class KittenRouter {
 		// Get the request object
 		let request = event.request;
 
-		
+
 
 	}
 }
