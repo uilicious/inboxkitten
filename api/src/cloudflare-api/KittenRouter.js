@@ -335,12 +335,21 @@ async function processOriginRoutingStr(originHostStr, inRequest) {
  * Process a request, and perform the required route request and logging
  * This DOES NOT handle the fetch fallback
  * 
+ * @param {*} fetchEvent provided from cloudflare, attaches logging waitUntil
  * @param {Request} inRequest to process 
  * @param {Array} configObj conataining both the .route, and .log array config
  * 
- * @return {Response} if a valid route with result is found, else return null
+ * @return {Response} if a valid route with result is found, else return final route request failure (if any), else return null
  */
-async function processRoutingRequest( inRequest, configObj ) {
+async function processRoutingRequest( configObj, fetchEvent, inRequest ) {
+	// Lets get the route array first
+	let routeArray = configObj.route;
+
+	// Return null, on empty routeArray
+	if( routeArray == null || routeArray.length <= 0 ) {
+		return null;
+	}
+
 
 	return null;
 }
@@ -354,21 +363,52 @@ async function processRoutingRequest( inRequest, configObj ) {
  * @return {Response} if a valid route with result is found, else the last route error (if applicable)
  */
 async function processFetchEvent( fetchEvent, configObj ) {
-	// Lets get the request first
+	// Lets unpack out the request
 	let inReq = fetchEvent.request;
+	let resObj = null;
+
+	// Lets process the routing request
+	//----------------------------------------------------------------------
+
+	// Lets try to get a response from a route
+	resObj = processRoutingRequest( configObj, fetchEvent, inReq );
+
+	// Lets return the response object if its valid
+	// We do an oversimilified assumption that its valid 
+	// if the response code is 200~399
+	if( resObj != null && resObj.status >= 200 && resObj.status < 400 ) {
+		return resObj;
+	}
 
 	// At this point all routes are assumed to have failed
 	// As such we will attempt to do a fallback to the default origin
 	//----------------------------------------------------------------------
 
-	// if( configObj.disableFetchFallback ) {
-	// 	// @TODO disabled fetch fallback handling
-	// }
+	// Origin fallback disabled, return last response, or a hard error
+	if( configObj.disableOriginFallback ) {
+		// No response object returned by routes : assume no valid routes
+		if( resObj == null ) {
+			// NO_VALID_ROUTE 404 response
+			return new Response(
+				'{ error: "No valid route found" }',
+				{ 
+					status: 404, 
+					statusText: 'NO_VALID_ROUTE', 
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}
+			);
+		}
 
-	// Lets fetch the original request, log it, and return its result
-	let res = await fetch(inReq);
-	fetchEvent.waitUntil( logRequestWithConfigArray( configObj.log, inReq, res, "ORIGIN_FALLBACK", -1) );
-	return res;
+		// Else return the last failed route response
+		return resObj;
+	}
+
+	// Lets fetch the cloudflare origin request, log it, and return its result instead
+	resObj = await fetch(inReq);
+	fetchEvent.waitUntil( logRequestWithConfigArray( configObj.log, inReq, resObj, "ORIGIN_FALLBACK", -1) );
+	return resObj;
 }
 
 //---------------------------------------------------------------------------------------------
