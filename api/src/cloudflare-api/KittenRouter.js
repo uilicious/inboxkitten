@@ -286,13 +286,6 @@ async function logRequestWithConfigArray(configArr, request, response, routeType
 //
 //---------------------------------------------------------------------------------------------
 
-// Request object properties, excluding url
-const requestProperties_excludingURL = [
-	"method", "headers", "body", "mode", 
-	"credentials", "cache", "redirect", 
-	"referrer", "integrity"
-];
-
 /**
  * Clones a URL object, with an origin string
  * 
