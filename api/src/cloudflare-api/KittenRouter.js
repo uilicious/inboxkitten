@@ -56,51 +56,68 @@ const exampleConfig = {
 			// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
 			logTrueIP : false,
 
+			// @TODO support
 			// Additional cookies to log
 			//
 			// Be careful not to log "sensitive" cookies, that can compromise security
 			// typically this would be seesion keys.
-			cookies : ["__cfduid", "_ga", "_gid", "account_id"]
+			// cookies : ["__cfduid", "_ga", "_gid", "account_id"]
 		}
 	],
 
-	// routing rules to evaluate, starting from 0 index
+	// Routing rules to evaluate, starting from 0 index
+	// these routes will always be processed in sequence
 	routes : [
-		{
-			// "" host routing will match all
-			host : [""],
-			// Routing prefix to check for, note that "" will match all
-			prefix : [""],
-			origins : [
-				"host-endpoint-a",
-				"host-endpoint-b",
-				// // @TODO (consider support for object based origin decleration?)
-				// // Might be useful for some region based routing
-				// // or maybe crazier? racing origin requests and terminating the "slower copy"
-				// {
-				// 	host : "host-endpoint-c"
-				// 	port : 443,
-				// 	protocol : "https",
-				// 	// Matching by country
-				// 	// Country codes : https://support.cloudflare.com/hc/en-us/articles/205072537-What-are-the-two-letter-country-codes-for-the-Access-Rules-
-				// 	country : [
-				// 		"SG"
-				// 	],
-				// 	// Matching by region
-				// 	region : [
-				// 		"Europe"
-				// 	],
-				// 	// Timeout to abort request on
-				// 	
-				// 	// Fetching sub options (like cache overwrite)
-				// 	fetchConfig : { cf: { cacheEverything: true } }
-				// }
-			]
-		}
+
+		// Lets load from commonshost first
+		"commonshost.inboxkitten.com",
+
+		// If it fails, we fallback to firebase
+		"firebase.inboxkitten.com"
+
+		// Object based route definitions
+		//-----------------------------------------------------------------
+		// {
+		// 	// "" host routing will match all
+		// 	reqHost : [""],
+		// 	// Routing prefix to check for, note that "" will match all
+		// 	reqPrefix : [""],
+		//
+		// 	// Origin servers to route to
+		// 	origins : [
+		// 		"host-endpoint-a",
+		// 		"host-endpoint-b",
+		// 		// // @TODO (consider support for object based origin decleration?)
+		// 		// // Might be useful for some region based routing or maybe crazier?
+		// 		// // Racing origin requests and terminating the "slower copy"
+		// 		// //-------------------------------------------------------------------------
+		// 		// {
+		// 		// 	host : "host-endpoint-c"
+		// 		// 	port : 443,
+		// 		// 	protocol : "https",
+		// 		// 	// Matching by country
+		// 		// 	// Country codes : https://support.cloudflare.com/hc/en-us/articles/205072537-What-are-the-two-letter-country-codes-for-the-Access-Rules-
+		// 		// 	country : [
+		// 		// 		"SG"
+		// 		// 	],
+		// 		// 	// Matching by region
+		// 		// 	region : [
+		// 		// 		"Europe"
+		// 		// 	],
+		// 		// 	// Timeout to abort request on
+		// 		// 	
+		// 		// 	// Fetching sub options (like cache overwrite)
+		// 		// 	fetchConfig : { cf: { cacheEverything: true } }
+		// 		// }
+		// 	]
+		// }
 	],
 
 	// Allow fallback to origin host fetch request
-	defaultFetchFallback : true
+	defaultFetchFallback : true,
+
+	// @TODO support default timeout to process a request in milliseconds
+	// defaultOriginTimeout : 10000, // 10,000 ms = 10 s
 
 	// @TODO crazier caching options to consider
 	// - KeyValue caching (probably pointless, cost wise)
@@ -117,10 +134,19 @@ const exampleConfig = {
 // Simple regex to validate for an ipv4
 const ipv4_simpleRegex = /^[0-9a-z]{1,3}\.[0-9a-z]{1,3}\.[0-9a-z]{1,3}\.[0-9a-z]{1,3}$/i;
 
-// Extract from various possible options, a valid ipv4 from the request
+/**
+ * Extract from a request, various possible ip properties (in cludflare) 
+ * for a valid ipv4 address
+ * 
+ * @param {Request} request object to extract from
+ * @param {Boolean} logTrueIP (defaul false) used to log unmasked ip if true
+ * 
+ * @return {String} ipv4 string if found, else a blank string of ""
+ */
 function getIPV4(request, logTrueIP = false) {
 	let headers = request.headers;
 	let ip = headers.get('cf-pseudo-ipv4') || headers.get('cf-connecting-ipv4') || headers.get('cf-connecting-ip') || '';
+	ip = ip.trim();
 
 	// If ipv4 validation failed, return blank
 	if(ip === '' || !ipv4_simpleRegex.test(ip)) {
@@ -139,10 +165,19 @@ function getIPV4(request, logTrueIP = false) {
 	return ip_split.join(".");
 }
 
-// Extract from various possible options, a valid ipv6 from the request
+/**
+ * Extract from a request, various possible ip properties (in cludflare) 
+ * for a valid ipv6 address
+ * 
+ * @param {Request} request object to extract from
+ * @param {Boolean} logTrueIP (defaul false) used to log unmasked ip if true
+ * 
+ * @return {String} ipv6 string if found, else a blank string of ""
+ */
 function getIPV6(request, logTrueIP = false) {
 	let headers = request.headers;
 	let ip = headers.get('cf-connecting-ipv6') || headers.get('cf-connecting-ip') || '';
+	ip = ip.trim();
 
 	// If ipv4 validation passes, return blank
 	if(ip === '' || ipv4_simpleRegex.test(ip)) {
@@ -205,8 +240,17 @@ async function logRequestWithConfigMap(logConfig, request, response, routeType, 
 		'res.cache-control':    response.header.get('cache-control') || '',
 		'res.cf.cache-status':  response.header.get('cf-cache-status') || '',
 		'res.cf.ray':           response.header.get('cf-ray') || '',
+
+		'config.logTrueIP': logTrueIP
 	};
-	
+
+	// // Cookies to log
+	// let cookieNames = logConfig.cookies;
+	// if( cookieNames != null && cookieNames.length > 0 ) {
+	// 	let cookieJar = request.headers.get("Cookie")
+	// 	// @TODO : iterate cookies and log relevent keys
+	// }
+
 	// The elasticsearch POST request to perform for logging
 	return await fetch(
 		logConfig.url, {
@@ -241,13 +285,78 @@ async function logRequestWithConfigArray(configArr, request, response, routeType
 //
 //---------------------------------------------------------------------------------------------
 
-async function processOriginRoutingStr(originStr, request) {
-	
+// Request object properties, excluding url
+const requestProperties_excludingURL = [
+	"method", "headers", "body", "mode", 
+	"credentials", "cache", "redirect", 
+	"referrer", "integrity"
+];
+
+/**
+ * Clones a URL object, with an origin string
+ * 
+ * @param {URL} inURL to clone over
+ * @param {String} originHostStr to overwrite host with
+ * 
+ * @return {URL} cloned URL object with new origin host
+ */
+function cloneUrlWithNewOriginHostString(inURL, originHostStr) {
+	let ret = new URL(inURL);
+	ret.host = originHostStr;
+	return ret;
 }
 
-async function processOriginRouting(origin, request) {
-	if( origin instanceof String ) {
-		return processOriginRoutingStr(origin, request);
+// /**
+//  * Clones a request object, with an origin string
+//  * 
+//  * @param {Request} inRequest to clone from
+//  * @param {String} originHostStr to overwrite host with
+//  * 
+//  * @return {Request} cloned Request object with new origin host
+//  */
+// function cloneRequestWithNewOriginHostString(inRequest, originHostStr) {
+// 	// The initObject for forming the new request
+// 	let initObject = {}; 
+
+// 	// Lets iterate inRequest properties to setup the initObject
+// 	for(let i=0; i<requestProperties_excludingURL.length; ++i) {
+// 		let prop = requestProperties_excludingURL[i];
+// 		let val = inRequest[prop];
+// 		if( val != null ) {
+// 			initObject[prop] = val;
+// 		}
+// 	}
+
+// 	// Lets generate the new URL
+// 	let reqURL = cloneUrlWithNewOriginHostString(inRequest.url,originHostStr);
+
+// 	// And finally the request object to return
+// 	return new Request(reqURL, initObject);
+// }
+
+// Process a routing request, and return its response object
+async function processOriginRoutingStr(originHostStr, inRequest) {
+
+	// Lets perform a new fetch request (with origin host)
+	//----------------------------------------------------
+	let fetchReqObj = fetch( //
+		cloneUrlWithNewOriginHostString(inRequest.url,originHostStr), //
+		inRequest //
+	);
+
+	// Possible alternative cloned request method
+	//---------------------------------------------
+	// let req = cloneRequestWithNewOriginHostString(inRequest)
+	// let fetchReqObj = fetch(req)
+	
+	// WIP - lets return it as it is
+	return fetchReqObj;
+}
+
+// Process a routing request, and return its response object
+async function processOriginRouting(origin, inRequest) {
+	if( (typeof origin) === "string" ) {
+		return processOriginRoutingStr(origin, inRequest);
 	}
 	throw "Object based routing config is NOT yet supported";
 }
@@ -276,11 +385,41 @@ class KittenRouter {
 	 * 
 	 * @return response object for cloudflare
 	 */
-	async handleRequestEvent(event) {
+	async handleFetchEvent(event) {
 		// Get the request object
 		let request = event.request;
 
-
-
+		// 
+		return processOriginRouting("commonshost.inboxkitten.com", request);
 	}
+}
+
+// Export out the KittenRouter class, if possible
+if( this.module != null ) {
+	module.exports = KittenRouter;
+}
+
+//---------------------------------------------------------------------------------------------
+//
+// Quick and dirty sample implementation (for cloudflare debugging)
+//
+//---------------------------------------------------------------------------------------------
+
+//
+// If module does not exist, this is probably a cloudflare debugging session
+// Lets do this =)
+//
+if( this.module == null ) {
+	// KittenRouter setup
+	const router = new KittenRouter({
+		routes: [
+			"commonshost.inboxkitten.com",
+			"firebase.inboxkitten.com"
+		]
+	});
+
+	// Cloudflare fetch result handling
+	addEventListener('fetch', event => {
+		event.respondWith(router.handleFetchEvent(event))
+	})
 }

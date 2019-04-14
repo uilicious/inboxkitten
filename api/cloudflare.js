@@ -43,7 +43,7 @@ async function handleFetchEvent(request) {
 		pathname.startsWith("/static/img") || 
 		pathname.startsWith("/static/js")
 	) {
-		return router.handleRequestEvent(event);
+		return router.handleFetchEvent(event);
 	}
 	
 	// Throw an exception for invalid file request
