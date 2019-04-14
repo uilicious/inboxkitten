@@ -282,7 +282,7 @@ async function logRequestWithConfigArray(configArr, request, response, routeType
 
 //---------------------------------------------------------------------------------------------
 //
-// Routing internal logic
+// Utility functions
 //
 //---------------------------------------------------------------------------------------------
 
@@ -306,6 +306,50 @@ function cloneUrlWithNewOriginHostString(inURL, originHostStr) {
 	ret.host = originHostStr;
 	return ret;
 }
+
+/**
+ * Generate a Response object, containing an error
+ * @param {String} errorCode for the error
+ * @param {String} errorMsg containing error details
+ * @param {int} httpCode (default=500) for response object 
+ */
+function setupResponseError(errorCode, errorMsg, httpCode = 500) {
+	return new Response(
+		JSON.stringify({
+			error: {
+				code : errorCode,
+				message : errorMsg
+			}
+		}),
+		{ 
+			status: httpCode, 
+			statusText: errorCode, 
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}
+	);
+}
+
+/**
+ * Throws a hard exception for both the UI, and logs
+ * @param {*} fetchEvent to immediate send response
+ * @param {String} errorCode for the error
+ * @param {String} errorMsg containing error details
+ * @param {int} httpCode (default=500) for response object 
+ */
+function throwHardException(fetchEvent, errorCode, errorMsg, httpCode = 500) {
+	// Respond to display error in UI
+	fetchEvent.respondWith( setupResponseError(errorCode, errorMsg) );
+	// Throw for error logging
+	throw errorCode + " : \n" + errorMsg;
+}
+
+//---------------------------------------------------------------------------------------------
+//
+// Routing internal logic
+//
+//---------------------------------------------------------------------------------------------
 
 /**
  * Makes a request, with a different origin host
@@ -336,12 +380,12 @@ async function processOriginRoutingStr(originHostStr, inRequest) {
  * This DOES NOT handle the fetch fallback
  * 
  * @param {*} fetchEvent provided from cloudflare, attaches logging waitUntil
+ * @param {Object} configObj conataining both the .route, and .log array config
  * @param {Request} inRequest to process 
- * @param {Array} configObj conataining both the .route, and .log array config
  * 
  * @return {Response} if a valid route with result is found, else return final route request failure (if any), else return null
  */
-async function processRoutingRequest( configObj, fetchEvent, inRequest ) {
+async function processRoutingRequest( fetchEvent, configObj, inRequest ) {
 	// Lets get the route array first
 	let routeArray = configObj.route;
 
@@ -350,19 +394,34 @@ async function processRoutingRequest( configObj, fetchEvent, inRequest ) {
 		return null;
 	}
 
+	// setup the variable for response object
+	let resObj = null;
 
-	return null;
+	// Lets iterate the routes
+	for( let i=0; i<routeArray.length; ++i ) {
+		let route = routeArray[i];
+
+		// Route string processing
+		if( (typeof route) === "string" ) {
+
+		}
+
+		// Throw an exception on an unknown route type
+		throwHardException(fetchEvent, "UNKNOWN_CONFIG", "Object based route config is not yet supported");
+	}
+
+	return resObj;
 }
 
 /**
  * Process the fetch event as it comes from cloudflare
  * 
- * @param {*} fetchEvent provided from cloudflare
  * @param {Object} configObj for the KittenRouter.config
+ * @param {*} fetchEvent provided from cloudflare
  * 
  * @return {Response} if a valid route with result is found, else the last route error (if applicable)
  */
-async function processFetchEvent( fetchEvent, configObj ) {
+async function processFetchEvent( configObj, fetchEvent ) {
 	// Lets unpack out the request
 	let inReq = fetchEvent.request;
 	let resObj = null;
@@ -371,7 +430,7 @@ async function processFetchEvent( fetchEvent, configObj ) {
 	//----------------------------------------------------------------------
 
 	// Lets try to get a response from a route
-	resObj = processRoutingRequest( configObj, fetchEvent, inReq );
+	resObj = await processRoutingRequest( configObj, fetchEvent, inReq );
 
 	// Lets return the response object if its valid
 	// We do an oversimilified assumption that its valid 
@@ -388,17 +447,7 @@ async function processFetchEvent( fetchEvent, configObj ) {
 	if( configObj.disableOriginFallback ) {
 		// No response object returned by routes : assume no valid routes
 		if( resObj == null ) {
-			// NO_VALID_ROUTE 404 response
-			return new Response(
-				'{ error: "No valid route found" }',
-				{ 
-					status: 404, 
-					statusText: 'NO_VALID_ROUTE', 
-					headers: {
-						"Content-Type": "application/json"
-					}
-				}
-			);
+			return setupResponseError("NO_VALID_ROUTE", "No valid route found in config");
 		}
 
 		// Else return the last failed route response
@@ -431,12 +480,12 @@ class KittenRouter {
 	/**
 	 * Request handling function, and routing
 	 * 
-	 * @param  event from cloudflare to process
+	 * @param  fetchEvent from cloudflare to process
 	 * 
 	 * @return response object for cloudflare
 	 */
-	async handleFetchEvent(event) {
-		return processFetchEvent(event, this.config);
+	async handleFetchEvent(fetchEvent) {
+		return await processFetchEvent(this.config, fetchEvent);
 	}
 }
 
@@ -465,7 +514,5 @@ if( this.module == null ) {
 	});
 
 	// Cloudflare fetch result handling
-	addEventListener('fetch', event => {
-		event.respondWith(router.handleFetchEvent(event))
-	})
+	addEventListener('fetch', router.handleFetchEvent);
 }
