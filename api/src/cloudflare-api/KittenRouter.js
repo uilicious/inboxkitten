@@ -67,7 +67,7 @@ const exampleConfig = {
 
 	// Routing rules to evaluate, starting from 0 index
 	// these routes will always be processed in sequence
-	routes : [
+	route : [
 
 		// Lets load all requests to commonshost first
 		"commonshost.inboxkitten.com",
@@ -113,8 +113,9 @@ const exampleConfig = {
 		// }
 	],
 
-	// Allow fallback to origin host fetch request
-	defaultFetchFallback : true,
+	// Set to true to disable fallback to origin host 
+	// when all routes fails
+	disableOriginFallback : false,
 
 	// @TODO support default timeout to process a request in milliseconds
 	// defaultOriginTimeout : 10000, // 10,000 ms = 10 s
@@ -306,51 +307,20 @@ function cloneUrlWithNewOriginHostString(inURL, originHostStr) {
 	return ret;
 }
 
-// /**
-//  * Clones a request object, with an origin string
-//  * 
-//  * @param {Request} inRequest to clone from
-//  * @param {String} originHostStr to overwrite host with
-//  * 
-//  * @return {Request} cloned Request object with new origin host
-//  */
-// function cloneRequestWithNewOriginHostString(inRequest, originHostStr) {
-// 	// The initObject for forming the new request
-// 	let initObject = {}; 
-
-// 	// Lets iterate inRequest properties to setup the initObject
-// 	for(let i=0; i<requestProperties_excludingURL.length; ++i) {
-// 		let prop = requestProperties_excludingURL[i];
-// 		let val = inRequest[prop];
-// 		if( val != null ) {
-// 			initObject[prop] = val;
-// 		}
-// 	}
-
-// 	// Lets generate the new URL
-// 	let reqURL = cloneUrlWithNewOriginHostString(inRequest.url,originHostStr);
-
-// 	// And finally the request object to return
-// 	return new Request(reqURL, initObject);
-// }
-
+/**
+ * Makes a request, with a different origin host
+ * 
+ * @param {String} originHostStr to overwrite host with
+ * @param {Request} inRequest to use 
+ * 
+ * @return {Response} object of the request
+ */
 // Process a routing request, and return its response object
 async function processOriginRoutingStr(originHostStr, inRequest) {
-
-	// Lets perform a new fetch request (with origin host)
-	//----------------------------------------------------
-	let fetchReqObj = fetch( //
+	return fetch( //
 		cloneUrlWithNewOriginHostString(inRequest.url,originHostStr), //
 		inRequest //
 	);
-
-	// Possible alternative cloned request method
-	//---------------------------------------------
-	// let req = cloneRequestWithNewOriginHostString(inRequest)
-	// let fetchReqObj = fetch(req)
-	
-	// WIP - lets return it as it is
-	return fetchReqObj;
 }
 
 // // Process a routing request, and return its response object
@@ -360,6 +330,46 @@ async function processOriginRoutingStr(originHostStr, inRequest) {
 // 	}
 // 	throw "Object based routing config is NOT yet supported";
 // }
+
+/**
+ * Process a request, and perform the required route request and logging
+ * This DOES NOT handle the fetch fallback
+ * 
+ * @param {Request} inRequest to process 
+ * @param {Array} configObj conataining both the .route, and .log array config
+ * 
+ * @return {Response} if a valid route with result is found, else return null
+ */
+async function processRoutingRequest( inRequest, configObj ) {
+
+	return null;
+}
+
+/**
+ * Process the fetch event as it comes from cloudflare
+ * 
+ * @param {*} fetchEvent provided from cloudflare
+ * @param {Object} configObj for the KittenRouter.config
+ * 
+ * @return {Response} if a valid route with result is found, else the last route error (if applicable)
+ */
+async function processFetchEvent( fetchEvent, configObj ) {
+	// Lets get the request first
+	let inReq = fetchEvent.request;
+
+	// At this point all routes are assumed to have failed
+	// As such we will attempt to do a fallback to the default origin
+	//----------------------------------------------------------------------
+
+	// if( configObj.disableFetchFallback ) {
+	// 	// @TODO disabled fetch fallback handling
+	// }
+
+	// Lets fetch the original request, log it, and return its result
+	let res = await fetch(inReq);
+	fetchEvent.waitUntil( logRequestWithConfigArray( configObj.log, inReq, res, "ORIGIN_FALLBACK", -1) );
+	return res;
+}
 
 //---------------------------------------------------------------------------------------------
 //
@@ -372,10 +382,10 @@ class KittenRouter {
 	/**
 	 * Setup KittenRouter instance with the given config
 	 * 
-	 * @param config for configuring KittenRouter
+	 * @param inConfig for configuring KittenRouter
 	 */
-	constructor(config) {
-		this.config = config || {}; // fallback for blank object (make certain things easier)
+	constructor(inConfig) {
+		this.config = inConfig || {}; // fallback for blank object (make certain things easier)
 	}
 
 	/**
@@ -386,11 +396,7 @@ class KittenRouter {
 	 * @return response object for cloudflare
 	 */
 	async handleFetchEvent(event) {
-		// Get the request object
-		let request = event.request;
-
-		// 
-		return processOriginRouting("commonshost.inboxkitten.com", request);
+		return processFetchEvent(event, this.config);
 	}
 }
 
@@ -412,7 +418,7 @@ if( this.module != null ) {
 if( this.module == null ) {
 	// KittenRouter setup
 	const router = new KittenRouter({
-		routes: [
+		route: [
 			"commonshost.inboxkitten.com",
 			"firebase.inboxkitten.com"
 		]
