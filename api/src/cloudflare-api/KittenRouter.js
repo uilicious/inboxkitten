@@ -69,7 +69,7 @@ const exampleConfig = {
 	// these routes will always be processed in sequence
 	routes : [
 
-		// Lets load from commonshost first
+		// Lets load all requests to commonshost first
 		"commonshost.inboxkitten.com",
 
 		// If it fails, we fallback to firebase
@@ -353,13 +353,13 @@ async function processOriginRoutingStr(originHostStr, inRequest) {
 	return fetchReqObj;
 }
 
-// Process a routing request, and return its response object
-async function processOriginRouting(origin, inRequest) {
-	if( (typeof origin) === "string" ) {
-		return processOriginRoutingStr(origin, inRequest);
-	}
-	throw "Object based routing config is NOT yet supported";
-}
+// // Process a routing request, and return its response object
+// async function processOriginRouting(origin, inRequest) {
+// 	if( (typeof origin) === "string" ) {
+// 		return processOriginRoutingStr(origin, inRequest);
+// 	}
+// 	throw "Object based routing config is NOT yet supported";
+// }
 
 //---------------------------------------------------------------------------------------------
 //
