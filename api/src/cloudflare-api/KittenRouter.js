@@ -75,41 +75,36 @@ const exampleConfig = {
 		// If it fails, we fallback to firebase
 		"firebase.inboxkitten.com"
 
-		// Object based route definitions
-		//-----------------------------------------------------------------
+		// // Object based route definitions
+		// //-----------------------------------------------------------------
 		// {
 		// 	// "" host routing will match all
 		// 	reqHost : [""],
 		// 	// Routing prefix to check for, note that "" will match all
 		// 	reqPrefix : [""],
-		//
+		
 		// 	// Origin servers to route to
-		// 	origins : [
-		// 		"host-endpoint-a",
-		// 		"host-endpoint-b",
-		// 		// // @TODO (consider support for object based origin decleration?)
-		// 		// // Might be useful for some region based routing or maybe crazier?
-		// 		// // Racing origin requests and terminating the "slower copy"
-		// 		// //-------------------------------------------------------------------------
-		// 		// {
-		// 		// 	host : "host-endpoint-c"
-		// 		// 	port : 443,
-		// 		// 	protocol : "https",
-		// 		// 	// Matching by country
-		// 		// 	// Country codes : https://support.cloudflare.com/hc/en-us/articles/205072537-What-are-the-two-letter-country-codes-for-the-Access-Rules-
-		// 		// 	country : [
-		// 		// 		"SG"
-		// 		// 	],
-		// 		// 	// Matching by region
-		// 		// 	region : [
-		// 		// 		"Europe"
-		// 		// 	],
-		// 		// 	// Timeout to abort request on
-		// 		// 	
-		// 		// 	// Fetching sub options (like cache overwrite)
-		// 		// 	fetchConfig : { cf: { cacheEverything: true } }
-		// 		// }
-		// 	]
+		// 	host : "host-endpoint-c",
+		// 	port : 443,
+		// 	protocol : "https",
+		// 	// Matching by country
+		// 	// Country codes : https://support.cloudflare.com/hc/en-us/articles/205072537-What-are-the-two-letter-country-codes-for-the-Access-Rules-
+		// 	country : [
+		// 		"SG"
+		// 	],
+		// 	// Matching by region
+		// 	region : [
+		// 		"Europe"
+		// 	],
+		// 	// Timeout to abort request on
+			
+		// 	// Fetching sub options (like cache overwrite)
+		// 	fetchConfig : { cf: { cacheEverything: true } }
+	
+		// 	// @TODO (consider support for nested object based origin decleration?)
+		// 	// Might be useful for some region based routing or maybe crazier?
+		// 	// Racing origin requests and terminating the "slower copy"
+		// 	//-------------------------------------------------------------------------
 		// }
 	],
 
@@ -307,7 +302,7 @@ function cloneUrlWithNewOriginHostString(inURL, originHostStr) {
  * @param {int} httpCode (default=500) for response object 
  */
 function setupResponseError(errorCode, errorMsg, httpCode = 500) {
-	return new Response(
+	let ret = new Response(
 		JSON.stringify({
 			error: {
 				code : errorCode,
@@ -318,24 +313,36 @@ function setupResponseError(errorCode, errorMsg, httpCode = 500) {
 			status: httpCode, 
 			statusText: errorCode, 
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				//"KittenRouterException": "true"
 			}
 		}
 	);
+	ret._isKittenRouterException = true;
+	return ret;
 }
 
 /**
- * Throws a hard exception for both the UI, and logs
- * @param {*} fetchEvent to immediate send response
- * @param {String} errorCode for the error
- * @param {String} errorMsg containing error details
- * @param {int} httpCode (default=500) for response object 
+ * Lets do a oversimplified check if a response object is valid
+ * if the response code is 200~399
+ * 
+ * @param {*} resObj 
+ * 
+ * @return true if its a valid response object
  */
-function throwHardException(fetchEvent, errorCode, errorMsg, httpCode = 500) {
-	// Respond to display error in UI
-	fetchEvent.respondWith( setupResponseError(errorCode, errorMsg) );
-	// Throw for error logging
-	throw errorCode + " : \n" + errorMsg;
+function isGoodResponseObject(resObj) {
+	return resObj != null && resObj.status >= 200 && resObj.status < 400;
+}
+
+/**
+ * Check if the given response object is a KittenRouter exception
+ * @param {Response} resObj to validate
+ * 
+ * @return true if its a KittenRouter exception 
+ */
+function isKittenRouterException(resObj) {
+	return resObj != null && resObj._isKittenRouterException;
+	// resObj.headers && resObj.headers.get("KittenRouterException") == "true";
 }
 
 //---------------------------------------------------------------------------------------------
@@ -372,15 +379,16 @@ async function processOriginRoutingStr(originHostStr, inRequest) {
  * Process a request, and perform the required route request and logging
  * This DOES NOT handle the fetch fallback
  * 
- * @param {*} fetchEvent provided from cloudflare, attaches logging waitUntil
  * @param {Object} configObj conataining both the .route, and .log array config
+ * @param {*} fetchEvent provided from cloudflare, attaches logging waitUntil
  * @param {Request} inRequest to process 
  * 
  * @return {Response} if a valid route with result is found, else return final route request failure (if any), else return null
  */
-async function processRoutingRequest( fetchEvent, configObj, inRequest ) {
-	// Lets get the route array first
+async function processRoutingRequest( configObj, fetchEvent, inRequest ) {
+	// Lets get the route, and log array first
 	let routeArray = configObj.route;
+	let logArray = configObj.log;
 
 	// Return null, on empty routeArray
 	if( routeArray == null || routeArray.length <= 0 ) {
@@ -396,11 +404,23 @@ async function processRoutingRequest( fetchEvent, configObj, inRequest ) {
 
 		// Route string processing
 		if( (typeof route) === "string" ) {
+			// Lets handle string origins
+			resObj = await processOriginRoutingStr( route, inRequest );
 
+			// Lets log 
+			fetchEvent.waitUntil( logRequestWithConfigArray( logArray, inReq, resObj, "ROUTE_REQUEST", i) );
+
+			// If its a valid response, return it
+			if( isGoodResponseObject(resObj) ) {
+				return resObj;
+			}
+
+			// Lets continue to next route
+			continue;
 		}
 
 		// Throw an exception on an unknown route type
-		throwHardException(fetchEvent, "UNKNOWN_CONFIG", "Object based route config is not yet supported");
+		return setupResponseError("UNKNOWN_CONFIG", "Object based route config is not yet supported");
 	}
 
 	return resObj;
@@ -428,7 +448,12 @@ async function processFetchEvent( configObj, fetchEvent ) {
 	// Lets return the response object if its valid
 	// We do an oversimilified assumption that its valid 
 	// if the response code is 200~399
-	if( resObj != null && resObj.status >= 200 && resObj.status < 400 ) {
+	if( isGoodResponseObject(resObj) ) {
+		return resObj;
+	}
+
+	// Throw and show results from setupResponseError (for direct feedback loop)
+	if( isKittenRouterException(resObj) ) {
 		return resObj;
 	}
 
@@ -507,5 +532,7 @@ if( this.module == null ) {
 	});
 
 	// Cloudflare fetch result handling
-	addEventListener('fetch', router.handleFetchEvent);
+	addEventListener('fetch', event => {
+		event.respondWith(router.handleFetchEvent(event))
+	});
 }
