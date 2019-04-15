@@ -8,16 +8,16 @@ addEventListener('fetch', event => {
 const KittenRouter = require("./src/cloudflare-api/KittenRouter");
 const router = new KittenRouter({});
 
-async function handleFetchEvent(request) {
+async function handleFetchEvent(event) {
 
 	// Get the request object
-	let request = event.request;
+	let req = event.request;
 	// Get the request URL
-	let url = new URL(request.url)
+	let url = new URL(req.url)
 
 	// Does the CORS options hanlding
-	if (request.method === "OPTIONS") {
-		return require("./src/cloudflare-api/optionsHandler")(request)
+	if (req.method === "OPTIONS") {
+		return require("./src/cloudflare-api/optionsHandler")(req)
 	} 
 
 	// Get the pathname

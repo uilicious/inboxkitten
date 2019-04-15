@@ -408,7 +408,7 @@ async function processRoutingRequest( configObj, fetchEvent, inRequest ) {
 			resObj = await processOriginRoutingStr( route, inRequest );
 
 			// Lets log 
-			fetchEvent.waitUntil( logRequestWithConfigArray( logArray, inReq, resObj, "ROUTE_REQUEST", i) );
+			// fetchEvent.waitUntil( logRequestWithConfigArray( logArray, inReq, resObj, "ROUTE_REQUEST", i) );
 
 			// If its a valid response, return it
 			if( isGoodResponseObject(resObj) ) {
