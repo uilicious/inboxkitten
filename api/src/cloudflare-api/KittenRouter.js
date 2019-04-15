@@ -518,21 +518,22 @@ if( this.module != null ) {
 //
 //---------------------------------------------------------------------------------------------
 
+// //
+// // If module does not exist, this is probably a cloudflare debugging session
+// // Lets do this =)
+// //
+// if( this.module == null ) {
+// 	// KittenRouter setup
+// 	const router = new KittenRouter({
+// 		route: [
+// 			"commonshost.inboxkitten.com",
+// 			"firebase.inboxkitten.com"
+// 		]
+// 	});
 //
-// If module does not exist, this is probably a cloudflare debugging session
-// Lets do this =)
+// 	// Cloudflare fetch result handling
+// 	addEventListener('fetch', event => {
+// 		event.respondWith(router.handleFetchEvent(event))
+// 	});
+// }
 //
-if( this.module == null ) {
-	// KittenRouter setup
-	const router = new KittenRouter({
-		route: [
-			"commonshost.inboxkitten.com",
-			"firebase.inboxkitten.com"
-		]
-	});
-
-	// Cloudflare fetch result handling
-	addEventListener('fetch', event => {
-		event.respondWith(router.handleFetchEvent(event))
-	});
-}
