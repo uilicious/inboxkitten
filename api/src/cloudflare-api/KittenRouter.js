@@ -43,11 +43,20 @@ const exampleConfig = {
 			type : "elasticsearch",
 
 			//
-			// Elasticsearch index endpoint, note that a POST request will be done here
-			// the elasticsearch instance will then be expected to generate its own document id
-			// See : https://stackoverflow.com/questions/24756337/how-insert-data-to-elasticsearch-without-id
+			// Elasticsearch index endpoint 
 			//
-			url : "https://user:password@elasticsearch-server.secret-domain.com/cluster/index",
+			url : "https://elasticsearch-server.secret-domain.com/",
+
+			//
+			// Authorization header (if needed)
+			//
+			authUser : "user",
+			authPass : "pass",
+
+			//
+			// Index prefix for storing data, this is before the "YYYY.MM" is attached
+			//
+			indexPrefix : "test-data-",
 
 			// Enable logging of the full ipv4/6
 			//
@@ -201,12 +210,23 @@ async function logRequestWithConfigMap(logConfig, request, response, routeType, 
 		return null;
 	}
 
+	// Index YYYY.MM formating
+	let indexYearAndMonth = (new Date()).toISOString().substr(0,7).replace("-",".");
+	let indexPrefix = logConfig.indexPrefix || "KittenRouter-log-";
+
+	// The full POST request URL
+	let fullLoggingURL = logConfig.url.trim();
+	if( !fullLoggingURL.endsWith("/") ) {
+		fullLoggingURL = fullLoggingURL+"/";
+	}
+	fullLoggingURL = fullLoggingURL+logConfig.indexPrefix+indexYearAndMonth+"/_doc/";
+
 	// Trueip logging flag
 	let logTrueIP = logConfig.logTrueIP || false;
 
 	// The data to log
-	var data = {
-		'timestamp':  Date.now(),
+	let data = {
+		'timestamp': (new Date()).toISOString(),
 
 		'route.type':  routeType,
 		'route.count': routeCount,
@@ -222,20 +242,20 @@ async function logRequestWithConfigMap(logConfig, request, response, routeType, 
 		'req.country-code':  request.headers.get('cf-ipcountry') || '',
 
 		'req.cf.ray':     request.headers.get('cf-ray') || '',
-		'req.cf.colo':    request.cf.colo || '',
-		'req.tlsVersion': request.cf.tlsVersion || '',
-		'req.tlsCipher':  request.cf.tlsCipher || '',
+		'req.cf.colo':    (request.cf && request.cf.colo) || '',
+		'req.tlsVersion': (request.cf && request.cf.tlsVersion) || '',
+		'req.tlsCipher':  (request.cf && request.cf.tlsCipher) || '',
 
 		'res.status':           response.status,
 		'res.url':              response.url,
-		'res.server':           response.header.get('server') || '',
-		'res.via':              response.header.get('via') || '',
-		'res.content-type':     response.header.get('content-type') || '',
-		'res.content-encoding': response.header.get('content-encoding') || '',
-		'res.content-length':   response.header.get('content-length') || '',
-		'res.cache-control':    response.header.get('cache-control') || '',
-		'res.cf.cache-status':  response.header.get('cf-cache-status') || '',
-		'res.cf.ray':           response.header.get('cf-ray') || '',
+		'res.server':           response.headers.get('server') || '',
+		'res.via':              response.headers.get('via') || '',
+		'res.content-type':     response.headers.get('content-type') || '',
+		'res.content-encoding': response.headers.get('content-encoding') || '',
+		'res.content-length':   response.headers.get('content-length') || '',
+		'res.cache-control':    response.headers.get('cache-control') || '',
+		'res.cf.cache-status':  response.headers.get('cf-cache-status') || '',
+		'res.cf.ray':           response.headers.get('cf-ray') || '',
 
 		'config.logTrueIP': logTrueIP
 	};
@@ -247,15 +267,29 @@ async function logRequestWithConfigMap(logConfig, request, response, routeType, 
 	// 	// @TODO : iterate cookies and log relevent keys
 	// }
 
+	// Lets prepare the headers
+	let logHeaders = {
+		'Content-Type': 'application/json',
+	};
+
+	// Lets handle authentication
+	if( logConfig.basicAuthToken && logConfig.basicAuthToken.length > 0 ) {
+		logHeaders["Authorization"] = "Basic "+btoa(logConfig.basicAuthToken);
+	}
+
 	// The elasticsearch POST request to perform for logging
-	return await fetch(
-		logConfig.url, {
+	let logResult = await fetch(
+		fullLoggingURL, {
 		method: 'POST',
 		body: JSON.stringify(data),
-		headers: new Headers({
-		  'Content-Type': 'application/json',
-		})
+		headers: new Headers(logHeaders)
 	})
+
+	// // Log the log?
+	// console.log(logResult);
+
+	// Return the result
+	return logResult;
 }
 
 // Log request with a config array
@@ -268,7 +302,7 @@ async function logRequestWithConfigArray(configArr, request, response, routeType
 	// Lets iterate the config
 	let promiseArray = [];
 	for(let i=0; i<configArr.length; ++i) {
-		promiseArray = logRequestWithConfigMap(configArr[i], request, response, routeType, routeCount);
+		promiseArray[i] = logRequestWithConfigMap(configArr[i], request, response, routeType, routeCount);
 	}
 
 	// Return with a single promise object
@@ -408,7 +442,7 @@ async function processRoutingRequest( configObj, fetchEvent, inRequest ) {
 			resObj = await processOriginRoutingStr( route, inRequest );
 
 			// Lets log 
-			// fetchEvent.waitUntil( logRequestWithConfigArray( logArray, inReq, resObj, "ROUTE_REQUEST", i) );
+			fetchEvent.waitUntil( logRequestWithConfigArray( logArray, inRequest, resObj, "ROUTE_REQUEST", i) );
 
 			// If its a valid response, return it
 			if( isGoodResponseObject(resObj) ) {
@@ -525,15 +559,53 @@ if( this.module != null ) {
 // if( this.module == null ) {
 // 	// KittenRouter setup
 // 	const router = new KittenRouter({
+
+// 	 // logging endpoint to use
+// 	 log : [
+// 		{
+// 		  // Currently only elasticsearch is supported, scoped here for future alternatives
+// 		  // One possible option is google analytics endpoint
+// 		  type : "elasticsearch",
+
+// 			//
+// 			// Elasticsearch index endpoint 
+// 			//
+// 		  url : "https://inboxkitten.logging.com/",
+
+// 			//
+// 			// Authorization header (if needed)
+// 			//
+// 			basicAuthToken : "elasticsearch:password",
+
+// 			//
+// 			// Index prefix for storing data, this is before the "YYYY.MM" is attached
+// 			//
+// 			indexPrefix : "test-data-",
+
+// 			// Enable logging of the full ipv4/6
+// 			//
+// 			// Else it mask (by default) the last digit of IPv4 address
+// 			// or the "network" routing for IPv6
+// 			// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
+// 			logTrueIP : false,
+
+// 			// @TODO support
+// 			// Additional cookies to log
+// 			//
+// 			// Be careful not to log "sensitive" cookies, that can compromise security
+// 			// typically this would be seesion keys.
+// 			// cookies : ["__cfduid", "_ga", "_gid", "account_id"]
+// 		}
+// 	 ],
+
 // 		route: [
 // 			"commonshost.inboxkitten.com",
 // 			"firebase.inboxkitten.com"
 // 		]
 // 	});
-//
+
 // 	// Cloudflare fetch result handling
 // 	addEventListener('fetch', event => {
 // 		event.respondWith(router.handleFetchEvent(event))
 // 	});
 // }
-//
