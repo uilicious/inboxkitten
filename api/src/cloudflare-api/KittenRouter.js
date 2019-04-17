@@ -33,6 +33,7 @@
 //
 //---------------------------------------------------------------------------------------------
 
+/*
 const exampleConfig = {
 
 	// logging endpoint to use
@@ -129,6 +130,7 @@ const exampleConfig = {
 	// - In memory caching (with a limit of 500 objects + 10 kb per object?)
 	// See : https://developers.cloudflare.com/workers/writing-workers/storing-data/
 }
+*/
 
 //---------------------------------------------------------------------------------------------
 //
@@ -542,6 +544,7 @@ class KittenRouter {
 }
 
 // Export out the KittenRouter class, if possible
+// Skipped if used directly in cloudflare worker
 if( this.module != null ) {
 	module.exports = KittenRouter;
 }
@@ -552,60 +555,62 @@ if( this.module != null ) {
 //
 //---------------------------------------------------------------------------------------------
 
-// //
-// // If module does not exist, this is probably a cloudflare debugging session
-// // Lets do this =)
-// //
-// if( this.module == null ) {
-// 	// KittenRouter setup
-// 	const router = new KittenRouter({
+/*
+//
+// If module does not exist, this is probably a cloudflare debugging session
+// Lets do this =)
+//
+if( this.module == null ) {
+	// KittenRouter setup
+	const router = new KittenRouter({
 
-// 	 // logging endpoint to use
-// 	 log : [
-// 		{
-// 		  // Currently only elasticsearch is supported, scoped here for future alternatives
-// 		  // One possible option is google analytics endpoint
-// 		  type : "elasticsearch",
+	 // logging endpoint to use
+	 log : [
+		{
+		  // Currently only elasticsearch is supported, scoped here for future alternatives
+		  // One possible option is google analytics endpoint
+		  type : "elasticsearch",
 
-// 			//
-// 			// Elasticsearch index endpoint 
-// 			//
-// 		  url : "https://inboxkitten.logging.com/",
+			//
+			// Elasticsearch index endpoint 
+			//
+		  url : "https://inboxkitten.logging.com/",
 
-// 			//
-// 			// Authorization header (if needed)
-// 			//
-// 			basicAuthToken : "elasticsearch:password",
+			//
+			// Authorization header (if needed)
+			//
+			basicAuthToken : "elasticsearch:password",
 
-// 			//
-// 			// Index prefix for storing data, this is before the "YYYY.MM" is attached
-// 			//
-// 			indexPrefix : "test-data-",
+			//
+			// Index prefix for storing data, this is before the "YYYY.MM" is attached
+			//
+			indexPrefix : "test-data-",
 
-// 			// Enable logging of the full ipv4/6
-// 			//
-// 			// Else it mask (by default) the last digit of IPv4 address
-// 			// or the "network" routing for IPv6
-// 			// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
-// 			logTrueIP : false,
+			// Enable logging of the full ipv4/6
+			//
+			// Else it mask (by default) the last digit of IPv4 address
+			// or the "network" routing for IPv6
+			// see : https://www.haproxy.com/blog/ip-masking-in-haproxy/
+			logTrueIP : false,
 
-// 			// @TODO support
-// 			// Additional cookies to log
-// 			//
-// 			// Be careful not to log "sensitive" cookies, that can compromise security
-// 			// typically this would be seesion keys.
-// 			// cookies : ["__cfduid", "_ga", "_gid", "account_id"]
-// 		}
-// 	 ],
+			// @TODO support
+			// Additional cookies to log
+			//
+			// Be careful not to log "sensitive" cookies, that can compromise security
+			// typically this would be seesion keys.
+			// cookies : ["__cfduid", "_ga", "_gid", "account_id"]
+		}
+	 ],
 
-// 		route: [
-// 			"commonshost.inboxkitten.com",
-// 			"firebase.inboxkitten.com"
-// 		]
-// 	});
+		route: [
+			"commonshost.inboxkitten.com",
+			"firebase.inboxkitten.com"
+		]
+	});
 
-// 	// Cloudflare fetch result handling
-// 	addEventListener('fetch', event => {
-// 		event.respondWith(router.handleFetchEvent(event))
-// 	});
-// }
+	// Cloudflare fetch result handling
+	addEventListener('fetch', event => {
+		event.respondWith(router.handleFetchEvent(event))
+	});
+}
+*/
