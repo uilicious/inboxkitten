@@ -545,7 +545,7 @@ class KittenRouter {
 
 // Export out the KittenRouter class, if possible
 // Skipped if used directly in cloudflare worker
-if( this.module != null ) {
+if( global != null && global.module != null ) {
 	module.exports = KittenRouter;
 }
 
