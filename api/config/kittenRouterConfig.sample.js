@@ -18,8 +18,7 @@ module.exports = {
 			//
 			// Authorization header (if needed)
 			//
-			authUser : "user",
-			authPass : "pass",
+			basicAuthToken : "user:pass",
 
 			//
 			// Index prefix for storing data, this is before the "YYYY.MM" is attached

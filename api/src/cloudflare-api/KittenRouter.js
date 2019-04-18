@@ -287,8 +287,10 @@ async function logRequestWithConfigMap(logConfig, request, response, routeType, 
 		headers: new Headers(logHeaders)
 	})
 
-	// // Log the log?
-	// console.log(logResult);
+	// Log the log?
+	if( logConfig.consoleDebug ) {
+		console.log("KittenRouter logging response", logResult);
+	}
 
 	// Return the result
 	return logResult;
@@ -545,9 +547,7 @@ class KittenRouter {
 
 // Export out the KittenRouter class, if possible
 // Skipped if used directly in cloudflare worker
-if( global != null && global.module != null ) {
-	module.exports = KittenRouter;
-}
+module.exports = KittenRouter;
 
 //---------------------------------------------------------------------------------------------
 //
