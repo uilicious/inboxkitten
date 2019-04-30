@@ -252,6 +252,11 @@ body {
 		padding-left:1rem;
 		padding-right:1rem;
 	}
+	
+	.feature-card-hover:hover {
+		background-color:rgba(30,30,30,0.2);
+		border-radius: 8px;
+	}
 
 	.fas {
 		margin-right:0.5rem;
