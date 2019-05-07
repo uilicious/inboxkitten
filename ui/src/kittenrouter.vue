@@ -14,19 +14,19 @@
 		<div class="info-guide">
 			<div class="features" style="max-width:1100px">
 				<div class="feature-card">
-                    <img class="logo" src="@/assets/elasticsearch.png" style="width:2.7rem"/>
+                    <img class="logo" src="@/assets/elasticsearch.png" style="width:3.7rem"/>
 					<h3>ElasticSearch</h3>
 					<p>
 						Log down your network traffic to your own elasticsearch server for analytics!
 					</p>
 				</div>
 				<div class="feature-card">
-                    <i class="fas fa-server fa-3x"></i>
+                    <i class="fas fa-server fa-4x"></i>
 					<h3>Find next available server</h3>
 					<p>With the list of configured servers, KittenRouter can help you redirect the request to the next available server.</p>
 				</div>
 				<div class="feature-card">
-                    <img class="logo" src="@/assets/cloudflare.png" style="width:7.5rem"/>
+                    <img class="logo" src="@/assets/cloudflare.png" style="width:10rem"/>
 					<h3>Deploy it on Cloudflare</h3>
 					<p>Kitten Router is built for Cloudflare Workers script!</p>
 				</div>
@@ -165,6 +165,7 @@ export default {
 		align-items: center;
 
 		padding-left:2rem;
+		padding-top:1rem;
 		background: #36D1DC;  /* fallback for old browsers */
 		background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
 		background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
