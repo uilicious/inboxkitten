@@ -93,6 +93,7 @@
 						&nbsp;&nbsp;&nbsp;into your Cloudflare Worker script<br/>
 						3. Initialize KittenRouter variable in your script<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let router = new KittenRouter(config)<br/>
+						4. Use it to route all your desires
 					</div>
 				</div>
 			</div>
@@ -106,6 +107,7 @@
 						3. Initialize KittenRouter class in your script<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const KittenRouter = require("kittenrouter")<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let router = new KittenRouter(config)<br/>
+						4. Use it to route all your desires
 					</div>
 				</div>
 			</div>
