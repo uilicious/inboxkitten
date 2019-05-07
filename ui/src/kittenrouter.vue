@@ -14,7 +14,7 @@
 		<div class="info-guide">
 			<div class="features" style="max-width:1100px">
 				<div class="feature-card">
-                    <img class="logo" src="@/assets/elasticsearch.png" style="width:3rem"/>
+                    <img class="logo" src="@/assets/elasticsearch.png" style="width:2.7rem"/>
 					<h3>ElasticSearch</h3>
 					<p>
 						Log down your network traffic to your own elasticsearch server for analytics!
@@ -25,12 +25,30 @@
 					<h3>Find next available server</h3>
 					<p>With the list of configured servers, KittenRouter can help you redirect the request to the next available server.</p>
 				</div>
+				<div class="feature-card">
+                    <img class="logo" src="@/assets/cloudflare.png" style="width:7.5rem"/>
+					<h3>Deploy it on Cloudflare</h3>
+					<p>Kitten Router is built for Cloudflare Workers script!</p>
+				</div>
 			</div>
+		</div>
+		<div class="info-guide">
+			<div class="deploy-segmet">
+				<h2>How to install Kitten Router</h2>
+				<p>Install Kitten Router for your Cloudflare Worker script via NPM</p>
+
+				<p class="code deploy-code">
+					cd "your NodeJS project"<br/>
+					npm install --save kittenrouter<br/>
+				</p>
+			</div>
+		</div>
+		<div class="info-guide">
 			<div class="features">
                 <div class="feature-card"></div>
                 <div class="feature-card feature-card-hover">
                     <a href="https://github.com/uilicious/kittenrouter" target="_blank" style="text-decoration: none; color: inherit; cursor: pointer;">
-                        <p> Get your own Kitten Router from Github now! </p>
+                        <h2> Check out Kitten Router at Github to know how to use it on your Cloudflare Worker script! </h2>
 <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(240, 240, 240); color: rgb(68, 68, 68);"><span>https://github.com/uilicious/kittenrouter</span></pre>
                     </a>
                 </div>
