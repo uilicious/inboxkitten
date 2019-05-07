@@ -267,6 +267,12 @@ body {
 			flex-direction:column;
 		}
 	}
+
+	@media only screen and (max-width:1080px) {
+		.steps {
+			flex-direction: column;
+		}
+	}
 }
 
 .snippet {
@@ -384,9 +390,24 @@ body {
 	scroll-behavior: auto;
 }
 
+.config-code {
+	font-size:0.8rem;
+	width:50rem;
+	max-width: 90%;
+	background: #F6F8FF;
+	margin:auto;
+	border-radius: 8px;
+	scroll-behavior: auto;
+	text-align:justify;
+}
+
 @media only screen and (max-width:800px) {
 	.deploy-code {
 		font-size:0.75rem;
+	}
+
+	.config-code {
+		font-size: 0.75rem;
 	}
 }
 
