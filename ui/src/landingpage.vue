@@ -1,6 +1,6 @@
 <template>
 	<div class="landing-page">
-		<div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div>
+		<!-- <div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div> -->
 		<div class="header-gradient-background">
 			<div class="header">
 				<img class="logo" src="@/assets/inbox_kitten.png"/>
@@ -107,6 +107,7 @@
 			<h2>Coming Soon!</h2>
 		</section>
 		-->
+		<CarbonAds placement="InboxKittenLanding"></CarbonAds>
 	</div>
 </template>
 <script>
@@ -115,8 +116,13 @@
 	import 'normalize.css'
 	import ClipboardJS from 'clipboard'
 
+	import CarbonAds from '@/components/CarbonAds'
+
 	export default {
 		name: 'LandingPage',
+		components: {
+			CarbonAds: CarbonAds
+		},
 		data () {
 			return {
 				msg: 'Welcome to Your Vue.js App',
