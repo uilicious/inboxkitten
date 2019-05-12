@@ -1,5 +1,6 @@
 <template>
 	<div class="landing-page">
+		<div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div>
 		<div class="header-gradient-background">
 			<div class="header">
 				<img class="logo" src="@/assets/inbox_kitten.png"/>

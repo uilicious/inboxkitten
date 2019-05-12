@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Router from 'vue-router'
 import LandingPage from '@/landingpage.vue'
+import KittenRouter from '@/kittenrouter.vue'
 import Inbox from '@/components/mail/inbox.vue'
 import MessageDetail from '@/components/mail/message_detail.vue'
 import MessageList from '@/components/mail/message_list.vue'
@@ -54,6 +55,11 @@ export default new Router({
           redirect: {name: 'List'}
         }
       ]
+    },
+    {
+      path: '/kittenrouter',
+      name: 'KittenRouter',
+      component: KittenRouter
     },
     {
       path: '*',
