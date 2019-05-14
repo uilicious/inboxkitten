@@ -1,8 +1,7 @@
 <template>
 	<div>
 		<div class="kittenrouter-navigation">
-			<img class="kittenrouter-nav-main-logo" src="@/assets/logo_no_text.svg" @click="goToMainPage"/>
-			<h4 class="kittenrouter-nav-header" @click="goToMainPage">Inbox Kitten</h4>
+			<img class="kittenrouter-nav-main-logo" src="@/assets/inbox_kitten.png" @click="goToMainPage"/>
 		</div>
 		<div class="header-gradient-background">
 			<div class="header">
@@ -169,9 +168,9 @@ export default {
 		text-align: left;
 
 		.kittenrouter-nav-main-logo {
-			width:4rem;
-			padding-top:6rem;
-			padding-right: 1rem;
+			width:8rem;
+			padding-top:7rem;
+			padding-right: 4rem;
 			cursor: pointer;
 		}
 
@@ -185,7 +184,7 @@ export default {
 	@media only screen and (max-width:470px) {
 		.kittenrouter-navigation .kittenrouter-nav-main-logo {
 			padding-right: 4rem;
-			width:3rem;
+			width:5rem;
 			z-index: 3;
 		}
 		.kittenrouter-nav-header {
