@@ -1,8 +1,8 @@
 <template>
 	<div class="landing-page">
 		<!-- <div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div> -->
-		<div class="navigation">
-			<img class="nav-main-logo" src="@/assets/kitten_router.png" @click="goToKittenRouter"/>
+		<div class="landing-navigation">
+			<img class="landing-nav-main-logo" src="@/assets/kitten_router.png" @click="goToKittenRouter"/>
 		</div>
 		<div class="header-gradient-background">
 			<div class="header">
@@ -199,7 +199,7 @@
 	@import "scss/landingpage.scss";
 	@import "primer-tooltips/index.scss";
 
-	.navigation {
+	.landing-navigation {
 		display:flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -208,14 +208,14 @@
 		height: 1rem;
 		text-align: left;
 
-		.nav-main-logo {
+		.landing-nav-main-logo {
 			width:8rem;
 			padding-top:7rem;
 			padding-right: 4rem;
 			cursor: pointer;
 		}
 
-		.nav-header {
+		.landing-nav-header {
 			padding-top:6rem;
 			padding-right: 3rem;
 			cursor: pointer;
@@ -223,12 +223,12 @@
 	}
 
 	@media only screen and (max-width:470px) {
-		.navigation .nav-main-logo {
+		.landing-navigation .landing-nav-main-logo {
 			padding-right: 4rem;
 			width:5rem;
 			z-index: 3;
 		}
-		.nav-header {
+		.landing-nav-header {
 			display: none;
 		}
 	}

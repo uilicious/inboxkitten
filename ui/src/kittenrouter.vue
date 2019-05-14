@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<div class="navigation">
-			<img class="nav-main-logo" src="@/assets/logo_no_text.svg" @click="goToMainPage"/>
-			<h4 class="nav-header" @click="goToMainPage">Inbox Kitten</h4>
+		<div class="kittenrouter-navigation">
+			<img class="kittenrouter-nav-main-logo" src="@/assets/logo_no_text.svg" @click="goToMainPage"/>
+			<h4 class="kittenrouter-nav-header" @click="goToMainPage">Inbox Kitten</h4>
 		</div>
 		<div class="header-gradient-background">
 			<div class="header">
@@ -159,7 +159,7 @@ export default {
 	@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
     @import "scss/landingpage.scss";
 
-	.navigation {
+	.kittenrouter-navigation {
 		display:flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -168,14 +168,14 @@ export default {
 		height: 1rem;
 		text-align: left;
 
-		.nav-main-logo {
+		.kittenrouter-nav-main-logo {
 			width:4rem;
 			padding-top:6rem;
 			padding-right: 1rem;
 			cursor: pointer;
 		}
 
-		.nav-header {
+		.kittenrouter-nav-header {
 			padding-top:6rem;
 			padding-right: 3rem;
 			cursor: pointer;
@@ -183,12 +183,12 @@ export default {
 	}
 
 	@media only screen and (max-width:470px) {
-		.navigation .nav-main-logo {
+		.kittenrouter-navigation .kittenrouter-nav-main-logo {
 			padding-right: 4rem;
 			width:3rem;
 			z-index: 3;
 		}
-		.nav-header {
+		.kittenrouter-nav-header {
 			display: none;
 		}
 	}
