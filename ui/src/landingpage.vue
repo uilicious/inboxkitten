@@ -188,7 +188,7 @@
 				})
 			},
 			goToKittenRouter () {
-				location.href = "/kittenrouter"
+				location.href = '/kittenrouter'
 			}
 		}
 	}
