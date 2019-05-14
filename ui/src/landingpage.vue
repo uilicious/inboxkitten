@@ -1,7 +1,7 @@
 <template>
 	<div class="landing-page">
 		<!-- <div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div> -->
-		<div class="nav">
+		<div class="navigation">
 			<img class="nav-main-logo" src="@/assets/kitten_router.png" @click="goToKittenRouter"/>
 		</div>
 		<div class="header-gradient-background">
@@ -199,7 +199,7 @@
 	@import "scss/landingpage.scss";
 	@import "primer-tooltips/index.scss";
 
-	.nav {
+	.navigation {
 		display:flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -223,7 +223,7 @@
 	}
 
 	@media only screen and (max-width:470px) {
-		.nav .nav-main-logo {
+		.navigation .nav-main-logo {
 			padding-right: 4rem;
 			width:5rem;
 			z-index: 3;

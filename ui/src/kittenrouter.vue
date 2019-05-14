@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="nav">
+		<div class="navigation">
 			<img class="nav-main-logo" src="@/assets/logo_no_text.svg" @click="goToMainPage"/>
 			<h4 class="nav-header" @click="goToMainPage">Inbox Kitten</h4>
 		</div>
@@ -159,7 +159,7 @@ export default {
 	@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
     @import "scss/landingpage.scss";
 
-	.nav {
+	.navigation {
 		display:flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -183,7 +183,7 @@ export default {
 	}
 
 	@media only screen and (max-width:470px) {
-		.nav .nav-main-logo {
+		.navigation .nav-main-logo {
 			padding-right: 4rem;
 			width:3rem;
 			z-index: 3;
