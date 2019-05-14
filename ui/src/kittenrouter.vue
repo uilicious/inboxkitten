@@ -161,27 +161,35 @@ export default {
 
 	.nav {
 		display:flex;
-		justify-content: flex-start;
+		justify-content: flex-end;
 		align-items: center;
-
-		padding-left:2rem;
-		padding-top:1rem;
-		background: #36D1DC;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		float:right;
 		width: 100vw;
-		height: 5.5rem;
+		height: 1rem;
 		text-align: left;
 
 		.nav-main-logo {
 			width:4rem;
+			padding-top:6rem;
 			padding-right: 1rem;
 			cursor: pointer;
 		}
 
 		.nav-header {
-			padding-right: 1rem;
+			padding-top:6rem;
+			padding-right: 3rem;
 			cursor: pointer;
+		}
+	}
+
+	@media only screen and (max-width:470px) {
+		.nav .nav-main-logo {
+			padding-right: 4rem;
+			width:3rem;
+			z-index: 3;
+		}
+		.nav-header {
+			display: none;
 		}
 	}
 </style>
