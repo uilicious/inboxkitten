@@ -1,5 +1,5 @@
 <template>
-	<div></div>
+	<div id="_carbon_ads_div"></div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@
 				placement: ''
 			}
 		},
-		created () {
+		mounted () {
 			// // Skip if disabled
 			// if (!config.enable) {
 			// 	return
@@ -33,7 +33,7 @@
 			scriptTag.setAttribute('async', 'async')
 			scriptTag.setAttribute('id', '_carbonads_js')
 
-			document.head.appendChild(scriptTag)
+			document.getElementById('_carbon_ads_div').appendChild(scriptTag)
 		}
 	}
 </script>
@@ -49,6 +49,9 @@
 	max-width: 300px;
 	font-size: 12px;
 	background-color: #fff;
+	float:left;
+	z-index: 4;
+	position: absolute;
 }
 
 #carbonads a {
@@ -90,4 +93,64 @@
 	line-height: 1;
 	letter-spacing: 1px;
 }
+
+@media only screen and (max-width:1120px) and (min-width: 760px) {
+	#carbonads {
+	display: block;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	padding: 1em;
+	background: #fff;
+	text-align: center;
+	line-height: 1.5;
+	font-size: 14px;
+	max-width: 130px;
+	}
+
+	#carbonads a {
+	color: inherit;
+	text-decoration: none;
+	}
+
+	#carbonads a:hover {
+	color: inherit;
+	}
+
+	#carbonads span {
+	display: block;
+	overflow: hidden;
+	}
+
+	.carbon-img {
+	display: block;
+	margin: 0 auto 8px;
+	line-height: 1;
+	}
+
+	.carbon-text {
+	display: block;
+	margin-bottom: 8px;
+	text-align: left;
+	color: #637381;
+	max-width:130px;
+	}
+
+	.carbon-poweredby {
+	text-transform: uppercase;
+	display: block;
+	font-size: 10px;
+	letter-spacing: 1px;
+	line-height: 1;
+	}
+}
+
+@media only screen and (max-width:760px){
+	#carbonads {
+		position:fixed;
+		width:100vw;
+		max-width: 100vw;
+		z-index: 99;
+	}
+}
+
 </style>

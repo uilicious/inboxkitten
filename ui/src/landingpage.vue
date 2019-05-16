@@ -110,7 +110,6 @@
 			<h2>Coming Soon!</h2>
 		</section>
 		-->
-		<CarbonAds placement="InboxKittenLanding"></CarbonAds>
 	</div>
 </template>
 <script>
@@ -119,13 +118,8 @@
 	import 'normalize.css'
 	import ClipboardJS from 'clipboard'
 
-	import CarbonAds from '@/components/CarbonAds'
-
 	export default {
 		name: 'LandingPage',
-		components: {
-			CarbonAds: CarbonAds
-		},
 		data () {
 			return {
 				msg: 'Welcome to Your Vue.js App',
@@ -230,6 +224,11 @@
 		}
 		.landing-nav-header {
 			display: none;
+		}
+	}
+	@media only screen and (max-width:760px){
+		.landing-page {
+			padding-top: 120px;
 		}
 	}
 </style>
