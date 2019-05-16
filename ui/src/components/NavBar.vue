@@ -133,8 +133,10 @@
 
 		.back-button {
 			position:absolute;
-			padding:3rem;
-			padding-left:8rem;
+			padding-left:30rem;
+			padding-top:3rem;
+			padding-right:3rem;
+			padding-bottom:3rem;
 			cursor: pointer;
 			margin:0;
 		}
@@ -193,7 +195,7 @@
 			}
 
 			.back-button {
-				padding-left:2rem;
+				padding-left:30rem;
 			}
 		}
 
@@ -214,7 +216,23 @@
 		}
 	}
 
-	@media (max-width: 768px) { // IPad portrait
+	@media only screen and (max-width: 1500px) {
+		.nav {
+			.back-button {
+				padding-left: 23rem;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 1300px) {
+		.nav {
+			.back-button {
+				padding-left: 15rem;
+			}
+		}
+	}
+
+	@media (max-width: 800px) { // IPad portrait
 		.nav{
 			.back-button{
 				padding:3rem;
@@ -251,6 +269,15 @@
 			.input-email{
 				width: 7rem;
 			}
+		}
+	}
+
+	@media only screen and (max-width: 800px) {
+		.nav {
+			background: #36D1DC;
+			background: -webkit-gradient(linear, left top, right top, from(#5B86E5), to(#36D1DC));
+			background: linear-gradient(to right, #5B86E5, #36D1DC);
+			padding-top:140px;
 		}
 	}
 

@@ -94,7 +94,7 @@
 	letter-spacing: 1px;
 }
 
-@media only screen and (max-width:1120px) and (min-width: 760px) {
+@media only screen and (max-width:1300px) and (min-width: 760px) {
 	#carbonads {
 	display: block;
 	overflow: hidden;
@@ -144,7 +144,7 @@
 	}
 }
 
-@media only screen and (max-width:760px){
+@media only screen and (max-width:800px){
 	#carbonads {
 		position:fixed;
 		width:100vw;

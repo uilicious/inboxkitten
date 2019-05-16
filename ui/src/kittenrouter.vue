@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="kittenrouter-page">
 		<div class="kittenrouter-navigation">
 			<img class="kittenrouter-nav-main-logo" src="@/assets/inbox_kitten.png" @click="goToMainPage"/>
 		</div>
@@ -171,6 +171,7 @@ export default {
 			width:8rem;
 			padding-top:7rem;
 			padding-right: 4rem;
+			z-index: 2;
 			cursor: pointer;
 		}
 
@@ -189,6 +190,15 @@ export default {
 		}
 		.kittenrouter-nav-header {
 			display: none;
+		}
+	}
+
+	@media only screen and (max-width: 800px) {
+		.kittenrouter-page {
+			background: #36D1DC;
+			background: -webkit-gradient(linear, left top, right top, from(#5B86E5), to(#36D1DC));
+			background: linear-gradient(to right, #5B86E5, #36D1DC);
+			padding-top: 140px;
 		}
 	}
 </style>

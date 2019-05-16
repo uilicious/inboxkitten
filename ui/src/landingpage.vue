@@ -206,6 +206,7 @@
 			width:8rem;
 			padding-top:7rem;
 			padding-right: 4rem;
+			z-index: 2;
 			cursor: pointer;
 		}
 
@@ -226,9 +227,12 @@
 			display: none;
 		}
 	}
-	@media only screen and (max-width:760px){
+	@media only screen and (max-width:800px){
 		.landing-page {
-			padding-top: 120px;
+			background: #36D1DC;
+			background: -webkit-gradient(linear, left top, right top, from(#5B86E5), to(#36D1DC));
+			background: linear-gradient(to right, #5B86E5, #36D1DC);
+			padding-top: 140px;
 		}
 	}
 </style>
