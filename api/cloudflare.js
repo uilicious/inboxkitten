@@ -5,7 +5,7 @@ addEventListener('fetch', event => {
 	event.respondWith(handleFetchEvent(event))
 })
 
-const KittenRouter = require("./src/cloudflare-api/KittenRouter");
+const KittenRouter = require("kittenrouter");
 const kittenRouterConfig = require("./config/kittenRouterConfig") || {};
 const router = new KittenRouter(kittenRouterConfig);
 
