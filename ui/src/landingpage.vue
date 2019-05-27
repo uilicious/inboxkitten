@@ -1,5 +1,6 @@
 <template>
 	<div class="landing-page">
+		<carbon-ads placement="InboxKittenLanding"></carbon-ads>
 		<!-- <div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div> -->
 		<div class="landing-navigation">
 			<img class="landing-nav-main-logo" src="@/assets/kitten_router.png" @click="goToKittenRouter"/>
@@ -118,8 +119,13 @@
 	import 'normalize.css'
 	import ClipboardJS from 'clipboard'
 
+	import CarbonAds from '@/components/CarbonAds'
+
 	export default {
 		name: 'LandingPage',
+		components: {
+			CarbonAds: CarbonAds
+		},
 		data () {
 			return {
 				msg: 'Welcome to Your Vue.js App',
@@ -228,10 +234,7 @@
 		}
 	}
 	@media only screen and (max-width:800px){
-		.landing-page {
-			background: #36D1DC;
-			background: -webkit-gradient(linear, left top, right top, from(#5B86E5), to(#36D1DC));
-			background: linear-gradient(to right, #5B86E5, #36D1DC);
+		.landing-navigation {
 			padding-top: 140px;
 		}
 	}

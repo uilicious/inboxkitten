@@ -195,7 +195,7 @@
 			}
 
 			.back-button {
-				padding-left:30rem;
+				padding-left:3rem;
 			}
 		}
 
@@ -212,22 +212,6 @@
 				background-color: $domain-base;
 				cursor: pointer;
 				width:10rem;
-			}
-		}
-	}
-
-	@media only screen and (max-width: 1500px) {
-		.nav {
-			.back-button {
-				padding-left: 23rem;
-			}
-		}
-	}
-
-	@media only screen and (max-width: 1300px) {
-		.nav {
-			.back-button {
-				padding-left: 15rem;
 			}
 		}
 	}
@@ -269,15 +253,6 @@
 			.input-email{
 				width: 7rem;
 			}
-		}
-	}
-
-	@media only screen and (max-width: 800px) {
-		.nav {
-			background: #36D1DC;
-			background: -webkit-gradient(linear, left top, right top, from(#5B86E5), to(#36D1DC));
-			background: linear-gradient(to right, #5B86E5, #36D1DC);
-			padding-top:140px;
 		}
 	}
 

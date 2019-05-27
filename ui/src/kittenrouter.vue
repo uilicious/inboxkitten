@@ -1,5 +1,6 @@
 <template>
-	<div class="kittenrouter-page">
+	<div>
+		<carbon-ads placement="InboxKittenLanding"></carbon-ads>
 		<div class="kittenrouter-navigation">
 			<img class="kittenrouter-nav-main-logo" src="@/assets/inbox_kitten.png" @click="goToMainPage"/>
 		</div>
@@ -136,8 +137,14 @@
 
 <script>
 import shareConfig from '@/../config/shareConfig.js'
+
+import CarbonAds from '@/components/CarbonAds'
+
 export default {
 	name: 'App',
+	components: {
+		CarbonAds: CarbonAds
+	},
 	data: () => {
 		return {
 			mainURL: shareConfig.mainURL
@@ -194,10 +201,7 @@ export default {
 	}
 
 	@media only screen and (max-width: 800px) {
-		.kittenrouter-page {
-			background: #36D1DC;
-			background: -webkit-gradient(linear, left top, right top, from(#5B86E5), to(#36D1DC));
-			background: linear-gradient(to right, #5B86E5, #36D1DC);
+		.kittenrouter-navigation {
 			padding-top: 140px;
 		}
 	}
