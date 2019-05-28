@@ -22,7 +22,7 @@ module.exports = async function(url) {
 	}
 
 	// Setup the authentication option object
-    let authenticationKey = this.btoa("api:" + config.apiKey);
+	let authenticationKey = this.btoa("api:" + config.apiKey);
 
 	let _authOption = {
 		headers: {

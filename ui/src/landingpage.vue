@@ -1,5 +1,10 @@
 <template>
 	<div class="landing-page">
+		<carbon-ads placement="InboxKittenLanding"></carbon-ads>
+		<!-- <div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div> -->
+		<div class="landing-navigation">
+			<img class="landing-nav-main-logo" src="@/assets/kitten_router.png" @click="goToKittenRouter"/>
+		</div>
 		<div class="header-gradient-background">
 			<div class="header">
 				<img class="logo" src="@/assets/inbox_kitten.png"/>
@@ -114,8 +119,13 @@
 	import 'normalize.css'
 	import ClipboardJS from 'clipboard'
 
+	import CarbonAds from '@/components/CarbonAds'
+
 	export default {
 		name: 'LandingPage',
+		components: {
+			CarbonAds: CarbonAds
+		},
 		data () {
 			return {
 				msg: 'Welcome to Your Vue.js App',
@@ -176,6 +186,9 @@
 						email: this.randomName
 					}
 				})
+			},
+			goToKittenRouter () {
+				location.href = '/kittenrouter'
 			}
 		}
 	}
@@ -185,4 +198,44 @@
 	@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 	@import "scss/landingpage.scss";
 	@import "primer-tooltips/index.scss";
+
+	.landing-navigation {
+		display:flex;
+		justify-content: flex-end;
+		align-items: center;
+		float:right;
+		width: 100vw;
+		height: 1rem;
+		text-align: left;
+
+		.landing-nav-main-logo {
+			width:8rem;
+			padding-top:7rem;
+			padding-right: 4rem;
+			z-index: 2;
+			cursor: pointer;
+		}
+
+		.landing-nav-header {
+			padding-top:6rem;
+			padding-right: 3rem;
+			cursor: pointer;
+		}
+	}
+
+	@media only screen and (max-width:470px) {
+		.landing-navigation .landing-nav-main-logo {
+			padding-right: 4rem;
+			width:5rem;
+			z-index: 3;
+		}
+		.landing-nav-header {
+			display: none;
+		}
+	}
+	@media only screen and (max-width:800px){
+		.landing-navigation {
+			padding-top: 140px;
+		}
+	}
 </style>

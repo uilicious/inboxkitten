@@ -238,7 +238,7 @@ body {
 	padding: 1rem;
 
 	.features {
-		padding-top:0.5rem;
+		padding-top:2rem;
 		margin:auto;
 		display:flex;
 		flex-direction:row;
@@ -252,6 +252,11 @@ body {
 		padding-left:1rem;
 		padding-right:1rem;
 	}
+	
+	.feature-card-hover:hover {
+		background-color:rgba(30,30,30,0.2);
+		border-radius: 8px;
+	}
 
 	.fas {
 		margin-right:0.5rem;
@@ -260,6 +265,12 @@ body {
 	@media only screen and (max-width:800px) {
 		.features {
 			flex-direction:column;
+		}
+	}
+
+	@media only screen and (max-width:1080px) {
+		.steps {
+			flex-direction: column;
 		}
 	}
 }
@@ -379,9 +390,24 @@ body {
 	scroll-behavior: auto;
 }
 
+.config-code {
+	font-size:0.8rem;
+	width:50rem;
+	max-width: 90%;
+	background: #F6F8FF;
+	margin:auto;
+	border-radius: 8px;
+	scroll-behavior: auto;
+	text-align:justify;
+}
+
 @media only screen and (max-width:800px) {
 	.deploy-code {
 		font-size:0.75rem;
+	}
+
+	.config-code {
+		font-size: 0.75rem;
 	}
 }
 

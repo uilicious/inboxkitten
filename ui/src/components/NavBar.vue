@@ -133,8 +133,10 @@
 
 		.back-button {
 			position:absolute;
-			padding:3rem;
-			padding-left:8rem;
+			padding-left:30rem;
+			padding-top:3rem;
+			padding-right:3rem;
+			padding-bottom:3rem;
 			cursor: pointer;
 			margin:0;
 		}
@@ -193,7 +195,7 @@
 			}
 
 			.back-button {
-				padding-left:2rem;
+				padding-left:3rem;
 			}
 		}
 
@@ -214,7 +216,7 @@
 		}
 	}
 
-	@media (max-width: 768px) { // IPad portrait
+	@media (max-width: 800px) { // IPad portrait
 		.nav{
 			.back-button{
 				padding:3rem;
