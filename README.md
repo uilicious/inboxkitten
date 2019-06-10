@@ -127,10 +127,20 @@ ___
 
 ## Step 4 - Deployment
 
+For API deployment on Firebase:
+
 ```
 	# Run the deployment script
 	$ ./deploy/firebase/deploy.sh 
 ```
+
+For API deployment on Cloudflare:
+
+```
+	# Run the deployment script
+	$ ./deploy/cloudflare/deploy.sh 
+```
+
 ---
 
 # Developing on localhost / Custom deployment
