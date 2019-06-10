@@ -28,7 +28,9 @@ module.exports = async function(url) {
 	};
 
 	try {
-        let [prefix, key, ...remainder] = mailKey.split("-")
+		let prefix = mailKey.slice(0,2)
+		let key = mailKey.slice(3)
+		
         // slice the mailgunApi to include the region
         let apiUrl = "https://api.mailgun.net/v3"
         apiUrl = apiUrl.replace("://", "://"+prefix+".")
