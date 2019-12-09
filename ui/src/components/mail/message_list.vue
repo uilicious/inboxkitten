@@ -6,7 +6,7 @@
              @click="getMessage(msg.storage.url)">
 
           <div class="row-info">
-            <div class="row-name">{{formatName(msg.message.headers.from)}}</div>
+            <div class="row-name">{{extractEmail(msg.message.headers.from)}}</div>
             <div class="row-subject">{{(msg.message.headers.subject)}}</div>
           </div>
 
@@ -119,13 +119,15 @@ export default {
       }
     },
 
-    formatName (sender) {
-      // Sender does not contain any formatted name, do not format them
-      if (sender.includes('<') || sender.includes('>')) {
-        let [name, emailUnformatted, ...rest] = sender.split(' <')
-        let [email, ...unknown] = emailUnformatted.split('>')
-        return email
+    extractEmail (sender) {
+      let emails = sender.match(/[^@<\s]+@[^@\s>]+/g)
+
+      // If there are any email in the matching, take the first and return
+      if (emails) {
+        return emails[0]
       }
+
+      // Sender does not contain any formatted name, do not format them
       return sender
     },
 
