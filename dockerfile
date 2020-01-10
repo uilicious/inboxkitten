@@ -27,13 +27,17 @@ COPY api /application/api/
 COPY ui  /application/ui/
 COPY docker-entrypoint.sh  /application/docker-entrypoint.sh
 
-# Scrub out node_modules
-RUN rm -f /application/api/node_modules
-RUN rm -f /application/ui/node_modules
+# Scrub out node_modules and built files
+RUN rm -rf /application/api/node_modules
+RUN rm -rf /application/ui/node_modules
+RUN rm -rf /application/ui/dist
 
 # Lets do the initial npm install
 RUN cd /application/ui  && ls && npm install --production
 RUN cd /application/api && ls && npm install --production
+
+# Lets do the initial builds
+RUN cd /application/ui && npm build
 
 #
 #

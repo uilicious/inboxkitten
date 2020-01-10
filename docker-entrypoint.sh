@@ -30,8 +30,20 @@ fi
 #
 echo ">> Applying config settings"
 cat "$projectDir/api/config/mailgunConfig.sample.js" | envsubst > "$projectDir/api/config/mailgunConfig.js"
-cat "$projectDir/ui/config/apiconfig.sample.js" | envsubst > "$projectDir/ui/config/apiconfig.js"
+cat "$projectDir/ui/config/apiconfig.sample.js"      | envsubst > "$projectDir/ui/config/apiconfig.js"
 
 #
 # Doing the required builds
 #
+
+# Build the UI
+cd /application/ui
+npm run build
+
+# Export it to the api server static host
+rm -rf /application/api/public/*
+cp -r /application/ui/dist/* /application/api/public/
+
+# Start the API
+cd /application/api/
+npm start
