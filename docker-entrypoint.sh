@@ -26,23 +26,23 @@ else
 fi
 
 #
-# Applying the configuration
+# Setup the UI
 #
-echo ">> Applying config settings"
-cat "$projectDir/api/config/mailgunConfig.sample.js" | envsubst > "$projectDir/api/config/mailgunConfig.js"
-cat "$projectDir/ui/config/apiconfig.sample.js"      | envsubst > "$projectDir/ui/config/apiconfig.js"
+echo ">> Setting up UI"
 
-#
-# Doing the required builds
-#
-
-# Build the UI
-cd /application/ui
-npm run build
-
-# Export it to the api server static host
+# Clone the files
 rm -rf /application/api/public/*
-cp -r /application/ui/dist/* /application/api/public/
+cp -r /application/ui-dist/ /application/api/public/
+
+# Find and replace
+find /application/api/public/ -type f -exec sed -i "s/\$\{MAILGUN_EMAIL_DOMAIN\}/$MAILGUN_EMAIL_DOMAIN/g" {} +
+find /application/api/public/ -type f -exec sed -i "s/\$\{WEBSITE_DOMAIN\}/$WEBSITE_DOMAIN/g" {} +
+
+#
+# Setup the API
+#
+echo ">> Setting up API config"
+cat "application/api/config/mailgunConfig.sample.js" | envsubst > "application/api/config/mailgunConfig.js"
 
 # Start the API
 cd /application/api/
