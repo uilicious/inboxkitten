@@ -24,6 +24,9 @@ app.use(function (req, res, next){
 	next();
 });
 
+// Static folder hosting
+app.use( express.static("public") )
+
 // Setup JSON encoding
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
