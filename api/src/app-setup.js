@@ -28,5 +28,8 @@ app.use(function (req, res, next){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Add an easy way to get the express module
+app.express = express;
+
 // Export the app module, for actual server deployment (on X)
 module.exports = app;
