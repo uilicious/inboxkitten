@@ -1,38 +1,69 @@
-FROM node:12-alpine AS ui-build
+#
+#
+# Base alpine image with all the various dependencies
+#
+#
+FROM node:12-alpine AS baseimage
 
+# Install dependencies
+RUN apk add --no-cache gettext
+
+# Setup the /application/ directory
+RUN mkdir -p /application/
+# WORKDIR /application/
+
+#
+#
+# Initial docker builder (resets node_modules)
+#
+#
+FROM baseimage AS builder
+
+# node-gyp installation 
+RUN apk add --no-cache make gcc g++ python
+
+# Copy over the requried files
+COPY api /application/api/
+COPY ui  /application/ui/
+COPY docker-entrypoint.sh  /application/docker-entrypoint.sh
+
+# Scrub out node_modules
+RUN rm -f /application/api/node_modules
+RUN rm -f /application/ui/node_modules
+
+# Lets do the initial npm install
+RUN cd /application/ui  && ls && npm install --production
+RUN cd /application/api && ls && npm install --production
+
+#
+#
+# Docker application
+#
+#
+FROM node:12-alpine as application
+
+# Copy over the built files
+COPY --from=builder /application /application/
+
+# Debugging logging
+RUN ls /application
+
+# Expose the server port
+EXPOSE 8000
+
+#
+# Configurable environment variable
+#
+ENV MAILGUN_EMAIL_DOMAIN=""
+ENV MAILGUN_API_KEY=""
+ENV WEBSITE_DOMAIN=""
 
 # #
-# # Build the golang imageproxy application
+# # Preload the NPM installs
 # #
-# FROM golang:1.12.6-alpine3.10 AS builder
+# RUN cd /application/ui  && ls && npm install
+# RUN cd /application/api && ls && npm install
 
-# # Lets get some useful stiff for building
-# RUN apk add --no-cache bash git openssh
-
-# # Get the image proxy repo
-# RUN go get willnorris.com/go/imageproxy/cmd/imageproxy
-
-# # Double checking that the single binary is installed
-# RUN ls -alh /go/bin
-
-# #
-# # Lets build the actual container
-# #
-# FROM alpine:latest  
-
-# # Lets add SSL support
-# RUN apk --no-cache add ca-certificates
-
-# # Copy over built file into bin
-# WORKDIR /bin/
-# COPY --from=builder /go/bin/imageproxy .
-
-# # Set workdir to /tmp/
-# WORKDIR /tmp/
-
-# # Debug checker 
-# RUN imageproxy --help || true
-
-# # Default entry starts the server at port 80
-# ENTRYPOINT [ "imageproxy" ]
-# CMD [ "-addr", "localhost:80" ]
+# Setup the entrypoint
+ENTRYPOINT [ "/application/docker-entrypoint.sh" ]
+CMD []
