@@ -44,9 +44,13 @@ And head over to port 8000 - for your inboxkitten
 # Other References
 
 - [Coding Guide](./CODE-GUIDE.md)
+
+# Looking for sponsor
+
+Note: Due to this project rather heavy traffic usage, a good half sadly spam/bot related, we are looking for a hosting sponsor / sponsor to subsidise running cost
 ___
 
-## Setup Mailgun
+## How to Setup Mailgun - and get your free API key
 
 ### Mailgun
 To sign up for a Mailgun account, go to the <a href="https://signup.mailgun.com/new/signup" target="_blank">signup</a> page.
