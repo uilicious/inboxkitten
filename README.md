@@ -8,19 +8,21 @@
 
 Visit [our site](https://inboxkitten.com) to give a spin, or ...
 
-Follow the 5 steps guide below to get started on Firebase!
+# Docker Deployment Guide
 
-- [Step 0 - Clone Me](#step-0---clone-me)
-- [Step 1 - Mailgun & Firebase signup](#step-1---mailgun--firebase-signup)
-- [Step 2 - Configuration](#step-2---configuration)
-- [Step 3 - Build the package](#step-3---build-the-package)
-- [Step 4 - Deployment](#step-4---deployment)
+Its one simple line - after signing up for mailgun, and getting your api key
 
-For other deployment options, refer to the following guide.
+```
+# PS: you should modify this for your use case
+docker run \
+	-e MAILGUN_EMAIL_DOMAIN="<email-domain>" \
+	-e MAILGUN_API_KEY="<api-key>" \
+	-e WEBSITE_DOMAIN="localhost:8000" \ 
+	-p 8000:8000 \
+	inboxkitten
+```
 
-- [localhost/custom manual configuration guide](#developing-on-localhost--custom-deployment)
-
-> Also do let us know how we can help make this better 😺
+And head over to port 8000 - for your inboxkitten
 
 # Support us on product hunt 🚀
 
@@ -35,6 +37,20 @@ For other deployment options, refer to the following guide.
 # Firebase Deployment Guide
 
 ## Step 0 - Clone Me
+
+Follow the 5 steps guide below to get started on Firebase!
+
+- [Step 0 - Clone Me](#step-0---clone-me)
+- [Step 1 - Mailgun & Firebase signup](#step-1---mailgun--firebase-signup)
+- [Step 2 - Configuration](#step-2---configuration)
+- [Step 3 - Build the package](#step-3---build-the-package)
+- [Step 4 - Deployment](#step-4---deployment)
+
+For other deployment options, refer to the following guide.
+
+- [localhost/custom manual configuration guide](#developing-on-localhost--custom-deployment)
+
+> Also do let us know how we can help make this better 😺
 
 ```
 	$ git clone https://github.com/uilicious/inboxkitten.git
