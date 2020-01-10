@@ -21,6 +21,7 @@ ui/config/apiconfig.js
 
 # Include sample config files
 !api/config/*.sample.js
+!api/config/cacheControl.js
 
 # Whitelist anchor files & .gitignore
 !.gitignore

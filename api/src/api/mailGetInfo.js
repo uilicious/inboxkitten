@@ -1,11 +1,12 @@
 // Loading mailgun reader and config
 const mailgunReader = require("../mailgunReader");
 const mailgunConfig = require("../../config/mailgunConfig");
+const cacheControl  = require("../../config/cacheControl");
 
 const reader = new mailgunReader(mailgunConfig);
 
 /**
- * Get and return the URL content from the mailgun API
+ * Get and return the static email header details from the mailgun API given the mailKey
  *
  * @param {*} req
  * @param {*} res
@@ -18,22 +19,25 @@ module.exports = function(req, res){
 	}
 
 	reader.getKey(mailKey).then(response => {
-			let emailDetails = {}
+		let emailDetails = {}
 
-			// Format and extract the name of the user
-			let [name, ...rest] = formatName(response.from)
-			emailDetails.name = name
+		// Format and extract the name of the user
+		let [name, ...rest] = formatName(response.from)
+		emailDetails.name = name
 
-			// Extract the rest of the email domain after splitting
-			if (rest[0].length > 0) {
-				emailDetails.emailAddress = ' <' + rest
-			}
+		// Extract the rest of the email domain after splitting
+		if (rest[0].length > 0) {
+			emailDetails.emailAddress = ' <' + rest
+		}
 
-			// Extract the subject of the response
-			emailDetails.subject = response.subject
+		// Extract the subject of the response
+		emailDetails.subject = response.subject
 
-			// Extract the recipients
-			emailDetails.recipients = response.recipients
+		// Extract the recipients
+		emailDetails.recipients = response.recipients
+
+		// Return with cache control
+		res.set('cache-control', cacheControl.static)
 		res.status(200).send(emailDetails)
 	})
 	.catch(e => {

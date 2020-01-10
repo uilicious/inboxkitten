@@ -1,11 +1,12 @@
 // Loading mailgun reader and config
 const mailgunReader = require("../mailgunReader");
 const mailgunConfig = require("../../config/mailgunConfig");
+const cacheControl  = require("../../config/cacheControl");
 
 const reader = new mailgunReader(mailgunConfig);
 
 /**
- * Mail listing api, returns the item list
+ * Mail listing api, returns the list of emails
  *
  * @param {*} req
  * @param {*} res
@@ -24,7 +25,8 @@ module.exports = function(req, res){
 	}
 
 	reader.recipientEventList(recipient+"@"+mailgunConfig.emailDomain).then(response => {
-		 res.status(200).send(response.items)
+		res.set('cache-control', cacheControl.dynamic)
+		res.status(200).send(response.items)
 	})
 	.catch(e => {
 		res.status(500).send("{error: '"+e+"'}")

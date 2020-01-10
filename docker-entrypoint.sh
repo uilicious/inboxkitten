@@ -1,6 +1,13 @@
 #!/bin/sh
 
 #
+# Entrypoint start
+#
+echo ">>---------------------------------------------------------------------"
+echo ">> Starting inboxkitten container : Get Mail Nyow!"
+echo ">>---------------------------------------------------------------------"
+
+#
 # Getting the various configuration settings from command line / environment variable
 #
 if [ -z "$MAILGUN_EMAIL_DOMAIN" ]; then
@@ -11,9 +18,8 @@ else
 fi
 
 if [ -z "$MAILGUN_API_KEY" ]; then
-	echo ">> Please type in your MAILGUN_API_KEY";
-	read -sp '>> MAILGUN_API_KEY : ' MAILGUN_API_KEY;
-	echo "";
+	echo "[FATAL ERROR] Missing MAILGUN_API_KEY";
+	exit 1;
 else
 	echo ">> Detected MAILGUN_API_KEY env variable : [intentionally redacted]";
 fi
@@ -26,24 +32,46 @@ else
 fi
 
 #
+# End of env variable checks
+# Moving to config setups
+#
+echo ">>---------------------------------------------------------------------"
+
+# Debug check
+# ls /application/
+
+#
 # Setup the UI
 #
 echo ">> Setting up UI"
 
 # Clone the files
-rm -rf /application/api/public/*
-cp -r /application/ui-dist/ /application/api/public/
+rm -rf /application/api/public/
+mkdir /application/api/public/
+cp -r /application/ui-dist/* /application/api/public/
+
+# Debug check
+# ls /application/api/public/
+
+# Search token (so that it does not get character substituted)
+TOKEN_MAILGUN_EMAIL_DOMAIN='${MAILGUN_EMAIL_DOMAIN}'
+TOKEN_WEBSITE_DOMAIN='${WEBSITE_DOMAIN}'
 
 # Find and replace
-find /application/api/public/ -type f -exec sed -i "s/\$\{MAILGUN_EMAIL_DOMAIN\}/$MAILGUN_EMAIL_DOMAIN/g" {} +
-find /application/api/public/ -type f -exec sed -i "s/\$\{WEBSITE_DOMAIN\}/$WEBSITE_DOMAIN/g" {} +
+find /application/api/public/ -type f -exec sed -i "s/$TOKEN_MAILGUN_EMAIL_DOMAIN/$MAILGUN_EMAIL_DOMAIN/g" {} +
+find /application/api/public/ -type f -exec sed -i "s/$TOKEN_WEBSITE_DOMAIN/$WEBSITE_DOMAIN/g" {} +
 
 #
 # Setup the API
 #
 echo ">> Setting up API config"
-cat "application/api/config/mailgunConfig.sample.js" | envsubst > "application/api/config/mailgunConfig.js"
+cat "/application/api/config/mailgunConfig.sample.js" | envsubst > "/application/api/config/mailgunConfig.js"
 
-# Start the API
+#
+# Start the server
+#
+echo ">>---------------------------------------------------------------------"
+echo ">> Starting the server"
+echo ">>---------------------------------------------------------------------"
 cd /application/api/
 npm start

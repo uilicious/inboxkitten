@@ -1,61 +1,79 @@
+#-------------------------------------------------------
 #
+# Base alpine images with all the runtime os dependencies
 #
-# Base alpine image with all the various dependencies
-#
-# Note that the node sass is broken with
+# Note that the node-sass is broken with node 12
 # https://github.com/nodejs/docker-node/issues/1028
 #
-#
+#-------------------------------------------------------
+
+# Does basic node, and runtime dependencies
 FROM node:10-alpine AS baseimage
-
-# Install dependencies
 RUN apk add --no-cache gettext
-
-# Setup the /application/ directory
 RUN mkdir -p /application/
 # WORKDIR /application/
 
+#-------------------------------------------------------
 #
+# code builders (used by dockerbuilders)
 #
-# Initial docker builder (resets node_modules)
-#
-#
-FROM baseimage AS builder
+#-------------------------------------------------------
 
-# node-gyp installation 
+# Install dependencies for some NPM modules
+FROM baseimage AS codebuilder
 RUN apk add --no-cache make gcc g++ python
 
-# Copy over the requried files
+#-------------------------------------------------------
+#
+# Docker builders (also resets node_modules)
+#
+# Note each major dependency is compiled seperately
+# so as to isolate the impact of each code change
+#
+#-------------------------------------------------------
+
+# Build the API
+# with reseted node_modules
+FROM codebuilder AS apibuilder
+# copy and reset the code
 COPY api /application/api/
-COPY ui  /application/ui/
-COPY docker-entrypoint.sh  /application/docker-entrypoint.sh
-
-# Scrub out node_modules and built files
 RUN rm -rf /application/api/node_modules
-RUN rm -rf /application/ui/node_modules
-RUN rm -rf /application/ui/dist
-
-# Lets do the initial npm install
-RUN cd /application/ui  && ls && npm install
 RUN cd /application/api && ls && npm install
 
+# Build the UI
+# with reseted node_modules
+FROM codebuilder AS uibuilder
+# copy and reset the code
+COPY ui  /application/ui/
+RUN rm -rf /application/ui/node_modules
+RUN rm -rf /application/ui/dist
+RUN cd /application/ui  && ls && npm install
 # Lets do the UI build
 RUN cp /application/ui/config/apiconfig.sample.js /application/ui/config/apiconfig.js
 RUN cd /application/ui && npm run build
 
+# Entry script 
+# & Permission reset
+FROM codebuilder AS entrypointbuilder
+COPY docker-entrypoint.sh  /application/docker-entrypoint.sh
+RUN chmod +x /application/docker-entrypoint.sh
+
+#-------------------------------------------------------
 #
+# Full Docker application
 #
-# Docker application
-#
-#
-FROM node:12-alpine as application
+#-------------------------------------------------------
+FROM baseimage as inboxkitten
 
 # Copy over the built files
-COPY --from=builder /application/api     /application/
-COPY --from=builder /application/ui/dist /application/ui-dist
+COPY --from=apibuilder        /application/api                  /application/api
+COPY --from=uibuilder         /application/ui/dist              /application/ui-dist
+COPY --from=entrypointbuilder /application/docker-entrypoint.sh /application/docker-entrypoint.sh
 
 # Debugging logging
-RUN ls /application
+# RUN ls /application/./
+# RUN ls /application/ui-dist
+# RUN ls /application/api
 
 # Expose the server port
 EXPOSE 8000
@@ -72,6 +90,9 @@ ENV WEBSITE_DOMAIN=""
 # #
 # RUN cd /application/ui  && ls && npm install
 # RUN cd /application/api && ls && npm install
+
+# Setup the workdir
+WORKDIR "/application/"
 
 # Setup the entrypoint
 ENTRYPOINT [ "/application/docker-entrypoint.sh" ]

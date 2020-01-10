@@ -1,11 +1,14 @@
 // Loading mailgun reader and config
 const mailgunReader = require("../mailgunReader");
 const mailgunConfig = require("../../config/mailgunConfig");
+const cacheControl  = require("../../config/cacheControl");
 
 const reader = new mailgunReader(mailgunConfig);
 
 /**
- * Get and return the URL content from the mailgun API
+ * Get and return the URL link from the mailgun API - for the mail gcontent
+ * 
+ * NOTE - this is to be deprecated
  *
  * @param {*} req
  * @param {*} res
@@ -18,7 +21,8 @@ module.exports = function(req, res){
 	}
 
 	reader.getUrl(url).then(response => {
-		 res.status(200).send(response)
+		res.set('cache-control', cacheControl.static)
+		res.status(200).send(response)
 	})
 	.catch(e => {
 		res.status(500).send("{error: '"+e+"'}")
