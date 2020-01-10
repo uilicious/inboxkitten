@@ -85,12 +85,6 @@ ENV MAILGUN_EMAIL_DOMAIN=""
 ENV MAILGUN_API_KEY=""
 ENV WEBSITE_DOMAIN=""
 
-# #
-# # Preload the NPM installs
-# #
-# RUN cd /application/ui  && ls && npm install
-# RUN cd /application/api && ls && npm install
-
 # Setup the workdir
 WORKDIR "/application/"
 

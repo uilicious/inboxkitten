@@ -1,0 +1,19 @@
+#
+# Hidden files ignore
+#
+.*
+
+#
+# Remove uneeded files from docker context
+#
+/api/node_modules
+/ui/node_modules
+/ui/dist
+/cli/**
+/deploy/**
+
+#
+# Config files to ignore
+#
+/ui/config/apiconfig.js
+/api/config/mailgunConfig.js
