@@ -35,10 +35,15 @@ RUN apk add --no-cache make gcc g++ python
 # Build the API
 # with reseted node_modules
 FROM codebuilder AS apibuilder
-# copy and reset the code
+# copy and download dependencies
+COPY api/package.json /application/api-mods/package.json
+RUN cd /application/api-mods/ && npm install
+# copy source code
 COPY api /application/api/
 RUN rm -rf /application/api/node_modules
-RUN cd /application/api && ls && npm install
+# merge in dependnecies
+RUN cp -r /application/api-mods/node_modules /application/api/node_modules
+RUN ls /application/api/
 
 # Build the UI
 # with reseted node_modules
