@@ -5,13 +5,13 @@ const cacheControl = require("./config/cacheControl");
 let app = require("./src/app-setup");
 
 // Setup the routes
-app.get("/api/v1/mail/list",   require("./src/api/mailList"));
+app.get("/api/v1/mail/list",    require("./src/api/mailList"));
 app.get("/api/v1/mail/getInfo", require("./src/api/mailGetInfo"));
 app.get("/api/v1/mail/getHtml", require("./src/api/mailGetHtml"));
 
 // Legacy fallback behaviour - 
 // Note this is to be deprecated (after updating UI)
-app.get("/api/v1/mail/getKey", require("./src/api/mailGetInfo"));
+app.get("/api/v1/mail/getKey",  require("./src/api/mailGetInfo"));
 
 // Static regex 
 const staticRegex = /static\/(js|css|img)\/(.+)\.([a-zA-Z0-9]+)\.(css|js|png|gif)/g;
