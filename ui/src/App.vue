@@ -35,9 +35,11 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+
 	@import url("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
 	@import "scss/_producthunt.scss";
 	@import "scss/_common.scss";
+
 	#app {
 		font-family: 'Avenir', Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
@@ -51,13 +53,6 @@ export default {
 
 	.app-router-view {
 		flex:1;
-	}
-
-	// Some forceful scroll bar fixing
-	html, body {
-		margin: 0;
-		padding: 0;
-		overflow-x: hidden;
 	}
 
 	// Github corner styling
