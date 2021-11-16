@@ -1,5 +1,11 @@
 <template>
     <vue-scroll :ops="vueScrollBarOps">
+      <div class="table-box advisory" style="
+          background: #fbc02d4f;
+          padding: 0.5em;
+      ">
+        <i class="fas fa-exclamation-triangle" style="margin-right:0.5em"></i><a href="https://uilicious.com/blog/psa-inboxkitten-will-be-blocking-no-reply-google/" target="_blank"><b>PSA</b>: Please use inboxkitten, for only testing, or non critical emails. See here for more details.</a>
+      </div>
       <pulse-loader v-if="refreshing" class="loading"></pulse-loader>
       <div class="table-box" v-if="listOfMessages.length > 0">
         <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
@@ -160,7 +166,7 @@ export default {
       border-bottom: 3px solid #20a0ff;
 
       .row-info {
-        width: 75%;
+        width: 85%;
 
         .row-name {
           font-weight: bold;
@@ -207,8 +213,12 @@ export default {
       .row-info {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         .row-name {
+          margin-right: 1em;
+          width: 35%;
+          min-width: 35%;
+          max-width: 35%;
         }
       }
       border-bottom: 1px solid #20a0ff;

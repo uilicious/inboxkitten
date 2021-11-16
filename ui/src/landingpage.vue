@@ -36,7 +36,16 @@
 			</div>
 		</div>
 		<div class="info-guide mx-a my-0 p-2" style="max-width: 1240px; ">
-
+			<div class="pure-g mx-a" style="max-width: 1000px; background: #fbc02d4f; padding-top: 1em;">
+				<div class="pure-u-1-1">
+						<section class="p-1">
+						<h3>
+							<i class="fas fa-exclamation-triangle"></i> PSA: Please use inboxkitten, for only testing, or non critical emails.
+						</h3>
+						<p><a href="https://uilicious.com/blog/psa-inboxkitten-will-be-blocking-no-reply-google/" target="_blank">We block "no-reply@google" to prevent abuse on our platform, see more details on our blog post (here)</a></p>
+					</section>
+				</div>
+			</div>
 			<div class="pure-g mx-a my-1" style="max-width: 1000px;">
 				<div class="pure-u-1-2">
 					<section class="p-1">
