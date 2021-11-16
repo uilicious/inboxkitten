@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="info-guide mx-a my-0 p-2" style="max-width: 1240px; ">
-			<div class="pure-g mx-a" style="max-width: 1000px; background: #fbc02d4f; padding-top: 1em;">
+			<div class="pure-g mx-a" style="max-width: 1000px; background: #fbc02d4f;">
 				<div class="pure-u-1-1">
 						<section class="p-1">
 						<h3>
