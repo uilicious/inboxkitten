@@ -42,7 +42,7 @@
 						<h3>
 							<i class="fas fa-exclamation-triangle"></i> PSA: Please use inboxkitten, for only testing, or non critical emails.
 						</h3>
-						<p><a href="https://uilicious.com/blog/psa-inboxkitten-will-be-blocking-no-reply-google/">We block "no-reply@google" to prevent abuse on our platform, see more details on our blog post (here)</a></p>
+						<p><a href="https://uilicious.com/blog/psa-inboxkitten-will-be-blocking-no-reply-google/" target="_blank">We block "no-reply@google" to prevent abuse on our platform, see more details on our blog post (here)</a></p>
 					</section>
 				</div>
 			</div>
