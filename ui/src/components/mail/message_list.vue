@@ -160,7 +160,7 @@ export default {
       border-bottom: 3px solid #20a0ff;
 
       .row-info {
-        width: 75%;
+        width: 85%;
 
         .row-name {
           font-weight: bold;
@@ -207,8 +207,12 @@ export default {
       .row-info {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         .row-name {
+          margin-right: 1em;
+          width: 35%;
+          min-width: 35%;
+          max-width: 35%;
         }
       }
       border-bottom: 1px solid #20a0ff;
