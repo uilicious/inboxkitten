@@ -55,7 +55,7 @@ ___
 ### Mailgun
 To sign up for a Mailgun account, go to the <a href="https://signup.mailgun.com/new/signup" target="_blank">signup</a> page.
 
-> 2021 Udpate: Inbound routing for mailgun, now requires any paid account (starting at $35/month) see : https://www.mailgun.com/pricing/
+> 2021 Update: Inbound routing for mailgun, now requires any paid account (starting at $35/month) see : https://www.mailgun.com/pricing/
 
 #### Custom Domain
 ```
