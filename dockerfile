@@ -85,10 +85,9 @@ EXPOSE 8000
 
 #
 # Configurable environment variable
-#
 ENV MAILGUN_EMAIL_DOMAIN=""
 ENV MAILGUN_API_KEY=""
-ENV WEBSITE_DOMAIN=""
+ENV WEBSITE_DOMAIN="localhost:8000"
 
 # Setup the workdir
 WORKDIR "/application/"

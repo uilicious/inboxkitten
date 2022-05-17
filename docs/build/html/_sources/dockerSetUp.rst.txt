@@ -1,0 +1,27 @@
+.. _dockerSetUp:
+
+Pre-Requisites
+==============
+
+Install relevant applications and libraries
+-------------------------------------------
+1. Install Docker `here <https://www.docker.com/products/docker-desktop/>`_.
+2. Install Visual Studio Code `here <https://code.visualstudio.com/>`_.
+3. Install Node.js `here <https://nodejs.org/en/download/>`_. -Tested using node.js LTS version: 16.15.0-
+
+Configure to allow virtualization
+---------------------------------
+How to check if virtualization is enabled?
+
+1. Open up task manager (Ctrl + Alt + Del)
+2. Go to Performance Tab
+3. Check Virtualization whether its enabled
+
+.. figure:: /images/TaskManagerVirtualization.JPG
+   :alt: Virtualization
+   :align: center
+   :scale: 80 %
+
+If it is disabled, follo
+Enabling Hypervisor/HyperV on Windows
+-------------------------------------
