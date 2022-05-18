@@ -14,7 +14,9 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Install Docker on Visual Studio Code" href="VSSetUp.html" />
+    <link rel="prev" title="Home" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -22,6 +24,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="VSSetUp.html" title="Install Docker on Visual Studio Code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Home"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">inboxkitten  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Pre-Requisites</a></li> 
       </ul>
@@ -44,18 +52,28 @@
 </section>
 <section id="configure-to-allow-virtualization">
 <h2>Configure to allow virtualization<a class="headerlink" href="#configure-to-allow-virtualization" title="Permalink to this headline">¶</a></h2>
-<p>How to check if virtualization is enabled?</p>
+<p>How to check if virtualization is enabled? <br>
+1. Open up task manager (Ctrl + Alt + Del) <br>
+2. Go to Performance Tab <br>
+3. Check Virtualization whether its enabled</p>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/TaskManagerVirtualization.JPG"><img alt="Virtualization" class="with-border" src="_images/TaskManagerVirtualization.JPG" style="width: 530.4px; height: 473.6px;" /></a>
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>If it is disabled, proceed to <a class="reference external" href="https://support.bluestacks.com/hc/en-us/articles/360058102252-How-to-enable-Virtualization-VT-on-Windows-10-for-BlueStacks-5">How to enable virtualization</a>.</p></li>
+<li><p>Else proceed to Enabling Hypervisor/HyperV on Windows</p></li>
+</ol>
+</section>
+<section id="enabling-hypervisor-hyperv-on-windows">
+<h2>Enabling Hypervisor/HyperV on Windows<a class="headerlink" href="#enabling-hypervisor-hyperv-on-windows" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Open up task manager (Ctrl + Alt + Del)</p></li>
-<li><p>Go to Performance Tab</p></li>
-<li><p>Check Virtualization whether its enabled</p></li>
+<li><p>Search “Turn Windows features on and off” in windows search</p></li>
+<li><p>Check Windows Hypervisor platform / Check HyperV</p></li>
+<li><p>Restart Computer</p></li>
 </ol>
 <figure class="align-center">
-<a class="reference internal image-reference" href="_images/TaskManagerVirtualization.JPG"><img alt="Virtualization" src="_images/TaskManagerVirtualization.JPG" style="width: 530.4px; height: 473.6px;" /></a>
+<a class="with-border reference internal image-reference" href="_images/WindowsHypervisor.JPG"><img alt="WindowsHypervisor" class="with-border" src="_images/WindowsHypervisor.JPG" style="width: 419.0px; height: 371.0px;" /></a>
 </figure>
-<p>If it is disabled, follo
-Enabling Hypervisor/HyperV on Windows
-————————————-</p>
 </section>
 </section>
 
@@ -72,10 +90,35 @@ Enabling Hypervisor/HyperV on Windows
 <li><a class="reference internal" href="#">Pre-Requisites</a><ul>
 <li><a class="reference internal" href="#install-relevant-applications-and-libraries">Install relevant applications and libraries</a></li>
 <li><a class="reference internal" href="#configure-to-allow-virtualization">Configure to allow virtualization</a></li>
+<li><a class="reference internal" href="#enabling-hypervisor-hyperv-on-windows">Enabling Hypervisor/HyperV on Windows</a></li>
 </ul>
 </li>
 </ul>
 
+  </div>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pre-Requisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-relevant-applications-and-libraries">Install relevant applications and libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configure-to-allow-virtualization">Configure to allow virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-hypervisor-hyperv-on-windows">Enabling Hypervisor/HyperV on Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VSSetUp.html">Install Docker on Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailgunSetUp.html">Setting up Mailgun</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Home</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="VSSetUp.html"
+                          title="next chapter">Install Docker on Visual Studio Code</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -104,6 +147,12 @@ Enabling Hypervisor/HyperV on Windows
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="VSSetUp.html" title="Install Docker on Visual Studio Code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Home"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">inboxkitten  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Pre-Requisites</a></li> 
       </ul>
