@@ -27,8 +27,7 @@ author = 'UIlicious'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-]
+extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -43,10 +42,17 @@ exclude_patterns = []
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
 html_theme = 'nature'
 
+#configure the sidebar width
+html_theme_options = {
+    'sidebarwidth': 300, #configure sidebar width
+    'body_max_width': 1000, #configure the body of the main page
+}
+
+#configure what is displayed on the sidebar
 html_sidebars = { '**': ['localtoc.html','globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'] }
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
