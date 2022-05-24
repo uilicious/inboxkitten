@@ -11,13 +11,13 @@ Home
 
 .. toctree::
    :glob:
+   :numbered:
    :maxdepth: 2
    :caption: Contents:
 
    self
-   dockerSetUp
-   VSSetUp
    mailgunSetUp
+   VSApplicationRun
 
 .. figure:: /images/inboxkitten_logo.jpg
    :alt: Inbox Kitten Logo
@@ -31,12 +31,17 @@ Inboxkitten is an open-source disposable email service that you can freely deplo
 
 Visit `our site <https://inboxkitten.com/>`_ to give a spin or run it on your local machine!
 
-How to run InboxKitten
-----------------------
+Pre-Requisites
+--------------
 
 * :ref:`Setting Up Docker <dockerSetUp>`
 * :ref:`Setting Up Visual Studio Code <VSSetUp>`
+
+How to run InboxKitten
+----------------------
+
 * :ref:`Setting Up Mailgun <mailgunSetUp>`
+* :ref:`Running Inbox Kitten <VSApplicationRun>`
 
 .. * :ref:`genindex`
 .. * :ref:`search`

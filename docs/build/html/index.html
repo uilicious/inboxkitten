@@ -15,7 +15,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pre-Requisites" href="dockerSetUp.html" /> 
+    <link rel="next" title="1. Setting up Mailgun" href="mailgunSetUp.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,7 +24,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="dockerSetUp.html" title="Pre-Requisites"
+          <a href="mailgunSetUp.html" title="1. Setting up Mailgun"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">inboxkitten  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Home</a></li> 
@@ -42,14 +42,19 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dockerSetUp.html">Pre-Requisites</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dockerSetUp.html#install-relevant-applications-and-libraries">Install relevant applications and libraries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dockerSetUp.html#configure-to-allow-virtualization">Configure to allow virtualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dockerSetUp.html#enabling-hypervisor-hyperv-on-windows">Enabling Hypervisor/HyperV on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailgunSetUp.html">1. Setting up Mailgun</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mailgunSetUp.html#getting-details-such-as-api-key-and-mailgun-email-domain">1.1. Getting details such as API Key and Mailgun Email domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailgunSetUp.html#setting-up-a-route-to-receive-emails">1.2. Setting up a route to receive emails</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="VSSetUp.html">Install Docker on Visual Studio Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mailgunSetUp.html">Setting up Mailgun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VSApplicationRun.html">2. Running inboxkitten</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="VSApplicationRun.html#visual-studio-by-editing-docker-file">2.1. Visual Studio (By Editing Docker File)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VSApplicationRun.html#running-with-only-bash">2.2. Running with only bash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VSApplicationRun.html#using-inboxkitten">2.3. Using inboxkitten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VSApplicationRun.html#removing-an-image-of-a-running-instance">2.4. Removing an image of a running instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VSApplicationRun.html#stopping-a-running-instance">2.5. Stopping a running instance</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <figure class="align-center">
@@ -60,12 +65,18 @@
 <p>Inboxkitten is an open-source disposable email service that you can freely deploy adopt on your own!</p>
 <p>Visit <a class="reference external" href="https://inboxkitten.com/">our site</a> to give a spin or run it on your local machine!</p>
 </section>
-<section id="how-to-run-inboxkitten">
-<h2>How to run InboxKitten<a class="headerlink" href="#how-to-run-inboxkitten" title="Permalink to this headline">¶</a></h2>
+<section id="pre-requisites">
+<h2>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="dockerSetUp.html#dockersetup"><span class="std std-ref">Setting Up Docker</span></a></p></li>
 <li><p><a class="reference internal" href="VSSetUp.html#vssetup"><span class="std std-ref">Setting Up Visual Studio Code</span></a></p></li>
+</ul>
+</section>
+<section id="how-to-run-inboxkitten">
+<h2>How to run InboxKitten<a class="headerlink" href="#how-to-run-inboxkitten" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
 <li><p><a class="reference internal" href="mailgunSetUp.html#mailgunsetup"><span class="std std-ref">Setting Up Mailgun</span></a></p></li>
+<li><p><a class="reference internal" href="VSApplicationRun.html#vsapplicationrun"><span class="std std-ref">Running Inbox Kitten</span></a></p></li>
 </ul>
 </section>
 <section id="support-us-on-product-hunt">
@@ -103,6 +114,7 @@
     <ul>
 <li><a class="reference internal" href="#">Home</a><ul>
 <li><a class="reference internal" href="#welcome-to-inboxkitten-s-documentation">Welcome to inboxkitten’s documentation!</a></li>
+<li><a class="reference internal" href="#pre-requisites">Pre-Requisites</a></li>
 <li><a class="reference internal" href="#how-to-run-inboxkitten">How to run InboxKitten</a></li>
 <li><a class="reference internal" href="#support-us-on-product-hunt">Support us on product hunt 🚀</a></li>
 <li><a class="reference internal" href="#somewhat-related-blog-articles">Somewhat related blog / articles</a></li>
@@ -117,15 +129,14 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dockerSetUp.html">Pre-Requisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="VSSetUp.html">Install Docker on Visual Studio Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mailgunSetUp.html">Setting up Mailgun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailgunSetUp.html">1. Setting up Mailgun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VSApplicationRun.html">2. Running inboxkitten</a></li>
 </ul>
 
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="dockerSetUp.html"
-                          title="next chapter">Pre-Requisites</a></p>
+    <p class="topless"><a href="mailgunSetUp.html"
+                          title="next chapter"><span class="section-number">1. </span>Setting up Mailgun</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -155,7 +166,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="dockerSetUp.html" title="Pre-Requisites"
+          <a href="mailgunSetUp.html" title="1. Setting up Mailgun"
              >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">inboxkitten  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Home</a></li> 

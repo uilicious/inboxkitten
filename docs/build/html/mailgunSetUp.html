@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Setting up Mailgun &#8212; inboxkitten  documentation</title>
+    <title>1. Setting up Mailgun &#8212; inboxkitten  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -15,7 +15,8 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Install Docker on Visual Studio Code" href="VSSetUp.html" /> 
+    <link rel="next" title="2. Running inboxkitten" href="VSApplicationRun.html" />
+    <link rel="prev" title="Home" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,10 +25,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="VSSetUp.html" title="Install Docker on Visual Studio Code"
+          <a href="VSApplicationRun.html" title="2. Running inboxkitten"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Home"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">inboxkitten  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Setting up Mailgun</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Setting up Mailgun</a></li> 
       </ul>
     </div>  
 
@@ -37,7 +41,55 @@
           <div class="body" role="main">
             
   <section id="setting-up-mailgun">
-<span id="mailgunsetup"></span><h1>Setting up Mailgun<a class="headerlink" href="#setting-up-mailgun" title="Permalink to this headline">¶</a></h1>
+<span id="mailgunsetup"></span><h1><span class="section-number">1. </span>Setting up Mailgun<a class="headerlink" href="#setting-up-mailgun" title="Permalink to this headline">¶</a></h1>
+<p><strong>PS Requires user to add credit card information. It works without paying any money but still requires credit card information to use it in foundation trial</strong></p>
+<section id="getting-details-such-as-api-key-and-mailgun-email-domain">
+<h2><span class="section-number">1.1. </span>Getting details such as API Key and Mailgun Email domain<a class="headerlink" href="#getting-details-such-as-api-key-and-mailgun-email-domain" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Click Dashboard Tab</p></li>
+<li><p>Under sending domain, the string ending with mailgun.org is the sandbox domain name</p></li>
+</ol>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/MailgunReceive.png"><img alt="Mailgun Receive" class="with-border" src="_images/MailgunReceive.png" style="width: 1468.8000000000002px; height: 560.0px;" /></a>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>Click API Keys</p></li>
+</ol>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/MailgunAPIKey.png"><img alt="Mailgun API Key" class="with-border" src="_images/MailgunAPIKey.png" style="width: 1439.2px; height: 668.0px;" /></a>
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>The private API Key is used as the connection API Key</p></li>
+</ol>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/MailgunAPI.png"><img alt="Mailgun API Key" class="with-border" src="_images/MailgunAPI.png" style="width: 1167.2px; height: 441.6px;" /></a>
+</figure>
+</section>
+<section id="setting-up-a-route-to-receive-emails">
+<h2><span class="section-number">1.2. </span>Setting up a route to receive emails<a class="headerlink" href="#setting-up-a-route-to-receive-emails" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Proceed to the receiving tab</p></li>
+<li><p>Click on create new route</p></li>
+</ol>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/MailgunReceive.png"><img alt="Mailgun Receive" class="with-border" src="_images/MailgunReceive.png" style="width: 1468.8000000000002px; height: 560.0px;" /></a>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>Change Expression type to match recipient if you want to catch specific email addresses or else just use Catch All</p></li>
+<li><p>Check Store and Notify</p></li>
+</ol>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/MailgunCreateRoute1.JPG"><img alt="Mailgun Create Route 1" class="with-border" src="_images/MailgunCreateRoute1.JPG" style="width: 1206.4px; height: 670.4000000000001px;" /></a>
+</figure>
+<ol class="arabic simple" start="5">
+<li><p>Click on create route</p></li>
+</ol>
+<figure class="align-center">
+<a class="with-border reference internal image-reference" href="_images/MailgunCreateRoute2.JPG"><img alt="Mailgun Create Route 2" class="with-border" src="_images/MailgunCreateRoute2.JPG" style="width: 1219.2px; height: 648.0px;" /></a>
+</figure>
+<p>At this point, Mailgun should receive any email sent to the sendbox domain.
+E.g. if the domain is sandbox293ds9021.mailgun.org, to send an email to your domain the format will be [name]&#64;sandbox293ds9021.mailgun.org, example mail sent to <a class="reference external" href="mailto:cat&#37;&#52;&#48;sandbox293ds9021&#46;mailgun&#46;org">cat<span>&#64;</span>sandbox293ds9021<span>&#46;</span>mailgun<span>&#46;</span>org</a> will be stored in mailgun’s storage.</p>
+</section>
 </section>
 
 
@@ -47,19 +99,38 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">1. Setting up Mailgun</a><ul>
+<li><a class="reference internal" href="#getting-details-such-as-api-key-and-mailgun-email-domain">1.1. Getting details such as API Key and Mailgun Email domain</a></li>
+<li><a class="reference internal" href="#setting-up-a-route-to-receive-emails">1.2. Setting up a route to receive emails</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
 <h3><a href="index.html">Table of Contents</a></h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dockerSetUp.html">Pre-Requisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="VSSetUp.html">Install Docker on Visual Studio Code</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up Mailgun</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Setting up Mailgun</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-details-such-as-api-key-and-mailgun-email-domain">1.1. Getting details such as API Key and Mailgun Email domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-route-to-receive-emails">1.2. Setting up a route to receive emails</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VSApplicationRun.html">2. Running inboxkitten</a></li>
 </ul>
 
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="VSSetUp.html"
-                          title="previous chapter">Install Docker on Visual Studio Code</a></p>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Home</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="VSApplicationRun.html"
+                          title="next chapter"><span class="section-number">2. </span>Running inboxkitten</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -89,10 +160,13 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="VSSetUp.html" title="Install Docker on Visual Studio Code"
+          <a href="VSApplicationRun.html" title="2. Running inboxkitten"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Home"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">inboxkitten  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Setting up Mailgun</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Setting up Mailgun</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
