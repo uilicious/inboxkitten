@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Setting Up and running inbox kitten (Serverless) &#8212; inboxkitten  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Using Firebase with inbox kitten" href="FBserverSetUp.html" />
+    <link rel="prev" title="2. Running inboxkitten" href="VSApplicationRun.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="FBserverSetUp.html" title="4. Using Firebase with inbox kitten"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="VSApplicationRun.html" title="2. Running inboxkitten"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">inboxkitten  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Setting Up and running inbox kitten (Serverless)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="setting-up-and-running-inbox-kitten-serverless">
+<span id="devsetup"></span><h1><span class="section-number">3. </span>Setting Up and running inbox kitten (Serverless)<a class="headerlink" href="#setting-up-and-running-inbox-kitten-serverless" title="Permalink to this headline">¶</a></h1>
+<section id="notes">
+<h2><span class="section-number">3.1. </span>notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>dev is only compatible with node 10 currently</p></li>
+<li><p>dev needs to be runned with api concurrently</p></li>
+</ul>
+</section>
+<section id="setting-up-and-running-api">
+<h2><span class="section-number">3.2. </span>Setting up and running API<a class="headerlink" href="#setting-up-and-running-api" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Open a bash terminal</p></li>
+<li><p>Enter the following command into the terminal</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">api</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Enter the following command into the terminal</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Go to /api/config and find mailgunConfig.sample.js, make a copy and rename the copy as mailgunConfig.js. Edit the apikey and email domain respectively.</p></li>
+</ol>
+<ul class="simple">
+<li><p>APIKEY: Mailgun’s private API key</p></li>
+<li><p>EMAIL DOMAIN: Mailgun’s provided email domain e.g. sandbox82ha8919eja9djs.mailgun.org</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Enter the following command into the terminal</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>Currently, if nothing else was set up, an message indicating index.html is missing should appear.</p>
+<ol class="arabic simple" start="6">
+<li><p>You can proceed to any of this url extensions</p></li>
+</ol>
+<ul class="simple">
+<li><p>/api/v1/mail/list</p></li>
+<li><p>/api/v1/mail/getinfo</p></li>
+<li><p>/api/v1/mail/gethtml</p></li>
+</ul>
+</section>
+<section id="setting-up-and-running-dev">
+<h2><span class="section-number">3.3. </span>Setting up and running dev<a class="headerlink" href="#setting-up-and-running-dev" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Open up another bash terminal</p></li>
+<li><p>Enter the following command into the terminal</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ui</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Enter the following command into the terminal</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span> <span class="mi">2</span> <span class="n">make</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Since inbox kitten only works in node 10, enter the following command</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">n</span>
+<span class="n">n</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Now open up another bash terminal and enter and run the following commands</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ui</span>
+<span class="n">npm</span> <span class="n">install</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Go to /ui/config and find apiConfig.sample.js, make a copy and rename the copy as apiConfig.js. Edit the website_domain and domain respectively.</p></li>
+</ol>
+<p>NOTE:</p>
+<ul class="simple">
+<li><p>WEBSITE_DOMAIN is the address your api is running on. So if it’s running on localhost:8000 , WEBSITE_DOMAIN is localhost:8000.</p></li>
+<li><p>DOMAIN is the mailgun email link. e.g. sandbox209sa9sa892.mailgun.org</p></li>
+</ul>
+<ol class="arabic simple" start="7">
+<li><p>Enter the following command into the terminal</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">dev</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li><p>If you want to view the dev. Example if localhost:8000 is the website domain, go to locahost:8000/api/v1/mail to see the program.</p></li>
+</ol>
+</section>
+<section id="setting-up-and-running-build">
+<h2><span class="section-number">3.4. </span>Setting up and running build<a class="headerlink" href="#setting-up-and-running-build" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Change directory to ui via this command</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ui</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>For deployment, enter the following command</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">build</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Copy contents of ui/dist folder into api/public folder using this command</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">dist</span><span class="o">/*</span> <span class="o">../</span><span class="n">api</span><span class="o">/</span><span class="n">public</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Change directory to api via this command</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span><span class="n">api</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Lastly enter this command to run the build</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">start</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">3. Setting Up and running inbox kitten (Serverless)</a><ul>
+<li><a class="reference internal" href="#notes">3.1. notes</a></li>
+<li><a class="reference internal" href="#setting-up-and-running-api">3.2. Setting up and running API</a></li>
+<li><a class="reference internal" href="#setting-up-and-running-dev">3.3. Setting up and running dev</a></li>
+<li><a class="reference internal" href="#setting-up-and-running-build">3.4. Setting up and running build</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailgunSetUp.html">1. Setting up Mailgun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VSApplicationRun.html">2. Running inboxkitten</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Setting Up and running inbox kitten (Serverless)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#notes">3.1. notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-and-running-api">3.2. Setting up and running API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-and-running-dev">3.3. Setting up and running dev</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-and-running-build">3.4. Setting up and running build</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FBserverSetUp.html">4. Using Firebase with inbox kitten</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="VSApplicationRun.html"
+                          title="previous chapter"><span class="section-number">2. </span>Running inboxkitten</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="FBserverSetUp.html"
+                          title="next chapter"><span class="section-number">4. </span>Using Firebase with inbox kitten</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/devSetUp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="FBserverSetUp.html" title="4. Using Firebase with inbox kitten"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="VSApplicationRun.html" title="2. Running inboxkitten"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">inboxkitten  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Setting Up and running inbox kitten (Serverless)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, UIlicious.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

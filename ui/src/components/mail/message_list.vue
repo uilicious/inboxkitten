@@ -21,7 +21,7 @@
       </div>
       <div class="no-mails" v-if="listOfMessages.length == 0">
         <p>
-          There for no messages for this kitten :(<br/><br/>
+          There are no messages for this kitten :(<br/><br/>
           Press on the 'Refresh' button if you want to overwork the kittens...
         </p>
         <button class="refresh-button" @click="refreshList" v-if="!refreshing">Refresh</button>

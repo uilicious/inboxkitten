@@ -154,7 +154,7 @@
 
 		.domain-text {
 			display: none;
-			width:14rem;
+			width: min-content;
 		}
 
 		.input-email {
@@ -211,7 +211,7 @@
 				border-left-width: 0;
 				background-color: $domain-base;
 				cursor: pointer;
-				width:10rem;
+				width: min-content;
 			}
 		}
 	}

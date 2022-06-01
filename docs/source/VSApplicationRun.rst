@@ -6,7 +6,11 @@ Running inboxkitten
 Visual Studio (By Editing Docker File)
 --------------------------------------
 1. Open up the dockerfile
-2. Scroll down and Enter the Mailgun Email Domain and Mailgun API Key from the previous step. Website_Domain = "localhost:8000"
+2. Scroll down and Enter the Mailgun Email Domain and Mailgun API Key from the previous step. 
+
+- MAILGUN_EMAIL_DOMAIN : domain name with sandbox3029djawnd1n2.mailgun.org
+- MAILGUN_API_KEY : The private API Key found at the previous step
+- WEBSITE_DOMAIN = localhost:8000
 
 .. figure:: /images/DockerConfig.JPG
    :class: with-border
@@ -60,7 +64,7 @@ Fill in the relavant information needed.
 Using inboxkitten
 -----------------
 1. Once Inbox Kitten has been started 
-2. Send any email to [name]@[domain name] e.g. if domain name is sandbox293ds9021.com then any email sent to [name]@sandbox293ds9021.com will be received
+2. Send any email to [name]@[domain name] e.g. if domain name is sandbox293ds9021.com then any email sent to [name]@sandbox293ds9021.com will be received. Based on your route settings in mailgun.
 3. Go to inbox kitten then enter the name here
 4. Click Get Mail Nyow! and it will show all emails that exist in the inbox.
 

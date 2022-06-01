@@ -15,6 +15,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Setting Up and running inbox kitten (Serverless)" href="devSetUp.html" />
     <link rel="prev" title="1. Setting up Mailgun" href="mailgunSetUp.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -23,6 +24,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="devSetUp.html" title="3. Setting Up and running inbox kitten (Serverless)"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="mailgunSetUp.html" title="1. Setting up Mailgun"
              accesskey="P">previous</a> |</li>
@@ -42,8 +46,13 @@
 <h2><span class="section-number">2.1. </span>Visual Studio (By Editing Docker File)<a class="headerlink" href="#visual-studio-by-editing-docker-file" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Open up the dockerfile</p></li>
-<li><p>Scroll down and Enter the Mailgun Email Domain and Mailgun API Key from the previous step. Website_Domain = “localhost:8000”</p></li>
+<li><p>Scroll down and Enter the Mailgun Email Domain and Mailgun API Key from the previous step.</p></li>
 </ol>
+<ul class="simple">
+<li><p>MAILGUN_EMAIL_DOMAIN : domain name with sandbox3029djawnd1n2.mailgun.org</p></li>
+<li><p>MAILGUN_API_KEY : The private API Key found at the previous step</p></li>
+<li><p>WEBSITE_DOMAIN = localhost:8000</p></li>
+</ul>
 <figure class="align-center">
 <a class="with-border reference internal image-reference" href="_images/DockerConfig.JPG"><img alt="Docker Configuration" class="with-border" src="_images/DockerConfig.JPG" style="width: 1097.6000000000001px; height: 436.8px;" /></a>
 </figure>
@@ -88,7 +97,7 @@
 <h2><span class="section-number">2.3. </span>Using inboxkitten<a class="headerlink" href="#using-inboxkitten" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Once Inbox Kitten has been started</p></li>
-<li><p>Send any email to [name]&#64;[domain name] e.g. if domain name is sandbox293ds9021.com then any email sent to [name]&#64;sandbox293ds9021.com will be received</p></li>
+<li><p>Send any email to [name]&#64;[domain name] e.g. if domain name is sandbox293ds9021.com then any email sent to [name]&#64;sandbox293ds9021.com will be received. Based on your route settings in mailgun.</p></li>
 <li><p>Go to inbox kitten then enter the name here</p></li>
 <li><p>Click Get Mail Nyow! and it will show all emails that exist in the inbox.</p></li>
 </ol>
@@ -161,12 +170,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#stopping-a-running-instance">2.5. Stopping a running instance</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="devSetUp.html">3. Setting Up and running inbox kitten (Serverless)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FBserverSetUp.html">4. Using Firebase with inbox kitten</a></li>
 </ul>
 
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="mailgunSetUp.html"
                           title="previous chapter"><span class="section-number">1. </span>Setting up Mailgun</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="devSetUp.html"
+                          title="next chapter"><span class="section-number">3. </span>Setting Up and running inbox kitten (Serverless)</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -195,6 +211,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="devSetUp.html" title="3. Setting Up and running inbox kitten (Serverless)"
+             >next</a> |</li>
         <li class="right" >
           <a href="mailgunSetUp.html" title="1. Setting up Mailgun"
              >previous</a> |</li>

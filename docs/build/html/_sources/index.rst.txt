@@ -18,6 +18,8 @@ Home
    self
    mailgunSetUp
    VSApplicationRun
+   devSetUp
+   FBserverSetUp
 
 .. figure:: /images/inboxkitten_logo.jpg
    :alt: Inbox Kitten Logo
@@ -41,7 +43,8 @@ How to run InboxKitten
 ----------------------
 
 * :ref:`Setting Up Mailgun <mailgunSetUp>`
-* :ref:`Running Inbox Kitten <VSApplicationRun>`
+* :ref:`Running Inbox Kitten (Docker) <VSApplicationRun>`
+* :ref:`Running Inbox Kitten (Serverless) <devSetUp>`
 
 .. * :ref:`genindex`
 .. * :ref:`search`
