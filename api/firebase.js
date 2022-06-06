@@ -11,7 +11,7 @@ let app         = require("./src/app-setup");
 
 // Setup the routes - for mail list / get
 app.get("/api/v1/mail/list",   require("./src/api/mailList"));
-app.get("/api/v1/mail/getKey", require("./src/api/mailGetKey"));
+//app.get("/api/v1/mail/getKey", require("./src/api/mailGetKey")); Outdated?
 app.get("/api/v1/mail/getHtml", require("./src/api/mailGetHtml"));
 
 // Expose the HTTP on request
