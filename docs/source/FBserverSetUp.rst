@@ -89,12 +89,6 @@ Starting the inbox kitten program
 
 ::
 
-    firebase init hosting
+    ./deploy.sh
 
-8. Select which project you want to run on, enter for every other option
-
-9. To start the server, enter the following command
-
-::
-
-    firebase deploy
+8. Go to your firebase web link and inbox kitten will be running
