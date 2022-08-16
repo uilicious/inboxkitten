@@ -19,7 +19,7 @@ Note you will need to [setup your mailgun account first](#setup-mailgun)
 docker run \
 	-e MAILGUN_EMAIL_DOMAIN="<email-domain>" \
 	-e MAILGUN_API_KEY="<api-key>" \
-	-e WEBSITE_DOMAIN="localhost:8000" \ 
+	-e WEBSITE_DOMAIN="localhost:8000" \
 	-p 8000:8000 \
 	uilicious/inboxkitten
 ```
