@@ -100,8 +100,6 @@ mailgunReader.prototype.getUrlValidation = function getUrlValidation(email) {
 	return true;
 }
 
-
-
 /**
  * Get the content of URL and return it, using the mailgun key.
  * This is useful for stored emails returned by the event stream.
@@ -124,10 +122,23 @@ mailgunReader.prototype.getUrl = function getUrl(url) {
  *
  * @param {String} url
  */
-mailgunReader.prototype.getKey = function getKey(key) {
+mailgunReader.prototype.getKey = function getKey(fullKey) {
 
-	[prefix, key, ...rest] = key.split("-")
-	// slice the mailgunApi to include the region
+	// Given the key, lets get the ID, and prefix
+	let prefix, key;
+
+	// Lets check for newer key format
+	if( fullKey.length > 37 ) {
+		let pt = fullKey.lastIndexOf("-", fullKey.length - 36);
+		prefix = fullKey.slice(0,pt);
+		key = fullKey.slice(pt+1);
+	} else {
+		let pt = fullKey.lastIndexOf("-");
+		prefix = fullKey.slice(0,pt);
+		key = fullKey.slice(pt+1);
+	}
+	
+	// Inject the region to the mailgunApi
 	let apiUrl = this._config.mailgunApi
 	apiUrl = apiUrl.replace("://", "://"+prefix+".")
 	let urlWithParams = apiUrl+"/domains/"+this._config.emailDomain+"/messages/"+key;
