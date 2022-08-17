@@ -28,8 +28,21 @@ module.exports = async function(url) {
 	};
 
 	try {
-		let prefix = mailKey.slice(0,2)
-		let key = mailKey.slice(3)
+		// Initialize the variables
+		let prefix, key;
+			
+		// Lets check for newer key format
+		if( mailKey.length > 37 ) {
+			// Handle newer key format
+			let pt = fullKey.lastIndexOf("-", fullKey.length - 36);
+			prefix = fullKey.slice(0,pt);
+			key = fullKey.slice(pt+1);
+		} else {
+			// Fallback to original logic
+			let pt = fullKey.lastIndexOf("-");
+			prefix = fullKey.slice(0,pt);
+			key = fullKey.slice(pt+1);
+		}
 		
         // slice the mailgunApi to include the region
         let apiUrl = "https://api.mailgun.net/v3"
