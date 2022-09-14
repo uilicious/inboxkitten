@@ -128,7 +128,7 @@ mailgunReader.prototype.getKey = function getKey(fullKey) {
 	let prefix, key;
 
 	// Lets check for newer key format
-	if( mailKey.length > 37 ) {
+	if( fullKey.length > 37 ) {
 		// Handle newer key format
 		let pt = fullKey.lastIndexOf("-", fullKey.length - 36);
 		prefix = fullKey.slice(0,pt);
