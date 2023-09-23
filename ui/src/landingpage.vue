@@ -1,6 +1,6 @@
 <template>
 	<div class="landing-page">
-		<carbon-ads placement="InboxKittenLanding"></carbon-ads>
+		<!-- <carbon-ads placement="InboxKittenLanding"></carbon-ads> -->
 		<!-- <div><a href="/kittenrouter" class="product-hunt">Introducing Kitten Router 🐱 </a></div> -->
 		<div class="landing-navigation">
 			<router-link to="/kittenrouter">
@@ -184,13 +184,14 @@ import $ from 'jquery'
 import config from '@/../config/apiconfig.js'
 import 'normalize.css'
 import ClipboardJS from 'clipboard'
+import { generate, count } from "random-words";
 
-import CarbonAds from '@/components/CarbonAds'
+// import CarbonAds from './components/CarbonAds.vue'
 
 export default {
 	name: 'LandingPage',
 	components: {
-		CarbonAds: CarbonAds
+		// CarbonAds: CarbonAds
 	},
 	data () {
 		return {
@@ -237,9 +238,9 @@ export default {
 	},
 	methods: {
 		generateRandomName () {
-			var randomWords = require('random-words')
+			
 			return (
-				randomWords({
+				generate({
 					exactly: 1,
 					wordsPerString: 2,
 					separator: '-'

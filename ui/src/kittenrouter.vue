@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<carbon-ads placement="InboxKittenLanding"></carbon-ads>
+		<!-- <carbon-ads placement="InboxKittenLanding"></carbon-ads> -->
 		<div class="kittenrouter-navigation">
 			<img class="kittenrouter-nav-main-logo" src="@/assets/inbox_kitten.png" @click="goToMainPage"/>
 		</div>
@@ -138,12 +138,12 @@
 <script>
 import shareConfig from '@/../config/shareConfig.js'
 
-import CarbonAds from '@/components/CarbonAds'
+// import CarbonAds from './components/CarbonAds.vue'
 
 export default {
 	name: 'App',
 	components: {
-		CarbonAds: CarbonAds
+		// CarbonAds: CarbonAds
 	},
 	data: () => {
 		return {

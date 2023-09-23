@@ -9,7 +9,7 @@
       <pulse-loader v-if="refreshing" class="loading"></pulse-loader>
       <div class="table-box" v-if="listOfMessages.length > 0">
         <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
-             @click="getMessage(msg.storage.url)">
+             @click="getMessage(msg)">
 
           <div class="row-info">
             <div class="row-name">{{extractEmail(msg.message.headers.from)}}</div>
@@ -96,10 +96,15 @@ export default {
       this.refreshList()
     },
 
-    getMessage (url) {
-      let [protocol, empty, host, ...uri] = url.split('/')
+    getMessage (msg) {
+      
+      // let region = msg.storage.region;
+      // let key = msg.storage.key;
+
+      let [protocol, empty, host, ...uri] = msg.storage.url.split('/')
       let [region, ...remainingHost] = host.split('.')
       let mailkey = region + '-' + uri[uri.length - 1]
+      
       this.$router.push({
         name: 'Detail',
         params: {
