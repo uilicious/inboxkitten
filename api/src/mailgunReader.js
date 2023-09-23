@@ -122,28 +122,13 @@ mailgunReader.prototype.getUrl = function getUrl(url) {
  *
  * @param {String} url
  */
-mailgunReader.prototype.getKey = function getKey(fullKey) {
+mailgunReader.prototype.getKey = function getKey({region, key}) {
 
-	// Given the key, lets get the ID, and prefix
-	let prefix, key;
-
-	// Lets check for newer key format
-	if( fullKey.length > 37 ) {
-		// Handle newer key format
-		let pt = fullKey.lastIndexOf("-", fullKey.length - 36);
-		prefix = fullKey.slice(0,pt);
-		key = fullKey.slice(pt+1);
-	} else {
-		// Fallback to original logic
-		let pt = fullKey.lastIndexOf("-");
-		prefix = fullKey.slice(0,pt);
-		key = fullKey.slice(pt+1);
-	}
-	
 	// Inject the region to the mailgunApi
 	let apiUrl = this._config.mailgunApi
-	apiUrl = apiUrl.replace("://", "://"+prefix+".")
-	let urlWithParams = apiUrl+"/domains/"+this._config.emailDomain+"/messages/"+key;
+	apiUrl = apiUrl.replace("://", "://storage-" + region + ".")
+	let urlWithParams = apiUrl + "/domains/" + this._config.emailDomain + "/messages/" + key;
+	
 	// Lets get and return it with a promise
 	return axiosGet(urlWithParams, this._authOption);
 }

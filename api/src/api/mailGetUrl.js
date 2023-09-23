@@ -25,6 +25,7 @@ module.exports = function(req, res){
 		res.status(200).send(response)
 	})
 	.catch(e => {
+		console.error("Error: ", error)
 		res.status(500).send("{error: '"+e+"'}")
 	});
 }

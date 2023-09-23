@@ -12,13 +12,19 @@ const reader = new mailgunReader(mailgunConfig);
  * @param {*} res
  */
 module.exports = function(req, res){
-	let params = req.query
-	let mailKey = params.mailKey
-	if (mailKey == null || mailKey === ""){
-		res.status(400).send('{ "error" : "No `mailKey` param found" }');
+
+	let region = req.query.region
+	let key = req.query.key
+	
+	if (region == null || region === ""){
+		return res.status(400).send('{ "error" : "No `region` param found" }');
 	}
 
-	reader.getKey(mailKey).then(response => {
+	if (key == null || key === ""){
+		return res.status(400).send('{ "error" : "No `key` param found" }');
+	}
+	
+	reader.getKey({region, key}).then(response => {
 		let emailDetails = {}
 
 		// Format and extract the name of the user
@@ -41,6 +47,7 @@ module.exports = function(req, res){
 		res.status(200).send(emailDetails)
 	})
 	.catch(e => {
+		console.error(`Error getting mail metadata info for /${region}/${key}: `, e)
 		res.status(500).send("{error: '"+e+"'}")
 	});
 }

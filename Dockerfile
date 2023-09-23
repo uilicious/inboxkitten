@@ -8,7 +8,7 @@
 #-------------------------------------------------------
 
 # Does basic node, and runtime dependencies
-FROM node:10-alpine AS baseimage
+FROM node:14-alpine AS baseimage
 RUN apk add --no-cache gettext
 RUN mkdir -p /application/
 # WORKDIR /application/
@@ -21,7 +21,7 @@ RUN mkdir -p /application/
 
 # Install dependencies for some NPM modules
 FROM baseimage AS codebuilder
-RUN apk add --no-cache make gcc g++ python
+# RUN apk add --no-cache make gcc g++ python
 
 #-------------------------------------------------------
 #

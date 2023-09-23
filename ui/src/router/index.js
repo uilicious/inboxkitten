@@ -46,8 +46,8 @@ export default new Router({
           component: MessageList
         },
         {
-          path: 'detail/:key',
-          name: 'Detail',
+          path: 'message/:region/:key',
+          name: 'Message',
           component: MessageDetail
         },
         {

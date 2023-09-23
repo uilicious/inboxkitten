@@ -12,6 +12,7 @@ const reader = new mailgunReader(mailgunConfig);
  * @param {*} res
  */
 module.exports = function(req, res){
+
 	let params = req.query
 	let recipient = params.recipient
 
@@ -24,11 +25,13 @@ module.exports = function(req, res){
 		recipient = recipient.substring(0, recipient.indexOf("@"))
 	}
 
-	reader.recipientEventList(recipient+"@"+mailgunConfig.emailDomain).then(response => {
-		res.set('cache-control', cacheControl.dynamic)
-		res.status(200).send(response.items)
-	})
-	.catch(e => {
-		res.status(500).send("{error: '"+e+"'}")
-	});
+	reader.recipientEventList(recipient+"@"+mailgunConfig.emailDomain)
+		.then(response => {
+			res.set('cache-control', cacheControl.dynamic)
+			res.status(200).send(response.items)
+		})
+		.catch(e => {
+			console.error(`Error getting list of messages for "${recipient}":`, e);
+			res.status(500).send("{error: '"+e+"'}")
+		});
 }

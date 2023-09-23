@@ -40,9 +40,10 @@
 		},
 		methods: {
 			getMessage () {
-				let mailKey = this.$route.params.key
-				this.src = config.apiUrl + '/getHtml?mailKey=' + mailKey
-				axios.get(config.apiUrl + '/getKey?mailKey=' + mailKey)
+				let region = this.$route.params.region
+				let key = this.$route.params.key
+				this.src = `${config.apiUrl}/getHtml?region=${region}&key=${key}`
+				axios.get(`${config.apiUrl}/getKey?region=${region}&key=${key}`)
 					.then(res => {
 						this.emailContent = res.data
 					}).catch((e) => {
