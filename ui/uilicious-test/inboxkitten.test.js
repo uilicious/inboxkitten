@@ -21,7 +21,7 @@ I.fill("email", SAMPLE.id(22));
 I.click("Get Mail Nyow!");
 
 // Check that its empty
-I.see("There for no messages for this kitten :(");
+I.see("There are no messages for this kitten :(");
 
 //
 // Testing for regular email
