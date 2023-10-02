@@ -4,7 +4,7 @@
           background: #fbc02d4f;
           padding: 0.5em;
       ">
-        <i class="fas fa-exclamation-triangle" style="margin-right:0.5em"></i><a href="https://uilicious.com/blog/psa-inboxkitten-will-be-blocking-no-reply-google/" target="_blank"><b>PSA</b>: Please use inboxkitten, for only testing, or non critical emails. See here for more details.</a>
+        <i class="fas fa-exclamation-triangle" style="margin-right:0.5em"></i><a href="https://uilicious.com/blog/psa-inboxkitten-will-be-blocking-no-reply-google/" target="_blank"><b>PSA</b>: Please only use inboxkitten for testing or non critical emails. See here for more details.</a>
       </div>
       <pulse-loader v-if="refreshing" class="loading"></pulse-loader>
       <div class="email-list table-box" v-if="listOfMessages.length > 0">
@@ -21,7 +21,7 @@
       </div>
       <div class="no-mails" v-if="listOfMessages.length == 0">
         <p>
-          There for no messages for this kitten :(<br/><br/>
+          There are no messages for this kitten :(<br/><br/>
           Press on the 'Refresh' button if you want to overwork the kittens...
         </p>
         <button class="refresh-button" @click="refreshList" v-if="!refreshing">Refresh</button>
