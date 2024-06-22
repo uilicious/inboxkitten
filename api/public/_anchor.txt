@@ -1,1 +1,0 @@
-This directory is used for static file serving via the API
