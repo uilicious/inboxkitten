@@ -135,3 +135,21 @@ mailgunReader.prototype.getKey = function getKey({region, key}) {
 
 // Export the mailgunReader class
 module.exports = mailgunReader;
+
+/**
+ * Validate the email format and ensure it contains only allowed characters
+ *
+ * @param {String} email
+ */
+mailgunReader.prototype.validateEmail = function validateEmail(email) {
+  // Remove leading/trailing whitespace
+  email = email.trim();
+
+  // Validate that the email contains only allowed characters
+  const allowedCharacters = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$/;
+  if (!allowedCharacters.test(email)) {
+    throw new Error("Invalid email format");
+  }
+
+  return email;
+};

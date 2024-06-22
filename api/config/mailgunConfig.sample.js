@@ -4,5 +4,6 @@
 module.exports = {
 	"apiKey"      : "${MAILGUN_API_KEY}",
 	"emailDomain" : "${MAILGUN_EMAIL_DOMAIN}",
+	"adminAccessKey" : "${ADMIN_ACCESS_KEY}",
 	//"corsOrigin"  : "*"
 }
