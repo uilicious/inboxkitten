@@ -1,0 +1,33 @@
+{
+  "name": "inboxkitten-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.3",
+    "firebase-admin": "^6.0.0",
+    "firebase-functions": "^2.0.5",
+    "kittenrouter": "^1.0.3",
+    "validator": "^10.7.0"
+  },
+  "devDependencies": {
+    "delay": "^4.0.0",
+    "mailgun-js": "^0.20.0",
+    "md5": "^2.2.1",
+    "mocha": "^5.2.0",
+    "shortid": "^2.2.13",
+    "uuid": "^3.3.2",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node app.js",
+    "build-cloudflare": "webpack --mode production cloudflare.js"
+  },
+  "author": "",
+  "license": "MIT"
+}

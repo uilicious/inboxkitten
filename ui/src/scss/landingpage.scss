@@ -1,0 +1,468 @@
+
+// Loading of font awesome
+// @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
+
+// Loading of color scheme
+@import "_color.scss";
+
+// Min-width for body (for some sanity)
+body {
+	min-width: 280px;
+	background: white;
+}
+
+//
+// Landing page header and logo
+//
+.header {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+	width: 100vw;
+
+	.logo {
+		width:40vw;
+		max-width: 800px;
+		margin-bottom:1rem;
+	}
+
+	h1 {
+		color:$bright-text;
+		padding-left:2rem;
+		padding-right:2rem;
+	}
+	h2 {
+		color:$dark-text;
+		padding-left:2rem;
+		padding-right:2rem;
+	}
+
+	h1,h2 {
+		margin:0;
+	}
+
+	@media only screen and (max-width:760px) {
+		.logo {
+			width: 80vw;
+		}
+
+		// Line display hack to force a new block
+		h1 a {
+			display:block;
+		}
+	}
+}
+
+//
+// Email selection box
+//
+.email-selection {
+	width: 100vw;
+
+	padding-top: 1rem;
+	padding-bottom: 3rem;
+
+	// Adust the input box elements borders
+	// $input-box-el-border-radius: 0.4rem;
+	$input-box-el-border-radius: 0rem;
+
+	// The main input box
+	.input-box {
+
+		// Remove space between inline-blocks
+		font-size:0;
+
+		// Input-box radius : note you will need
+		// to update input left top/bottom radius as well
+		background-color:$color5-base;
+		display: inline-block;
+		
+		border-radius: $input-box-el-border-radius;
+		border: 3px solid black;
+
+		// Common settings for input, and suffix label
+		.input-email, .input-suffix {
+			padding:0;
+			margin:0;
+			font-size:1rem;
+			padding-top:0.25rem;
+			padding-bottom:0.25rem;
+		}
+
+		// Input email styling
+		.input-email {
+			border:0px;
+			width: 12rem;
+			display: inline-block;
+			text-align:center;
+
+			// Border radius overwrite
+			border-top-left-radius: $input-box-el-border-radius;
+			border-bottom-left-radius: $input-box-el-border-radius;
+			border-top-right-radius: 0rem;
+			border-bottom-right-radius: 0rem;
+
+			// input text color
+			color: $dark-text;
+
+			// Right border
+			border-right: 3px solid black;
+		}
+
+		// Input email suffix
+		.input-suffix {
+			width: 10rem;
+			display: inline-block;
+			padding-left:1rem;
+			padding-right:1rem;
+
+			// Text with subtle fade out
+			color: fade-out($dark-text, 0.3);
+
+		}
+	}
+
+	// Submit box
+	.submit-box {
+		display:inline-block;
+		margin-left:1rem;
+	}
+	// Submission button styling
+	.submit  {
+		padding: 0.25rem 1rem 0.25rem 1rem;
+		margin:0;
+		border: 0;
+
+		font-size:1rem;
+		font-weight: bold;
+
+		background: $cta-base;
+		color: $cta-base-text;
+
+		border-radius: $input-box-el-border-radius;
+
+		font-size: 100%;
+		font-family: inherit;
+		text-transform: none;
+		-webkit-appearance: button;
+		border: 3px solid black;
+	}
+
+	// Hover submit button styling
+	.submit:hover {
+		background: $cta-hover;
+		color: $cta-hover-text;
+	}
+
+	/*
+	@media only screen and (max-width:760px) {
+		// Collapes the inbox input into 2 lines
+		.input-box {
+			display: inline-block;
+			vertical-align: middle;
+			width: 12rem;
+			.input-email {
+				border-top-right-radius: $input-box-el-border-radius;
+				border-bottom-left-radius: 0;
+			}
+		}
+
+		// Increase submit button height
+		.submit-box {
+			display: inline-block;
+			vertical-align: middle;
+			.submit {
+				display: inline;
+				height: 3.5rem;
+			}
+		}
+	}
+	*/
+
+	@media only screen and (max-width:760px) {
+		// Collapes the inbox input into 2 lines
+		.input-box {
+			display: inline-block;
+			vertical-align: middle;
+			width: 75%;
+			.input-email {
+				border-top-right-radius: $input-box-el-border-radius;
+				border-bottom-left-radius: 0;
+				width: 100%;
+				height:2rem;
+			}
+		}
+
+		// Increase submit button height
+		.submit-box {
+			margin-top:1.25rem;
+			margin-left:0;
+
+			display: block;
+			vertical-align: middle;
+
+			.submit {
+				display: inline;
+				width: 75%;
+				height:2.5rem;
+			}
+		}
+	}
+}
+
+//
+// Love notes
+//
+.love-notes {
+	padding: 1rem;
+	background: white;
+
+	p {
+		font-size:1.2rem;
+	}
+}
+
+//
+// Line break
+//
+.line-break {
+	width: 80vw;
+	background: black;
+	margin: auto;
+	height: 1px;
+}
+
+//
+// Deployment guide content
+//
+.info-guide {
+	padding: 1rem;
+
+	.features {
+		padding-top:2rem;
+		margin:auto;
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+	}
+
+	.feature-card {
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 0;
+		padding-left:1rem;
+		padding-right:1rem;
+	}
+	
+	.feature-card-hover:hover {
+		background-color:rgba(30,30,30,0.2);
+		border-radius: 8px;
+	}
+
+	.fas {
+		margin-right:0.5rem;
+	}
+
+	@media only screen and (max-width:800px) {
+		.features {
+			flex-direction:column;
+		}
+	}
+
+	@media only screen and (max-width:1080px) {
+		.steps {
+			flex-direction: column;
+		}
+	}
+}
+
+.snippet {
+	padding: 1rem;
+	display: flex;
+	flex-direction: row;
+	margin:auto;
+	justify-content: center;
+	align-items: center;
+
+	.features {
+		padding: 0;
+		background-color:rgba(30,30,30,0.1); 
+		border-radius:8px;
+	}
+	.features:hover {
+		background-color:rgba(30,30,30,0.2);
+	}
+
+	.feature-card {
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 0;
+		padding-left:1rem;
+		padding-right:0.5rem;
+		padding-top: 1rem;
+		align-self: center;
+	}
+
+	.feature-gif {
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 0;
+		align-self: flex-end;
+		padding-left:0.5rem;
+		padding-right:1rem;
+		padding-bottom: 1rem;
+		padding-top: 1rem;
+		
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	
+	.hljs {
+		text-align: left;
+		border-radius: 8px;
+		display: block; 
+		overflow-x: auto; 
+		margin-top: 2rem;
+		padding: 0.5em;
+		background: rgb(35, 36, 31); 
+		color: rgb(248, 248, 242);
+	}
+
+	@media only screen and (max-width:1170px) {
+		.features {
+			flex-direction:column;
+			pre {
+				font-size:0.75rem;
+			}
+		}
+
+		.feature-gif {
+			padding-top: 0;
+			padding-left: 1rem;
+		}
+	}
+
+	@media only screen and (max-width:630px){
+		.feature-card {
+			padding-right:1rem;
+			img {
+				width:100%;
+				height: auto;
+			}
+			pre {
+				font-size:0.5rem;
+			}
+		}
+
+		.hljs {
+			margin-top: 1rem;
+		}
+	}
+}
+
+.line-break {
+	height:2px;
+
+	// Fallback
+	background:black;
+	// Gradient
+	background:linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
+
+	width:50%;
+	margin:auto;
+	margin-top:2rem;
+	// margin-bottom:4rem;
+}
+
+.deploy-code {
+	width: 30rem;
+	max-width:90%;
+	margin:auto;
+	border-radius: 8px;
+	scroll-behavior: auto;
+}
+
+.config-code {
+	font-size:0.8rem;
+	width:50rem;
+	max-width: 90%;
+	background: #F6F8FF;
+	margin:auto;
+	border-radius: 8px;
+	scroll-behavior: auto;
+	text-align:justify;
+}
+
+@media only screen and (max-width:800px) {
+	.deploy-code {
+		font-size:0.75rem;
+	}
+
+	.config-code {
+		font-size: 0.75rem;
+	}
+}
+
+.deploy-segmet {
+
+	p {
+		padding:1rem;
+	}
+	h3 {
+		padding-left:1rem;
+		padding-right:1rem;
+	}
+
+	.self-host-tier-link {
+		text-decoration: none;
+		cursor: pointer;
+		display:inline-block;
+		width:12rem;
+	}
+
+	.self-host-tier {
+		border:3px solid black;
+		border-radius:5px;
+		display:flex;
+		flex-direction: column;
+		padding:0;
+		max-width:12rem;
+		margin:auto;
+		background:white;
+
+		text-decoration: none;
+
+		.tier-title {
+			
+			margin:0;
+			background: #5a86e4;
+			padding:1rem;
+			border-bottom:2px solid black;
+
+			h3 {
+				display: inline-block;
+				color:white;
+				margin:0;
+				padding:0;
+			}
+		}
+
+		.price {
+			margin:0;
+			padding:1rem;
+			color:black;
+			
+			h3 {
+				color:black;
+				font-size: 4rem;
+				margin:0;
+				padding:0;
+			}
+		}
+	}
+
+	.disclaimer {
+		font-size:0.75rem;
+	}
+}
