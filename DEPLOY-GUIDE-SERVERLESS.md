@@ -1,6 +1,6 @@
 # Serverless Deployment Guide
 
-Follow the 5 steps guide below to get started on Firebase!
+Follow the 5 step guide below to get started on Firebase!
 
 - [Step 0 - Clone Me](#step-0---clone-me)
 - [Step 1 - Setup Serverless provider](#step-1---mailgun--firebase-signup)
@@ -20,8 +20,8 @@ Follow the 5 steps guide below to get started on Firebase!
 
 1. Go to <a href="https://firebase.google.com" target="_blank">Firebase</a> and click on `Get Started`.
 2. Sign in with your favorite Google account.
-3. Click on `Add Project` and create your own firebase inboxkitten project.
-4. Remember the project ID  
+3. Click on `Add Project` and create your own Firebase inboxkitten project.
+4. Remember the project ID.  
 
 On your local machine where your InboxKitten is located at,
 ```
@@ -48,12 +48,12 @@ ___
 
 ## Step 2 - Configuration
 
-In the root directory of Inboxkitten, run the following command
+In the root directory of Inboxkitten, run the following command:
 ```
 	$ ./config.sh
 ```
 
-During the run time of `./config.sh`, there are three environment variables that is being used to set the configuration for your configuration files.
+During the run time of `./config.sh`, there are three environment variables that are being used to set the configuration for your configuration files.
 
 1. `MAILGUN_EMAIL_DOMAIN` - any custom domain that you owned or the default domain in Mailgun
 2. `WEBSITE_DOMAIN`  - any custom domain that you owned. If you use your default firebase url, it will be `<Your project>.firebaseapp.com`
