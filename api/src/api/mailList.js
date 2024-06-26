@@ -17,12 +17,23 @@ module.exports = function(req, res){
 	let recipient = params.recipient
 
 	if (recipient == null){
-		res.status(400).send({ error : "No `recepient` param found" });
+		res.status(400).send({ error : "No valid `recepient` param found" });
 	}
+
+	// Trim once
+	recipient = recipient.trim()
 
 	// strip off all @domain if there is any
 	if(recipient.indexOf("@") >= 0){
 		recipient = recipient.substring(0, recipient.indexOf("@"))
+	}
+
+	// Trim twice
+	recipient = recipient.trim() 
+
+	// Empty check
+	if(recipient == null || recipient == ""){
+		res.status(400).send({ error : "No valid `recepient` param found" });
 	}
 
 	reader.recipientEventList(recipient+"@"+mailgunConfig.emailDomain)
