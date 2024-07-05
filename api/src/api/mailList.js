@@ -62,30 +62,37 @@ module.exports = function(req, res) {
  * @returns {string} Validated username
  */
 function validateUsername(username) {
+
     // Step 1: Trim leading and trailing whitespaces
     username = username.trim();
 
-    // Step 2: Check for disallowed characters
+    // Step 2: Throw error if the sanitized string is empty
+    if (username.length === 0) {
+        throw new Error("Invalid email.");
+    }
+
+    // Step 3: Check for disallowed characters
     // Allowed characters: alphanumeric, dot (.), underscore (_), hyphen (-), plus (+)
     const disallowedChars = /[^a-zA-Z0-9._+-]/g;
     if (disallowedChars.test(username)) {
         throw new Error("Invalid email.");
     }
 
-    // Step 3: Check for consecutive dots
+    // Step 4: Ensure that the username does not only contains symbols, but at least one alphanumeric character
+    if (!/[a-zA-Z0-9]/.test(username)) {
+        throw new Error("Invalid email.");
+    }
+
+    // Step 5: Check for consecutive dots
     if (/\.{2,}/.test(username)) {
         throw new Error("Invalid email.");
     }
 
-    // Step 4: Check if the sanitized string starts or ends with a dot
-    if (/^\./.test(username) || /\.$/.test(username)) {
-        throw new Error("Invalid email.");
-    }
-
-    // Step 5: Throw error if the sanitized string is empty
-    if (username.length === 0) {
+    // Step 6: Ensure that the username starts and end with an alphanumeric character instead of a symbol
+    if (/^[._+-]/.test(username) || /[._+-]$/.test(username)) {
         throw new Error("Invalid email.");
     }
 
     return username;
+    
 }
