@@ -67,7 +67,12 @@ function validateUsername(username) {
     username = username.trim();
 
     // Step 2: Throw error if the sanitized string is empty
-    if (username.length === 0) {
+    if (username.length < 3) {
+        throw new Error("Invalid email.");
+    }
+
+    // Step 2: Block the domain itself
+    if(username.toLowerCase() == mailgunConfig.emailDomain) {
         throw new Error("Invalid email.");
     }
 
@@ -83,9 +88,14 @@ function validateUsername(username) {
         throw new Error("Invalid email.");
     }
 
-    // Step 5: Check for consecutive dots
-    if (/\.{2,}/.test(username)) {
-        throw new Error("Invalid email.");
+    // Step 5: Reject problematic inputs
+    if (/^[-._]+$/.test(username) || username === '-' || username === '_' || username === '.') {
+        throw new Error("Invalid email: Username cannot consist solely of special characters.");
+    }
+
+    // Step 6: Check for consecutive special characters
+    if (/[._-]{2,}/.test(username)) {
+        throw new Error("Invalid email: Username cannot contain consecutive special characters.");
     }
 
     // Step 6: Ensure that the username starts and end with an alphanumeric character instead of a symbol
