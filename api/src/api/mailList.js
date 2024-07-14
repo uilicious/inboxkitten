@@ -94,7 +94,7 @@ function validateUsername(username) {
     }
 
     // Step 7A: Pure numeric usernames are disallowed
-    if (!(/^[0-9]$/.test(username))) {
+    if ((/^[0-9]*$/.test(username)) == true) {
         throw new Error("Invalid email.");
     }
 
